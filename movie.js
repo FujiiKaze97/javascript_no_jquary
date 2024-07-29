@@ -9,7 +9,7 @@ const cardData = (movie) => {
       <span>Rating: ${movie.vote_average}</span>
     </div>
   `;
-  //화살표 함수 사용
+  // 화살표 함수 사용
   card.addEventListener('click', () => alert(`Movie ID: ${movie.id}`));
   return card;
 }
@@ -20,14 +20,16 @@ document.addEventListener('DOMContentLoaded', () => {
   if (searchInput) {
     searchInput.focus();
   }
+
+  // 초기 데이터 로드
+  loadMovies(currentPage);
 });
 
-// keydown Event
-document.addEventListener("keydown", function(event)
-{
-     if(event.key === 'Enter') {
-          document.getElementById('search-button').click();
-     } 
+// 키다운 이벤트
+document.addEventListener("keydown", function(event) {
+  if (event.key === 'Enter') {
+    document.getElementById('search-button').click();
+  }
 });
 
 const options = {
@@ -38,23 +40,54 @@ const options = {
   }
 };
 
-fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', options)
-  .then(response => response.json())
-  .then(data  =>  
-    //이후 데이터 처리 
-    {
+// 현재 페이지 상태 관리
+let currentPage = 1;
+
+// 영화 데이터를 로드하는 함수
+function loadMovies(page) {
+  fetch(`https://api.themoviedb.org/3/movie/popular?language=en-US&page=${page}&region=KR`, options)
+    .then(response => response.json())
+    .then(data => {
       const movies = data.results;
       const movieContainer = document.getElementById('movie-container');
+      movieContainer.innerHTML = ''; // 이전 영화 목록 제거
+
       movies.forEach(movie => {
         const card = cardData(movie);
         movieContainer.appendChild(card);
-    });
-  })
-  .catch(err => console.error(err));
+      });
 
-// Javascript search button 
+      // 페이지네이션 상태 업데이트
+      document.getElementById('page-number').textContent = `Page: ${page}`;
+
+      // 이전 페이지 버튼 활성화/비활성화
+      const prevButton = document.getElementById('prev-page');
+      prevButton.disabled = page === 1;
+
+      // 다음 페이지 버튼 활성화/비활성화
+      const nextButton = document.getElementById('next-page');
+      nextButton.disabled = page === data.total_pages;
+
+    })
+    .catch(err => console.error(err));
+}
+
+// 페이지네이션 버튼 이벤트 핸들러
+document.getElementById('prev-page').addEventListener('click', () => {
+  if (currentPage > 1) {
+    currentPage--;
+    loadMovies(currentPage);
+  }
+});
+
+document.getElementById('next-page').addEventListener('click', () => {
+  currentPage++;
+  loadMovies(currentPage);
+});
+
+// 검색 버튼 이벤트 핸들러
 document.getElementById('search-button').addEventListener('click', () => {
-  // 무조건 소문자로 처리하여.. 대소문자 상관없이.. 
+  // 무조건 소문자로 처리하여.. 대소문자 상관없이..
   const query = document.getElementById('search-input').value.toLowerCase();
   const movieCards = document.querySelectorAll('.movie-card');
   movieCards.forEach(card => {

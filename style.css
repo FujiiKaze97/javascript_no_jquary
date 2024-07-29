@@ -108,3 +108,37 @@ body, h3, p, span {
     color: #555;
     font-weight: bold;
   }
+  
+  /* 페이지네이션 스타일 */
+  .pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .pagination-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 0 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .pagination-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .pagination-button:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+  
+  #page-number {
+    font-size: 16px;
+    color: #333;
+  }
