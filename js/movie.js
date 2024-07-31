@@ -100,7 +100,3 @@ document.getElementById('search-button').addEventListener('click', () => {
   });
 });
 
-// 상세페이지로 이동하는 함수
-function moveToDetail() {
-  window.location.href = 'https://www.naver.com'
-};
