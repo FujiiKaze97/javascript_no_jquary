@@ -10,7 +10,7 @@ const cardData = (movie) => {
     </div>
   `;
   // 화살표 함수 사용
-  card.addEventListener('click', () => window.location.href = "movieDetail.html");
+  card.addEventListener('click', () => window.location.href = `movieDetail.html?${movie.id}`);
   return card;
 }
 
@@ -55,6 +55,7 @@ function loadMovies(page) {
       movies.forEach(movie => {
         const card = cardData(movie);
         movieContainer.appendChild(card);
+        console.log(movie)
       });
 
       // 페이지네이션 상태 업데이트
