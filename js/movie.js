@@ -101,5 +101,5 @@ document.getElementById('search-button').addEventListener('click', () => {
 });
 
 function moveToDetail() {
-  
-}
+  window.location.href = 'https://naver.com'
+};
