@@ -10,7 +10,7 @@ const cardData = (movie) => {
     </div>
   `;
   // 화살표 함수 사용
-  card.addEventListener('click', () => alert(`Movie ID: ${movie.id}`));
+  card.addEventListener('click', () => window.location.href = 'https://naver.com');
   return card;
 }
 
@@ -100,6 +100,3 @@ document.getElementById('search-button').addEventListener('click', () => {
   });
 });
 
-function moveToDetail() {
-  window.location.href = 'https://naver.com'
-};
