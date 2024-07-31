@@ -10,7 +10,7 @@ const cardData = (movie) => {
     </div>
   `;
   // 화살표 함수 사용
-  card.addEventListener('click', () => window.location.href = 'https://naver.com');
+  card.addEventListener('click', () => window.location.href = "movieDetail.html");
   return card;
 }
 
