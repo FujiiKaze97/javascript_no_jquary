@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //열기 버튼을 눌렀을 때 모달팝업이 열림
     modalOpen.addEventListener('click', function () {
-        
+        document.body.style.overflow = "hidden";
         //'on' class 추가
         modal.classList.add('on');
     });
@@ -14,5 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
     modalClose.addEventListener('click', function () {
         //'on' class 제거
         modal.classList.remove('on');
+        document.body.style.overflow = "unset";
     });
   });
