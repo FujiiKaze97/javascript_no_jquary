@@ -16,9 +16,13 @@ const getReview = (key) => {
 //리뷰 등록 localStorage
 const btn = document.getElementById('btn');
 btn.addEventListener('click', function(){
+
     //등록 버튼 클릭시 컨펌 알림
     const result = confirm('등록하시겠습니까?') 
-    const reviewInfo = [{ 'id': idElement.value, 'pw':pwdElement.value, 'review': reviewElement.value }];
+
+    // 저장할 객체 배열 할당
+    const reviewInfo = [{ 'name': idElement.value, 'pw':pwdElement.value, 'review': reviewElement.value }];
+
     if(result){
     //컨펌 확인 버튼 입력시 처리
     if(localStorage.getItem('reviews')){
@@ -30,23 +34,31 @@ btn.addEventListener('click', function(){
         //로컬 스토리지에 reviews가 없을 경우 새로운 배열 저장
         saveReview(reviewInfo)
     }
-    // getReview('reviews').push(reviewInfo)
-    // // 로컬스토리지에 입력값 저장 !!!!!!!! key 값이 고정되어있어 등록마다 value가 변화.
-    // const reviewInfo = [{ 'id': idElement.value, 'pw':pwdElement.value, 'review': reviewElement.value }];
-    // localStorage.setItem("reviewInfo", JSON.stringify(reviewInfo));
     }
+    location.reload();
 });
 
+//리뷰 데이터 로드 함수
+function loadReview () {
+    const reviewData = localStorage.getItem('reviews')
+    const reviewContainer = document.getElementById('review-container')
+    reviewContainer.innerHTML = ""
 
+    console.log(reviewData)
+    reviewData.forEach((data)=> {
+        const card = cardData(data);
+        reviewContainer.appendChild(card);
+    })
 
-//리뷰 카드 만들기
-// const cardData = (review) => {
-//     const card = document.createElement('div');
-//     card.className = 'reviewCard';
-//     card.innerHTML = `
-//     <div class="movie-card-content">
-//       <h3>${movie.title}</h3>
-//       <p>${movie.overview}</p>
-//       <span>Rating: ${movie.vote_average}</span>
-//     </div>`;
-// }
+}
+// 리뷰 카드 만들기
+const cardData = (reviewData) => {
+    const card = document.createElement('div');
+    // card.className = '';
+    card.innerHTML = `
+    <div>
+      <h3>${reviewData.name}</h3>
+      <p>${reviewData.review}</p>
+    </div>`;
+}
+loadReview();
