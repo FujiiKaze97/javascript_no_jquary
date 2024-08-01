@@ -4,8 +4,8 @@ const pwdElement = document.getElementById("pw")
 const reviewElement = document.getElementById("reviewText")
 
 //로컬스토리지 저장함수
-const saveReview = (reviewInfo)=>{
-    localStorage.setItem('reviews', JSON.stringify(reviewInfo));
+const saveReview = (info)=>{
+    localStorage.setItem('reviews', JSON.stringify(info));
 }
 //로컬스토리지 불러오는 함수
 const getReview = (key) => {
@@ -18,12 +18,13 @@ const btn = document.getElementById('btn');
 btn.addEventListener('click', function(){
     //등록 버튼 클릭시 컨펌 알림
     const result = confirm('등록하시겠습니까?') 
+    const reviewInfo = [{ 'id': idElement.value, 'pw':pwdElement.value, 'review': reviewElement.value }];
     if(result){
     // 컨펌 확인 버튼 입력시 처리
-
+    saveReview(reviewInfo)
     // // 로컬스토리지에 입력값 저장 !!!!!!!! key 값이 고정되어있어 등록마다 value가 변화.
-    const reviewInfo = [{ 'id': idElement.value, 'pw':pwdElement.value, 'review': reviewElement.value }];
-    localStorage.setItem("reviewInfo", JSON.stringify(reviewInfo));
+    // const reviewInfo = [{ 'id': idElement.value, 'pw':pwdElement.value, 'review': reviewElement.value }];
+    // localStorage.setItem("reviewInfo", JSON.stringify(reviewInfo));
     }
 });
 
