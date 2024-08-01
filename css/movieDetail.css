@@ -5,11 +5,12 @@
 /* 헤더 header */
 header {
   width: 100%;
-  padding: 50px 50px 50px 50px;
+  padding: 50px 50px 20px 50px;
 }
 
-header h2 {
+.movie-title {
   font-size: 30px;
+  font-weight: 1000;
 }
 
 
@@ -19,8 +20,10 @@ main {
   flex-direction: row;
 
   height: 550px;
-  padding: 20px 50px 50px 50px;
+  padding: 20px 20px 50px 50px;
+ 
 }
+
 main .movie_img {
   width: 30%;
   height: 480px;

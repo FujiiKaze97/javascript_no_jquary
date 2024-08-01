@@ -2,7 +2,7 @@
 const receivedData = location.href.split('?')[1];
 console.log(receivedData); // data
 
-// detail 함수
+// 포스터 함수
 const cardData = (data) => {
   const card = document.createElement('div');
   card.className = 'data-card';
@@ -11,6 +11,26 @@ const cardData = (data) => {
   `;
   return card;
 }
+
+// 영화 제목 함수
+const getTitle = (data) => {
+  const card = document.createElement('div');
+  card.className = 'movie-title';
+  card.innerHTML = `
+    ${data.title}
+  `;
+  return card;
+}
+
+const getOverview = (data) => {
+  const card = document.createElement('div');
+  card.className = 'movie-overview';
+  card.innerHTML = `
+    ${data.overview}
+  `;
+  return card;
+}
+
 
 // 영화 데이터 로드
 const options = {
@@ -26,8 +46,16 @@ fetch(`https://api.themoviedb.org/3/movie/${receivedData}?language=ko-KR`, optio
   .then(data => {
     console.log(data);
     const movieDetail = document.getElementById('movie_poster');
-    console.log(movieDetail);
     const card = cardData(data);
     movieDetail.appendChild(card);
+
+    const movieTitle = document.getElementById('movie_title');
+    const title = getTitle(data);
+    movieTitle.appendChild(title);
+
+    const movieOverview = document.getElementById('movie_overview');
+    const overview = getOverview(data);
+    movieOverview.appendChild(overview);
+
   })
   .catch(err => console.error(err));
