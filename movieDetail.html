@@ -5,9 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Movie Detail</title>
-  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="./css/reset.css">
   <link rel="stylesheet" href="./css/movieDetail.css">
-
+  <link rel="stylesheet" href="./css/createReview.css">
+  
 </head>
 
 <body>
@@ -56,7 +57,42 @@
     내배캠 13조
   </footer>
 
+
+
+  <div class="modal_create_review">
+    <form class="modal_window">
+      <div class="modal_header">
+        <p>리뷰 작성하기</p>
+        <select class="select_star" id="select_star">
+          <option value="⭐">⭐</option>
+          <option value="⭐⭐">⭐⭐</option>
+          <option value="⭐⭐⭐">⭐⭐⭐</option>
+          <option value="⭐⭐⭐⭐">⭐⭐⭐⭐</option>
+          <option value="⭐⭐⭐⭐⭐" selected>⭐⭐⭐⭐⭐</option>
+        </select>
+      </div>
+      <div class="modal_body">
+        <p><textarea id="review_text" placeholder="리뷰를 작성해주세요"></textarea></p>
+       </div>
+      <div class="modal_footer">
+        <button id="cancel_review_btn" type="button">취소</button>
+        <div class="name_pw">
+          <div class="input_box">
+            <label for="name">닉네임</label>
+            <input id="name" placeholder="닉네임">
+          </div>
+          <div class="input_box">
+            <label for="pw">PW</label>
+            <input id="pw" type="password" placeholder="비밀번호">
+          </div>
+        </div>
+        <button id="create_review_btn"  type="button">등록</button>
+      </div>
+    </form>
+  </div>
+  
   <script src="./js/detail.js"></script>
+  <script src="./js/createReview.js"></script>
 </body>
 
 </html>
