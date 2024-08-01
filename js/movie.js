@@ -14,7 +14,7 @@ const cardData = (movie) => {
     </div>
   `;
   // 화살표 함수 사용
-  card.addEventListener('click', () => alert(`Movie ID: ${movie.id}`));
+  card.addEventListener('click', () => window.location.href = `movieDetail.html?${movie.id}`);
   return card;
 }
 
