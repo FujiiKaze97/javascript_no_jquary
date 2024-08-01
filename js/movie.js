@@ -51,11 +51,12 @@ function loadMovies(page) {
       const movies = data.results;
       const movieContainer = document.getElementById('movie-container');
       movieContainer.innerHTML = ''; // 이전 영화 목록 제거
-
+      
+      
       movies.forEach(movie => {
         const card = cardData(movie);
         movieContainer.appendChild(card);
-        console.log(movie)
+       
       });
 
       // 페이지네이션 상태 업데이트
