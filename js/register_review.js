@@ -16,7 +16,7 @@ const getReview = (key) => {
 //리뷰 등록 localStorage
 const btn = document.getElementById('btn');
 btn.addEventListener('click', function(){
-
+    try{
     //등록 버튼 클릭시 컨펌 알림
     const result = confirm('등록하시겠습니까?') 
 
@@ -36,6 +36,9 @@ btn.addEventListener('click', function(){
     }
     }
     location.reload();
+} catch (e){
+    console.log(e)
+}
 });
 
 //리뷰 데이터 로드 함수
