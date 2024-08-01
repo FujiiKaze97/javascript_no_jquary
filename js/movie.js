@@ -10,7 +10,7 @@ const cardData = (movie) => {
     </div>
   `;
   // 화살표 함수 사용
-  card.addEventListener('click', () => alert(`Movie ID: ${movie.id}`));
+  card.addEventListener('click', () => window.location.href = `movieDetail.html?${movie.id}`);
   return card;
 }
 
@@ -51,10 +51,12 @@ function loadMovies(page) {
       const movies = data.results;
       const movieContainer = document.getElementById('movie-container');
       movieContainer.innerHTML = ''; // 이전 영화 목록 제거
-
+      
+      
       movies.forEach(movie => {
         const card = cardData(movie);
         movieContainer.appendChild(card);
+       
       });
 
       // 페이지네이션 상태 업데이트
@@ -99,3 +101,4 @@ document.getElementById('search-button').addEventListener('click', () => {
     }
   });
 });
+
