@@ -1,5 +1,5 @@
 // ======================================
-//                 firebase
+//                firebase
 // ======================================
 
 // Firebase SDK 라이브러리 가져오기
@@ -30,9 +30,9 @@ const db = getFirestore(app);
 // '리뷰 작성' 버튼을 클릭하면 모달창이 뜨도록 함
 const creatReviewBtn = document.getElementById('write_review_btn');
 creatReviewBtn.addEventListener('click', () => {
-  showModal();
+  ShowModal();
 })
-const showModal = () => {
+const ShowModal = () => {
   console.log('"write_review_btn" clicked');
 
   const modal = document.getElementsByClassName('modal_create_review')[0];
@@ -44,10 +44,10 @@ const showModal = () => {
 // 취소 버튼을 누르면 모달창이 안보이도록 함.
 const cancelBtn = document.getElementById('cancel_review_btn');
 cancelBtn.addEventListener('click', () => {
-  cancelReview();
+  CancelReview();
 })
 
-const cancelReview = () => {
+const CancelReview = () => {
   console.log("'cancel review button' clicked");
   const result = confirm('리뷰 작성을 취소하시겠습니까?');
   if (result) {
@@ -58,7 +58,7 @@ const cancelReview = () => {
 
     // reset : 기존 모달창에 있던 내용 초기화
     // 새로고침은 하지 않음
-    clearModal(name, pw, review, score);
+    ClearModal(name, pw, review, score);
     const modal = document.getElementsByClassName('modal_create_review')[0];
     modal.style.display = 'none';
   }
@@ -100,7 +100,7 @@ createBtn.addEventListener('click', async function () {
 
 })
 
-const clearModal = (name, pw, review, score) => {
+const ClearModal = (name, pw, review, score) => {
   // reset : 기존 모달창에 있던 내용 초기화
   name.value = '';
   pw.value = '';

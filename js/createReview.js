@@ -1,9 +1,9 @@
 // '리뷰 작성' 버튼을 클릭하면 모달창이 뜨도록 함
 const creatReviewBtn = document.getElementById('write_review_btn');
 creatReviewBtn.addEventListener('click', () => {
-  showModal();
+  ShowModal();
 })
-const showModal = () => {
+const ShowModal = () => {
   console.log('"write_review_btn" clicked');
 
   const modal = document.getElementsByClassName('modal_create_review')[0];
@@ -17,10 +17,10 @@ const showModal = () => {
 // 취소 버튼을 누르면 모달창이 안보이도록 함.
 const cancelBtn = document.getElementById('cancel_review_btn');
 cancelBtn.addEventListener('click', () => {
-  cancelReview();
+  CancelReview();
 })
 
-const cancelReview = () => {
+const CancelReview = () => {
   console.log("'cancel review button' clicked");
   const result = confirm('리뷰 작성을 취소하시겠습니까?');
   if (result) {
@@ -47,10 +47,10 @@ const cancelReview = () => {
 // 데이터 저장 추후 구현해야 함.
 const createBtn = document.getElementById('create_review_btn');
 createBtn.addEventListener('click', () => {
-  createReview();
+  CreateReview();
 })
 
-const createReview = () => {
+const CreateReview = () => {
   console.log("'create review button' clicked");
   //등록 버튼 클릭시 컨펌 알림
   const result = confirm('등록하시겠습니까?');
@@ -77,7 +77,7 @@ const createReview = () => {
 
     } else {
       //로컬 스토리지에 reviews가 없을 경우 새로운 배열 저장
-      saveReview([reviewInfo]);
+      SaveReview([reviewInfo]);
 
     }
     // 저장 후 페이지 새로고침
@@ -88,16 +88,16 @@ const createReview = () => {
 }
 
 // localStorage에 저장하기
-const saveReview = (info) => {
+const SaveReview = (info) => {
   localStorage.setItem('test', JSON.stringify(info));
 }
 // localStorage 불러오기
-const getReview = (key) => {
+const GetReview = (key) => {
   let localData = JSON.parse(localStorage.getItem(key))
   return localData;
 }
 
-const clearModal = (name, pw, review, score) => {
+const ClearModal = (name, pw, review, score) => {
   // reset : 기존 모달창에 있던 내용 초기화
   name.value = '';
   pw.value = '';
