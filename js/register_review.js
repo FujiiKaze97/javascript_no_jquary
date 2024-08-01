@@ -20,8 +20,17 @@ btn.addEventListener('click', function(){
     const result = confirm('등록하시겠습니까?') 
     const reviewInfo = [{ 'id': idElement.value, 'pw':pwdElement.value, 'review': reviewElement.value }];
     if(result){
-    // 컨펌 확인 버튼 입력시 처리
-    saveReview(reviewInfo)
+    //컨펌 확인 버튼 입력시 처리
+    if(localStorage.getItem('reviews')){
+        //로컬 스토리지에 reviews 가 있을경우 내용 추가
+        let pushReview = getReview('reviews');
+        pushReview.push(reviewInfo[0]);
+        localStorage.setItem('reviews', JSON.stringify(pushReview));
+    } else {
+        //로컬 스토리지에 reviews가 없을 경우 새로운 배열 저장
+        saveReview(reviewInfo)
+    }
+    // getReview('reviews').push(reviewInfo)
     // // 로컬스토리지에 입력값 저장 !!!!!!!! key 값이 고정되어있어 등록마다 value가 변화.
     // const reviewInfo = [{ 'id': idElement.value, 'pw':pwdElement.value, 'review': reviewElement.value }];
     // localStorage.setItem("reviewInfo", JSON.stringify(reviewInfo));
