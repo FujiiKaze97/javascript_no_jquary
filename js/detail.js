@@ -21,7 +21,7 @@ const getTitle = (data) => {
   `;
   return card;
 }
-
+// 영화 설명 함수
 const getOverview = (data) => {
   const card = document.createElement('div');
   card.className = 'movie-overview';
@@ -36,7 +36,30 @@ const getOverview = (data) => {
   `;
   return card;
 }
-
+// 리뷰 로드 함수
+const getReview = (data) => {
+  const card = document.createElement('div');
+  card.className = 'cards';
+  card.innerHTML = `
+  <div class="cards">
+        <div class="cards_header">
+          <div class="userid">${id}</div>
+          <div class="cardrating">
+            <img class="cardstar" src="source/Star 8.png"></img>
+            <div class="rating">${star}</div>
+          </div>
+        </div>
+        <p class="carddivider"></p>
+        <div class="userreview">
+          ${review}
+        </div>
+        <div class = "cardfooter">
+          <img class = "commenticon" src = "source/comments.png"></img>
+        </div>
+      </div>
+  `;
+  return card;
+}
 
 // 영화 데이터 로드
 const options = {

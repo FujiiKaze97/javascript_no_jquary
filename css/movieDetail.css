@@ -136,7 +136,7 @@ main .movie_img {
   border-radius: 26px;
   background: var(--grey300, #F2F2F2);
   box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  padding: 20px 20px 20px 20px;
+  padding: 25px 25px 25px 25px;
 
 
 }
@@ -163,8 +163,8 @@ main .movie_img {
 }
 
 .cardstar {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
 }
 
 .rating {
@@ -180,7 +180,8 @@ main .movie_img {
 .carddivider {
   background-color: #616161;
   width: 400px;
-  height: 1px
+  height: 1px;
+  margin: 20px auto 20px auto;
 }
 
 .userreview {
@@ -192,6 +193,11 @@ main .movie_img {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+.commenticon {
+  width: 30px;
+  height: 30px;
 }
 
 /* home btn */
