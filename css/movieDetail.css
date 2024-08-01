@@ -9,8 +9,11 @@ header {
 }
 
 .movie-title {
-  font-size: 30px;
-  font-weight: 1000;
+  font-family: Inter;
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 }
 
 
@@ -21,8 +24,10 @@ main {
 
   height: 550px;
   padding: 20px 20px 50px 50px;
- 
+  margin-bottom: 50px;
+
 }
+
 
 main .movie_img {
   width: 30%;
@@ -36,12 +41,12 @@ main .movie_img {
   background-image: url("https://image.tmdb.org/t/p/w500/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg");
   background-size: cover; */
 }
-.movie_img img {
+
+.movie-poster {
   width: 100%;
   height: 100%;
 
   object-fit: contain;
-
   margin: auto;
 }
 
@@ -52,6 +57,43 @@ main .movie_img {
 
   margin-left: 50px;
   margin-right: 50px;
+
+  color: var(--grey700, #616161);
+  font-family: Inter;
+  font-size: 24x;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.votebox {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
+
+.movie_overview .vote {
+  color: #000;
+  font-family: Inter;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.vote_average {
+  color: #000;
+  font-family: Inter;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.divider {
+  background-color:#616161 ;
+  width: auto;
+  height: 1px
+  
 }
 
 /* 리뷰 카드란 */
@@ -74,7 +116,7 @@ main .movie_img {
 
 .reviews .cards_container {
   background-color: green;
-  
+
   width: 100%;
   height: 550px;
 }
@@ -88,6 +130,7 @@ main .movie_img {
   /* align-items: center; */
 
 }
+
 .home_btn_container #home_btn {
   margin: auto;
 }

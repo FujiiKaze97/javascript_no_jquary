@@ -3,11 +3,11 @@ const receivedData = location.href.split('?')[1];
 console.log(receivedData); // data
 
 // 포스터 함수
-const cardData = (data) => {
+const getPoster = (data) => {
   const card = document.createElement('div');
-  card.className = 'data-card';
+  card.className = 'movie-poster';
   card.innerHTML = `
-    <img src="https://image.tmdb.org/t/p/w500/${data.poster_path}">
+    <img src="https://image.tmdb.org/t/p/w500/${data.poster_path}" height ="480">
   `;
   return card;
 }
@@ -26,7 +26,13 @@ const getOverview = (data) => {
   const card = document.createElement('div');
   card.className = 'movie-overview';
   card.innerHTML = `
-    ${data.overview}
+  <div class = "votebox">
+  <div class = "vote">평균 별점</div>
+  
+  <div class = "vote_average">${data.vote_average.toFixed(1)}</div>
+  </div>
+  <p class = "divider"><p>
+  <div>${data.overview}</div>
   `;
   return card;
 }
@@ -46,8 +52,8 @@ fetch(`https://api.themoviedb.org/3/movie/${receivedData}?language=ko-KR`, optio
   .then(data => {
     console.log(data);
     const movieDetail = document.getElementById('movie_poster');
-    const card = cardData(data);
-    movieDetail.appendChild(card);
+    const poster = getPoster(data);
+    movieDetail.appendChild(poster);
 
     const movieTitle = document.getElementById('movie_title');
     const title = getTitle(data);
