@@ -28,7 +28,6 @@ main {
 
 }
 
-
 main .movie_img {
   width: 30%;
   height: 480px;
@@ -81,6 +80,11 @@ main .movie_img {
   line-height: normal;
 }
 
+.star {
+  width: 40px;
+  height: 40px;
+}
+
 .vote_average {
   color: #000;
   font-family: Inter;
@@ -89,11 +93,11 @@ main .movie_img {
   font-weight: 700;
   line-height: normal;
 }
+
 .divider {
-  background-color:#616161 ;
+  background-color: #616161;
   width: auto;
   height: 1px
-  
 }
 
 /* 리뷰 카드란 */
@@ -115,10 +119,58 @@ main .movie_img {
 }
 
 .reviews .cards_container {
-  background-color: green;
+  background-color: transparent;
 
   width: 100%;
   height: 550px;
+}
+
+.cards {
+  width: 440px;
+  height: 440px;
+
+  border-radius: 26px;
+  border: 1px solid #000;
+  background: #FFF;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  padding: 20px 20px 20px 20px;
+}
+
+.cards_header {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+
+}
+
+.userid {
+  color: #000;
+  font-family: Inter;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.cardstar {
+  width: 40px;
+  height: 40px;
+}
+
+.carddivider {
+  background-color: #616161;
+  width: 400px;
+  height: 1px
+}
+
+.userreview {
+  
+  color: #000;
+
+  font-family: Inter;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 /* home btn */

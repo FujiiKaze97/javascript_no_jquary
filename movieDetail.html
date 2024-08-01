@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Movie Detail</title>
   <link rel="stylesheet" href="reset.css">
   <link rel="stylesheet" href="./css/movieDetail.css">
-  
+
 </head>
+
 <body>
   <header>
-    <div class="movie_title" id = "movie_title">
+    <div class="movie_title" id="movie_title">
     </div>
   </header>
 
   <main class="movie_detail">
-    <div class="movie_img" id = "movie_poster"> 
+    <div class="movie_img" id="movie_poster">
     </div>
 
-    <div class="movie_overview">
-      <p class="overview" id ="movie_overview">
-        
-      </p>
+    <div class="movie_overview" id="movie_overview">
+
     </div>
   </main>
 
@@ -31,18 +31,31 @@
       <button id="write_review_btn">리뷰 작성</button>
     </div>
     <div class="cards_container">
-      카드가 들어갈 위치
+      <div class="cards">
+        <div class="cards_header">
+          <div class="userid">
+            최강창민
+          </div>
+          <img class = "cardstar" src = "Star 8.png"></img>
+          <div class="rating">3.5</div>
+        </div>
+        <p class = "carddivider"></p>
+        <div class =  "userreview">
+          너무 재밌어요 마블의 구세주 데드풀...스토리는 무난 
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="home_btn_container">
     <button id="home_btn">메인화면으로</button>
   </div>
-  
+
   <footer>
     내배캠 13조
   </footer>
-  
+
   <script src="./js/detail.js"></script>
 </body>
+
 </html>

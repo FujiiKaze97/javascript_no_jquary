@@ -28,7 +28,7 @@ const getOverview = (data) => {
   card.innerHTML = `
   <div class = "votebox">
   <div class = "vote">평균 별점</div>
-  
+  <img class = "star" src = "Star 8.png"></img>
   <div class = "vote_average">${data.vote_average.toFixed(1)}</div>
   </div>
   <p class = "divider"><p>
