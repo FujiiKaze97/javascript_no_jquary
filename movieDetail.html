@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,61 +8,52 @@
   <link rel="stylesheet" href="./css/reset.css">
   <link rel="stylesheet" href="./css/movieDetail.css">
   <link rel="stylesheet" href="./css/createReview.css">
-  
+
 </head>
+
 <body>
   <header>
-    <div class="movie_title">
-      <h2>Movie Title</h2>
+    <div class="movie_title" id="movie_title">
     </div>
   </header>
 
   <main class="movie_detail">
-    <div class="movie_img" id = "movie_poster"> 
+    <div class="movie_img" id="movie_poster">
     </div>
 
-    <div class="movie_overview">
-      <p>영화 정보</p>
-      <p class="overview"> (1절)
-        동해물과 백두산이 마르고 닳도록
-        하느님이 보우하사 우리나라만세
-        (후렴)무궁화 삼천리 화려강산 대한사람 대한으로 길이 보전하세
-        <br>
-        (2절)
-        남산위에 저 소나무 철갑을 두른듯
-        바람서리 불변함은 우리기상 일세
-        (후렴)무궁화 삼천리 화려강산 대한사람 대한으로 길이보전하세
-        <br>
-        
-        (3절)
-        가을하늘 공활한데 높고 구름없이 
-        밝은달은 우리가슴 일편단심일세
-        (후렴)무궁화 삼천리 화려강산 대한사람 대한으로 길이보전하세
-        <br>
-        
-        (4절)
-        이 기상과 이 맘으로 충성을 다하여
-        괴로우나 즐거우나 나라사랑하세
-        (후렴)무궁화 삼천리 화려강산 대한사람 대한으로 길이보전하세
-        
-         </p>
+    <div class="movie_overview" id="movie_overview">
+
     </div>
   </main>
 
   <div class="reviews">
     <div class="review_header">
-      <h4>네티즌 리뷰</h4>
+      <h4 class="review_title">네티즌 리뷰</h4>
       <button id="write_review_btn">리뷰 작성</button>
     </div>
     <div class="cards_container">
-      카드가 들어갈 위치
+      <div class="cards">
+        <div class="cards_header">
+          <div class="userid">최강창민</div>
+          <div class="cardrating">
+            <img class="cardstar" src="source/Star 8.png"></img>
+            <div class="rating">3.5</div>
+          </div>
+        </div>
+        <p class="carddivider"></p>
+        <div class="userreview">
+          너무 재밌어요 마블의 구세주 데드풀...스토리는 무난
+        </div>
+        <div class = "cardfooter">
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="home_btn_container">
     <button id="home_btn">메인화면으로</button>
   </div>
-  
+
   <footer>
     내배캠 13조
   </footer>
@@ -82,7 +74,7 @@
       </div>
       <div class="modal_body">
         <p><textarea id="review_text" placeholder="리뷰를 작성해주세요"></textarea></p>
-       </div>
+      </div>
       <div class="modal_footer">
         <button id="cancel_review_btn" type="button">취소</button>
         <div class="name_pw">
@@ -95,7 +87,7 @@
             <input id="pw" type="password" placeholder="비밀번호">
           </div>
         </div>
-        <button id="create_review_btn"  type="button">등록</button>
+        <button id="create_review_btn" type="button">등록</button>
       </div>
     </form>
   </div>
@@ -105,4 +97,5 @@
   <script type="module" src="./js/createReview_db.js"></script>
   <script type="module" src="./js/deletReview.js"></script>
 </body>
+
 </html>
