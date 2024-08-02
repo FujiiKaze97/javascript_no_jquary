@@ -144,7 +144,7 @@ body, h3, p, span {
     color: #333;
   }
   
-  .number-button-wrapper {
+  .number_button_wrapper {
     border-radius: 8px;
     font-size: 20px;
     margin: 0 15px;
@@ -152,11 +152,11 @@ body, h3, p, span {
     transition: background-color 0.3s;
   }
 
-  .number-button:hover {
+  .number_button:hover {
     text-decoration-line: underline;
   }
 
-  .number-button.selected {
+  .number_button.selected {
     font-weight: bold; /* 선택된 버튼 글자 굵기 */
     color:#006eff;
   }

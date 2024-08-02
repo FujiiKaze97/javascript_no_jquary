@@ -56,7 +56,7 @@ function loadMovies(page) {
       .then(response => response.json())
       .then(data => {
         const movies = data.results;
-        const movieContainer = document.getElementById('movie-container');
+        const movieContainer = document.getElementById('movie_container');
         movieContainer.innerHTML = ''; // 이전 영화 목록 제거
 
         movies.forEach(movie => {
@@ -97,11 +97,11 @@ document.getElementById('next_page').addEventListener('click', () => {
 });
 
 // 검색 버튼 이벤트 핸들러
-document.getElementById('search-button').addEventListener('click', () => {
+document.getElementById('search_button').addEventListener('click', () => {
   try {
     // 무조건 소문자로 처리하여.. 대소문자 상관없이..
-    const query = document.getElementById('search-input').value.toLowerCase();
-    const movieCards = document.querySelectorAll('.movie-card');
+    const query = document.getElementById('search_input').value.toLowerCase();
+    const movieCards = document.querySelectorAll('.movie_card');
     movieCards.forEach(card => {
       const title = card.querySelector('h3').textContent.toLowerCase();
       if (title.includes(query)) {
@@ -118,16 +118,16 @@ document.getElementById('search-button').addEventListener('click', () => {
 // Feature : MainPage Pagenation 
 function setPageNum() {
   try {
-    const numberButtonWrapper = document.querySelector('.number-button-wrapper');
+    const numberButtonWrapper = document.querySelector('.number_button_wrapper');
     numberButtonWrapper.innerHTML = ''; // 페이지 번호 wrapper 내부를 비워줌
     
     if (currentPage >= 6) {
       for (let i = currentPage - 5; i < currentPage + 5; i++) {
-        numberButtonWrapper.innerHTML += `<span class="number-button ${currentPage === i ? 'selected' : ''}"> ${i} </span`;
+        numberButtonWrapper.innerHTML += `<span class="number_button ${currentPage === i ? 'selected' : ''}"> ${i} </span`;
       }
     } else {
       for (let i = 1; i <= 10; i++) {
-        numberButtonWrapper.innerHTML += `<span class="number-button ${currentPage === i ? 'selected' : ''}"> ${i} </span`;
+        numberButtonWrapper.innerHTML += `<span class="number_button ${currentPage === i ? 'selected' : ''}"> ${i} </span`;
       }
     }
   } catch (e) {
@@ -140,7 +140,7 @@ function setPageNum() {
 function addPageClickEvent() {
 
   try {
-    const pageNumberButtons = document.querySelectorAll('.number-button');
+    const pageNumberButtons = document.querySelectorAll('.number_button');
 
     pageNumberButtons.forEach((numberButton) => {
       numberButton.addEventListener('click', (e) => {
