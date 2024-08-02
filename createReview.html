@@ -1,50 +1,17 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Movie Detail</title>
-  <link rel="stylesheet" href="./css/reset.css">
-  <link rel="stylesheet" href="./css/movieDetail.css">
-  <link rel="stylesheet" href="./css/createReview.css">
+  <title>Create Review</title>
 
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/createReview.css">
 </head>
 
 <body>
-  <header>
-    <div class="movie_title" id="movie_title">
-    </div>
-  </header>
-
-  <main class="movie_detail">
-    <div class="movie_img" id="movie_poster">
-    </div>
-
-    <div class="movie_overview" id="movie_overview">
-
-    </div>
-  </main>
-
-  <div class="reviews">
-    <div class="review_header">
-      <h4 class="review_title">네티즌 리뷰</h4>
-      <button class="write_review_btn" id="write_review_btn">리뷰 작성</button>
-    </div>
-    <div class="cards_container" id="cards_container">
-    </div>
-  </div>
-
-  <div class="home_btn_container">
-    <button id="home_btn"><a href="./index.html">메인화면으로</a></button>
-
-  </div>
-
-  <footer>
-    13조_튜탕사(튜터님 탕후루 사주세요)
-  </footer>
-
-
+  <button id="show_modal_btn" type="button">리뷰 작성</button>
 
   <div class="modal_create_review">
     <form class="modal_window">
@@ -60,7 +27,7 @@
       </div>
       <div class="modal_body">
         <p><textarea id="review_text" placeholder="리뷰를 작성해주세요"></textarea></p>
-      </div>
+       </div>
       <div class="modal_footer">
         <button id="cancel_review_btn" type="button">취소</button>
         <div class="name_pw">
@@ -73,14 +40,12 @@
             <input id="pw" type="password" placeholder="비밀번호">
           </div>
         </div>
-        <button id="create_review_btn" type="button">등록</button>
+        <button id="create_review_btn"  type="button">등록</button>
       </div>
     </form>
   </div>
 
-
-  <script type="module" src="./js/detail.js"></script>
-  <script type="module" src="./js/createReview_db.js"></script>
+  <script src="createReview.js"></script>
 </body>
 
 </html>
