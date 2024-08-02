@@ -30,30 +30,24 @@ const db = getFirestore(app);
 // 리뷰데이터 저장 변수
 let reviewData = [];
 
-let docs = await getDocs(collection(db, "review"));
-docs.forEach((doc)=>{
-  let row = doc.data();
-  
-  let reviewName = row['name'];
-  let reviewPw = row['pw'];
-  let reviewText = row['review'];
-  let reviewScore = row['score'];
-  let reviewKey = row['key'];
-  //리뷰 문서별 객체 생성
-  let dataInfo = {
-    name : reviewName,
-    pw : reviewPw,
-    review: reviewText,
-    score: reviewScore,
-    key: reviewKey
-  };
-  //리뷰 데이터 배열에 문서 객체 추가
-   reviewData.push(dataInfo);
-  // //문서별 배열
-  // let reviewData = [reviewName, reviewPw, reviewText, reviewScore]
-})
+//데이터 저장 로직 비동기 리팩토링
+const loadReviews = async () => {
+  const querySnapshot = await getDocs(collection(db, "review"));
+  querySnapshot.forEach((doc) => {
+    let row = doc.data();
+    let dataInfo = {
+      id: doc.id,
+      name: row.name,
+      pw: row.pw,
+      review: row.review,
+      score: row.score
+    };
+    reviewData.push(dataInfo);
+  });
+  console.log(reviewData);
+};
 
-console.log(reviewData);
+loadReviews();
 
 // 2. 데이터 수정하기
 
@@ -66,7 +60,7 @@ document.getElementById('review_modify_btn').addEventListener('click', function(
 
 // 프롬프트 입력 값과 데이터상의 pw 일치시 실행
 // 선택한 리뷰 모달창 데이터 가져올 필요 있음
-  if(getPw === testData['pw'] /* <=(임시값) 리뷰 모달창 pw 데이터 필요*/){
+  if(getPw === testData.pw /* <=(임시값) 리뷰 모달창 pw 데이터 필요*/){
 
     //리뷰 작성 모달창 띄우기 
     const modal = document.getElementsByClassName('modal_create_review')[1];
@@ -74,24 +68,12 @@ document.getElementById('review_modify_btn').addEventListener('click', function(
 
     // 기존 작성 데이터 가져오기
     document.getElementById('fix_text').value = testData['review'];
-    document.getElementById('fix_name').value = testData['name'];
-    document.getElementById('fix_pw').value = testData['pw'];
     document.getElementById('fix_star').value = testData['score'];
    } else if(getPw !== null){
     alert('비밀번호가 다릅니다.')
    }
 
- // 수정 버튼 입력시 데이터 수정
-document.getElementById('fix_review_btn').addEventListener('click', function(){
-  
-  // 데이터베이스 수정
-  //   const washingtonRef = doc(db, "cities", "DC");
-  
-  // // Set the "capital" field of the city 'DC'
-  // await updateDoc(washingtonRef, {
-  //   capital: true
-  // });
-  })
+
 })
 
 
