@@ -131,5 +131,8 @@ const makeKey = () => {
   let hours = ('0' + time.getHours()).slice(-2); 
   let minutes = ('0' + time.getMinutes()).slice(-2);
   let seconds = ('0' + time.getSeconds()).slice(-2); 
-  return '' + year + month + day + hours + minutes + seconds + Math.floor(1000*Math.random());
+
+  let random = Math.floor(9000*Math.random())+1000;
+  
+  return '' + year + month + day + hours + minutes + seconds + random;
 }
