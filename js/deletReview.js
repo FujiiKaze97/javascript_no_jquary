@@ -89,14 +89,19 @@ document.getElementById('review_modify_btn').addEventListener('click', function 
 })
 
 // 리뷰 데이터 수정 함수식
+//비동기 함수 사용
 const updateReview = async (id, updateReview) => {
+  /* doc함수: 파이어스토어 특정 문서 참조
+     db : 파이어스토어 데이터베이스 인스턴스
+    "review" : 컬렉션 이름
+     id: 업데이트할 문서 아이디   */
   const reviewRef = doc(db, "review", id);
+// updateDoc: 파이어스토어 문서 업데이트 함수
+//updateDoc(업데이트할 문서를 참조하는 객체, 업데이트 데이터 객체)
   await updateDoc(reviewRef, updateReview);
   alert('리뷰가 수정되었습니다.');
   location.reload();
 }
-
-
 
 
 // 수정 취소 버튼 작동
@@ -104,3 +109,27 @@ document.getElementById('cancel_fix_btn').addEventListener('click', function () 
   const modal = document.getElementsByClassName('modal_create_review')[1];
   modal.style.display = 'none';
 })
+
+// 리뷰 삭제 버튼 이벤트
+document.getElementById('review_delete_btn').addEventListener('click', function (){
+  
+  // 해당 페이지 영화 정보 가져올 필요 있음
+  let thisData = reviewData[0]
+  let getPw = prompt('비밀번호를 입력하세요')
+
+  if(getPw === thisData.pw){
+    if(confirm('정말 삭제하시겠습니까?')){
+      deleteData(thisData.id);
+    }
+  } else if(getPw !== null){
+    alert('비밀번호가 다릅니다.')
+  }
+})
+
+// 리뷰 삭제 함수
+const deleteData = async (id)=>{
+  const reviewRef = doc(db, "review", id);
+  await deleteDoc(reviewRef);
+  alert('리뷰가 삭제되었습니다.')
+  location.reload();
+}
