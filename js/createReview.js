@@ -47,10 +47,20 @@ const cancelReview = () => {
 // 데이터 저장 추후 구현해야 함.
 const createBtn = document.getElementById('create_review_btn');
 createBtn.addEventListener('click', () => {
-  createReview();
+  try {
+    console.log();
+    createReview();
+   } catch(e) {
+    console.log(e);
+   }
+
+  
 })
 
+
+// 리뷰 등록 생성 
 const createReview = () => {
+  try {
   console.log("'create review button' clicked");
   //등록 버튼 클릭시 컨펌 알림
   const result = confirm('등록하시겠습니까?');
@@ -61,29 +71,39 @@ const createReview = () => {
   const review = document.getElementById('review_text');
   const score = document.getElementById('select_star');
 
-  // console.log(name.value, pw.value);
-  // console.log('score :', score.value)
-  // console.log('review :', review.value);
 
+  // 로컬 스토리지에 test 라는 key 값이 있으면 로컬 스토리지 데이터 값 가져와서 
+  // 로컬 스토리지에 리뷰가 있으면 거따가 덮어씌우는 로직 
+  // 리뷰가 없으면 그냥 리뷰 새로 넣는건데 
   const reviewInfo = { name: name.value, pw: pw.value, score: score.value, review: review.value };
   if (result) {
     //컨펌 확인 버튼 입력시 처리
     if (localStorage.getItem('test')) {
       //로컬 스토리지에 reviews 가 있을경우 내용 추가
-      let pushReview = getReview('reviews');
+
+
+
+      //맞는 코드 : 태초에 review라고 정했기에 review가 맞음 
+      let pushReview = getReview('review');
+      //틀린 코드 : reviews라고 가져왔음 
+      // let pushReview = getReview('reviews');
+
       pushReview.push(reviewInfo);
-      localStorage.setItem('reviews', JSON.stringify(pushReview));
+      localStorage.setItem('review', JSON.stringify(pushReview));
+      // localStorage.setItem('reviews', JSON.stringify(pushReview));
 
 
     } else {
       //로컬 스토리지에 reviews가 없을 경우 새로운 배열 저장
       saveReview([reviewInfo]);
-
     }
     // 저장 후 페이지 새로고침
     location.reload();
   }
   // confirm 창에서 취소를 누르면 위에 주석처리한 부분 log가 또 뜨네요?
+} catch (e) {
+  console.log(e);
+}
 
 }
 
