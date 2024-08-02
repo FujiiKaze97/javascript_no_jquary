@@ -5,7 +5,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/fireba
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 import { getDocs } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
-
+import { deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
 // Firebase 구성 정보 설정
 const firebaseConfig = {
@@ -81,6 +81,18 @@ document.getElementById('review_modify_btn').addEventListener('click', function(
     alert('비밀번호가 다릅니다.')
    }
 
+})
+
+// 수정 버튼 입력시 데이터 수정
+document.getElementById('fix_review_btn').addEventListener('click', function(){
+  
+// 데이터베이스 수정
+//   const washingtonRef = doc(db, "cities", "DC");
+
+// // Set the "capital" field of the city 'DC'
+// await updateDoc(washingtonRef, {
+//   capital: true
+// });
 })
 
 // 수정 취소 버튼 작동
