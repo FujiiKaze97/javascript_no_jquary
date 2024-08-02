@@ -59,21 +59,30 @@
         </select>
       </div>
       <div class="modal_body">
-        <p><textarea id="review_text" placeholder="리뷰를 작성해주세요"></textarea></p>
-       </div>
+        <p><textarea id="review_text" maxlength="500" placeholder="리뷰를 작성해주세요"></textarea></p>
+        <div class="review_length">
+          <p>(<span id="current_length">0</span>/500)</p>
+        </div>
+      </div>
       <div class="modal_footer">
         <button id="cancel_review_btn" type="button">취소</button>
         <div class="name_pw">
-          <div class="input_box">
-            <label for="name">닉네임</label>
-            <input id="name" placeholder="닉네임">
+          <div class="container">
+            <div class="input_box">
+              <label for="name">닉네임</label>
+              <input id="name" placeholder="닉네임">
+            </div>
+            <p class="input_description">4-12글자. 영문, 숫자 사용 가능</p>
           </div>
-          <div class="input_box">
-            <label for="pw">PW</label>
-            <input id="pw" type="password" placeholder="비밀번호">
+          <div class="container">
+            <div class="input_box">
+              <label for="pw">PW</label>
+              <input id="pw" type="password" ime-mode="disabled" placeholder="비밀번호">
+            </div>
+            <p class="input_description">영문 대소문자, 숫자, !@#$%^&_ 중 <br> 2개 이상 사용한 4-12글자</p>
           </div>
         </div>
-        <button id="create_review_btn" type="button">등록</button>
+        <button id="create_review_btn"  type="button">등록</button>
       </div>
     </form>
   </div>
