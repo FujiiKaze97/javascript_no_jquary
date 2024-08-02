@@ -91,7 +91,8 @@ main .movie_img {
 .divider {
   background-color: #616161;
   width: auto;
-  height: 1px
+  height: 1px;
+  margin: 10px auto 10px auto;
 }
 
 /* 리뷰 카드란 */
