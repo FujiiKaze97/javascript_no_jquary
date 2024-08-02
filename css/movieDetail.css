@@ -125,6 +125,9 @@ main .movie_img {
 
 .reviews .cards_container {
   background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 
   width: 100%;
   height: 550px;
