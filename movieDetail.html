@@ -29,7 +29,8 @@
   <div class="reviews">
     <div class="review_header">
       <h4 class="review_title">네티즌 리뷰</h4>
-      <button class="write_review_btn" id="write_review_btn">리뷰 작성</button>
+      <button class ="write_review_btn" id="write_review_btn">리뷰 작성</button>
+      <button id="review_modify_btn">수정테스트</button> <!--수정버튼 테스트용-->
     </div>
     <div class="cards_container" id="cards_container">
     </div>
@@ -87,9 +88,35 @@
     </form>
   </div>
 
+  <!--리뷰 수정 모달창 / 이석원-->
+  <div class="modal_create_review">
+    <form class="modal_window">
+      <div class="modal_header">
+        <p>리뷰 수정하기</p>
+        <select class="select_star" id="fix_star">
+          <option value="⭐">⭐</option>
+          <option value="⭐⭐">⭐⭐</option>
+          <option value="⭐⭐⭐">⭐⭐⭐</option>
+          <option value="⭐⭐⭐⭐">⭐⭐⭐⭐</option>
+          <option value="⭐⭐⭐⭐⭐" selected>⭐⭐⭐⭐⭐</option>
+        </select>
+      </div>
+      <div class="modal_body">
+        <p><textarea style="width: 100%; height: 100%; resize: none; overflow: scroll;" id="fix_text" placeholder="리뷰를 작성해주세요"></textarea></p>
+      </div>
+      <div class="modal_footer">
+        <button id="cancel_fix_btn" type="button">수정취소</button>
+        <div class="name_pw">
+        </div>
+        <button id="fix_review_btn" type="button">수정등록</button>
+      </div>
+    </form>
+  </div>
+
 
   <script type="module" src="./js/detail.js"></script>
   <script type="module" src="./js/createReview_db.js"></script>
+  <script type="module" src="./js/deletReview.js"></script>
 </body>
 
 </html>
