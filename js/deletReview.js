@@ -104,10 +104,32 @@ const updateReview = async (id, updateReview) => {
 }
 
 
-
-
 // 수정 취소 버튼 작동
 document.getElementById('cancel_fix_btn').addEventListener('click', function () {
   const modal = document.getElementsByClassName('modal_create_review')[1];
   modal.style.display = 'none';
 })
+
+// 리뷰 삭제 버튼 이벤트
+document.getElementById('review_delete_btn').addEventListener('click', function (){
+  
+  // 해당 페이지 영화 정보 가져올 필요 있음
+  let thisData = reviewData[0]
+  let getPw = prompt('비밀번호를 입력하세요')
+
+  if(getPw === thisData.pw){
+    if(confirm('정말 삭제하시겠습니까?')){
+      deleteData(thisData.id);
+    }
+  } else if(getPw !== null){
+    alert('비밀번호가 다릅니다.')
+  }
+})
+
+// 리뷰 삭제 함수
+const deleteData = async (id)=>{
+  const reviewRef = doc(db, "review", id);
+  await deleteDoc(reviewRef);
+  alert('리뷰가 삭제되었습니다.')
+  location.reload();
+}
