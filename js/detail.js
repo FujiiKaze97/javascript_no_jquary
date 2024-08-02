@@ -73,6 +73,7 @@ const options = {
 fetch(`https://api.themoviedb.org/3/movie/${receivedData}?language=ko-KR`, options)
   .then(response => response.json())
   .then(data => {
+    console.log("영화 데이터 로드 111");
     console.log(data);
     const movieDetail = document.getElementById('movie_poster');
     const poster = getPoster(data);
