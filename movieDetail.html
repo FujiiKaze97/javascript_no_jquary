@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="./css/reset.css">
   <link rel="stylesheet" href="./css/movieDetail.css">
   <link rel="stylesheet" href="./css/createReview.css">
-
+  
 </head>
 
 <body>
@@ -29,36 +29,22 @@
   <div class="reviews">
     <div class="review_header">
       <h4 class="review_title">네티즌 리뷰</h4>
-      <button id="write_review_btn">리뷰 작성</button>
+      <button class ="write_review_btn" id="write_review_btn">리뷰 작성</button>
+      <button id="review_modify_btn">수정테스트</button><br> <!--수정버튼 테스트용-->
+      <button id="review_delete_btn">삭제테스트</button> <!--삭제버튼 테스트용-->
+
     </div>
-    <div class="cards_container">
-      <div class="cards">
-        <div class="cards_header">
-          <div class="userid">최강창민</div>
-          <div class="cardrating">
-            <img class="cardstar" src="source/Star 8.png"></img>
-            <div class="rating">3.5</div>
-          </div>
-        </div>
-        <p class="carddivider"></p>
-        <div class="userreview">
-          너무 재밌어요 마블의 구세주 데드풀...스토리는 무난
-        </div>
-        <div class = "cardfooter">
-        </div>
-      </div>
+    <div class="cards_container" id="cards_container">
     </div>
   </div>
 
   <div class="home_btn_container">
-    <button id="home_btn">메인화면으로</button>
+    <button id="home_btn" onclick="location.href='./index.html'">메인 페이지</button>
   </div>
 
   <footer>
-    내배캠 13조
+    13조_튜탕사(튜터님 탕후루 사주세요)
   </footer>
-
-
 
   <div class="modal_create_review">
     <form class="modal_window">
@@ -73,28 +59,64 @@
         </select>
       </div>
       <div class="modal_body">
-        <p><textarea id="review_text" placeholder="리뷰를 작성해주세요"></textarea></p>
+        <p><textarea id="review_text" maxlength="500" placeholder="리뷰를 작성해주세요"></textarea></p>
+        <div class="review_length">
+          <p>(<span id="current_length">0</span>/500)</p>
+        </div>
       </div>
       <div class="modal_footer">
         <button id="cancel_review_btn" type="button">취소</button>
         <div class="name_pw">
-          <div class="input_box">
-            <label for="name">닉네임</label>
-            <input id="name" placeholder="닉네임">
+          <div class="container">
+            <div class="input_box">
+              <label for="name">닉네임</label>
+              <input id="name" placeholder="닉네임">
+            </div>
+            <p class="input_description">4-12글자. 영문, 숫자 사용 가능</p>
           </div>
-          <div class="input_box">
-            <label for="pw">PW</label>
-            <input id="pw" type="password" placeholder="비밀번호">
+          <div class="container">
+            <div class="input_box">
+              <label for="pw">PW</label>
+              <input id="pw" type="password" ime-mode="disabled" placeholder="비밀번호">
+            </div>
+            <p class="input_description">영문 대소문자, 숫자, !@#$%^&_ 중 <br> 2개 이상 사용한 4-12글자</p>
           </div>
         </div>
-        <button id="create_review_btn" type="button">등록</button>
+        <button id="create_review_btn"  type="button">등록</button>
       </div>
     </form>
   </div>
 
+  <!--리뷰 수정 모달창 / 이석원-->
+  <div class="modal_create_review">
+    <form class="modal_window">
+      <div class="modal_header">
+        <p>리뷰 수정하기</p>
+        <select class="select_star" id="fix_star">
+          <option value="⭐">⭐</option>
+          <option value="⭐⭐">⭐⭐</option>
+          <option value="⭐⭐⭐">⭐⭐⭐</option>
+          <option value="⭐⭐⭐⭐">⭐⭐⭐⭐</option>
+          <option value="⭐⭐⭐⭐⭐" selected>⭐⭐⭐⭐⭐</option>
+        </select>
+      </div>
+      <div class="modal_body">
+        <p><textarea style="width: 100%; height: 100%; resize: none; overflow: scroll;" id="fix_text" placeholder="리뷰를 작성해주세요"></textarea></p>
+      </div>
+      <div class="modal_footer">
+        <button id="cancel_fix_btn" type="button">수정취소</button>
+        <div class="name_pw">
+        </div>
+        <button id="fix_review_btn" type="button">수정등록</button>
+      </div>
+    </form>
+  </div>
 
-  <script src="./js/detail.js"></script>
+  <script src="./js/reset.js"></script>
+  <script type="module" src="./js/detail.js"></script>
   <script type="module" src="./js/createReview_db.js"></script>
+  <script type="module" src="./js/deletReview.js"></script>
+  <script src="./js/modal.js"></script>
 </body>
 
 </html>
