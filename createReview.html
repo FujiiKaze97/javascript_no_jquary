@@ -26,8 +26,11 @@
         </select>
       </div>
       <div class="modal_body">
-        <p><textarea id="review_text" placeholder="리뷰를 작성해주세요"></textarea></p>
-       </div>
+        <p><textarea id="review_text" maxlength="500" placeholder="리뷰를 작성해주세요"></textarea></p>
+        <div class="review_length">
+          <p>(<span id="current_length">0</span>/500)</p>
+        </div>
+      </div>
       <div class="modal_footer">
         <button id="cancel_review_btn" type="button">취소</button>
         <div class="name_pw">
