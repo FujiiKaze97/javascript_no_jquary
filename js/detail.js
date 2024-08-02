@@ -1,3 +1,56 @@
+// Firebase SDK 라이브러리 가져오기
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+import { getDocs } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+
+// Firebase 구성 정보 설정
+const firebaseConfig = {
+  apiKey: "AIzaSyAcTX_5mbzFJeUantOQ4xZXah_aJtW96EQ",
+  authDomain: "prac-0717.firebaseapp.com",
+  projectId: "prac-0717",
+  storageBucket: "prac-0717.appspot.com",
+  messagingSenderId: "299955746969",
+  appId: "1:299955746969:web:b6cbca8f52d9469732e008"
+};
+
+// Firebase 인스턴스 초기화
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+
+  //  리뷰 카드 함수
+  const getReview = (data) => {
+    const card = document.createElement('div');
+     card.className = 'cards';
+       card.innerHTML = `<div class="cards_header">
+          <div class="userid">${data.name}</div>
+          <div class="cardrating">
+            
+            <div class="rating">${data.score}</div>
+          </div>
+        </div>
+        <p class="carddivider"></p>
+        <div class="userreview">
+          ${data.review}
+        </div>
+        <div class = "cardfooter">
+          
+        </div>`;
+      return card;
+     }
+
+// 리뷰 불러오기
+let docs = await getDocs(collection(db, "review"));
+docs.forEach((doc) => {
+  console.log(doc.data());
+  const cardsContainer = document.getElementById('cards_container');
+  const card = getReview(doc.data());
+  console.log(card)
+  cardsContainer.appendChild(card);
+
+})
+
 // movie id 받기
 const receivedData = location.href.split('?')[1];
 console.log(receivedData); // data
@@ -36,30 +89,6 @@ const getOverview = (data) => {
   `;
   return card;
 }
-// 리뷰 로드 함수
-const getReview = (data) => {
-  const card = document.createElement('div');
-  card.className = 'cards';
-  card.innerHTML = `
-  <div class="cards">
-        <div class="cards_header">
-          <div class="userid">${id}</div>
-          <div class="cardrating">
-            <img class="cardstar" src="source/Star 8.png"></img>
-            <div class="rating">${star}</div>
-          </div>
-        </div>
-        <p class="carddivider"></p>
-        <div class="userreview">
-          ${review}
-        </div>
-        <div class = "cardfooter">
-          <img class = "commenticon" src = "source/comments.png"></img>
-        </div>
-      </div>
-  `;
-  return card;
-}
 
 // 영화 데이터 로드
 const options = {
@@ -73,7 +102,7 @@ const options = {
 fetch(`https://api.themoviedb.org/3/movie/${receivedData}?language=ko-KR`, options)
   .then(response => response.json())
   .then(data => {
-    console.log("영화 데이터 로드 111");
+    console.log("영화 데이터 로드");
     console.log(data);
     const movieDetail = document.getElementById('movie_poster');
     const poster = getPoster(data);
