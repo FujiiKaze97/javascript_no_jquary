@@ -1,6 +1,6 @@
 const cardData = (movie) => {
   const card = document.createElement('div');
-  card.className = 'movie-card';
+  card.className = 'movie_card';
   card.innerHTML = `
     <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
     <div class="movie-card-content">
@@ -16,7 +16,7 @@ const cardData = (movie) => {
 
 // 웹페이지 시작 시 자동 포커스
 document.addEventListener('DOMContentLoaded', () => {
-  const searchInput = document.getElementById('search-input');
+  const searchInput = document.getElementById('search_input');
   if (searchInput) {
     searchInput.focus();
   }
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // 키다운 이벤트
 document.addEventListener("keydown", function(event) {
   if (event.key === 'Enter') {
-    document.getElementById('search-button').click();
+    document.getElementById('search_button').click();
   }
 });
 
@@ -49,7 +49,7 @@ function loadMovies(page) {
     .then(response => response.json())
     .then(data => {
       const movies = data.results;
-      const movieContainer = document.getElementById('movie-container');
+      const movieContainer = document.getElementById('movie_container');
       movieContainer.innerHTML = ''; // 이전 영화 목록 제거
       
       
@@ -60,14 +60,14 @@ function loadMovies(page) {
       });
 
       // 페이지네이션 상태 업데이트
-      document.getElementById('page-number').textContent = `Page: ${page}`;
+      document.getElementById('page_number').textContent = `Page: ${page}`;
 
       // 이전 페이지 버튼 활성화/비활성화
-      const prevButton = document.getElementById('prev-page');
+      const prevButton = document.getElementById('prev_page');
       prevButton.disabled = page === 1;
 
       // 다음 페이지 버튼 활성화/비활성화
-      const nextButton = document.getElementById('next-page');
+      const nextButton = document.getElementById('next_page');
       nextButton.disabled = page === data.total_pages;
 
     })
@@ -75,23 +75,23 @@ function loadMovies(page) {
 }
 
 // 페이지네이션 버튼 이벤트 핸들러
-document.getElementById('prev-page').addEventListener('click', () => {
+document.getElementById('prev_page').addEventListener('click', () => {
   if (currentPage > 1) {
     currentPage--;
     loadMovies(currentPage);
   }
 });
 
-document.getElementById('next-page').addEventListener('click', () => {
+document.getElementById('next_page').addEventListener('click', () => {
   currentPage++;
   loadMovies(currentPage);
 });
 
 // 검색 버튼 이벤트 핸들러
-document.getElementById('search-button').addEventListener('click', () => {
+document.getElementById('search_button').addEventListener('click', () => {
   // 무조건 소문자로 처리하여.. 대소문자 상관없이..
-  const query = document.getElementById('search-input').value.toLowerCase();
-  const movieCards = document.querySelectorAll('.movie-card');
+  const query = document.getElementById('search_input').value.toLowerCase();
+  const movieCards = document.querySelectorAll('.movie_card');
   movieCards.forEach(card => {
     const title = card.querySelector('h3').textContent.toLowerCase();
     if (title.includes(query)) {
