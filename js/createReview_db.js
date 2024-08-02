@@ -1,3 +1,32 @@
+// ======================================
+//                firebase
+// ======================================
+
+// Firebase SDK 라이브러리 가져오기
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+import { getDocs } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+
+
+// Firebase 구성 정보 설정
+const firebaseConfig = {
+  apiKey: "AIzaSyAcTX_5mbzFJeUantOQ4xZXah_aJtW96EQ",
+  authDomain: "prac-0717.firebaseapp.com",
+  projectId: "prac-0717",
+  storageBucket: "prac-0717.appspot.com",
+  messagingSenderId: "299955746969",
+  appId: "1:299955746969:web:b6cbca8f52d9469732e008"
+};
+
+
+// Firebase 인스턴스 초기화
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+
+
+
 // '리뷰 작성' 버튼을 클릭하면 모달창이 뜨도록 함
 const creatReviewBtn = document.getElementById('write_review_btn');
 creatReviewBtn.addEventListener('click', () => {
@@ -8,8 +37,6 @@ const ShowModal = () => {
 
   const modal = document.getElementsByClassName('modal_create_review')[0];
   modal.style.display = 'flex';
-
-  // document.body.style.overflow = 'hidden';
   
 }
 
@@ -31,7 +58,7 @@ const CancelReview = () => {
 
     // reset : 기존 모달창에 있던 내용 초기화
     // 새로고침은 하지 않음
-    clearModal(name, pw, review, score);
+    ClearModal(name, pw, review, score);
     const modal = document.getElementsByClassName('modal_create_review')[0];
     modal.style.display = 'none';
   }
@@ -39,18 +66,14 @@ const CancelReview = () => {
   // const modal = document.getElementsByClassName('modal_create_review')[0];
   // modal.style.display = 'none';
   // }
-
-
 }
 
-// 등록 버튼을 누르면 log만 찍히도록 함.
-// 데이터 저장 추후 구현해야 함.
-const createBtn = document.getElementById('create_review_btn');
-createBtn.addEventListener('click', () => {
-  CreateReview();
-})
 
-const CreateReview = () => {
+
+// firestorage에 저장하기
+
+const createBtn = document.getElementById('create_review_btn');
+createBtn.addEventListener('click', async function () {
   console.log("'create review button' clicked");
   //등록 버튼 클릭시 컨펌 알림
   const result = confirm('등록하시겠습니까?');
@@ -68,34 +91,14 @@ const CreateReview = () => {
   const reviewInfo = { name: name.value, pw: pw.value, score: score.value, review: review.value };
   if (result) {
     //컨펌 확인 버튼 입력시 처리
-    if (localStorage.getItem('test')) {
-      //로컬 스토리지에 reviews 가 있을경우 내용 추가
-      let pushReview = getReview('reviews');
-      pushReview.push(reviewInfo);
-      localStorage.setItem('reviews', JSON.stringify(pushReview));
-
-
-    } else {
-      //로컬 스토리지에 reviews가 없을 경우 새로운 배열 저장
-      SaveReview([reviewInfo]);
-
-    }
+    // saveReview(reviewInfo);
+    await addDoc(collection(db, "review"), reviewInfo);
     // 저장 후 페이지 새로고침
     location.reload();
   }
   // confirm 창에서 취소를 누르면 위에 주석처리한 부분 log가 또 뜨네요?
 
-}
-
-// localStorage에 저장하기
-const SaveReview = (info) => {
-  localStorage.setItem('test', JSON.stringify(info));
-}
-// localStorage 불러오기
-const GetReview = (key) => {
-  let localData = JSON.parse(localStorage.getItem(key))
-  return localData;
-}
+})
 
 const ClearModal = (name, pw, review, score) => {
   // reset : 기존 모달창에 있던 내용 초기화
@@ -104,5 +107,3 @@ const ClearModal = (name, pw, review, score) => {
   review.value = '';
   score.value = '⭐⭐⭐⭐⭐';
 }
-
-
