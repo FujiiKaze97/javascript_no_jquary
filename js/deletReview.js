@@ -30,7 +30,7 @@ const db = getFirestore(app);
 // 리뷰데이터 저장 변수
 let reviewData = [];
 
-//데이터 저장 로직 비동기 리팩토링
+//리뷰 데이터 읽기
 const loadReviews = async () => {
   const querySnapshot = await getDocs(collection(db, "review"));
   querySnapshot.forEach((doc) => {
@@ -52,34 +52,55 @@ loadReviews();
 // 2. 데이터 수정하기
 
 // 리뷰 수정버튼 클릭시 수정 모달창 생성
-document.getElementById('review_modify_btn').addEventListener('click', function(){
- // 리뷰 모달창 데이터 임시 할당
-  let testData = reviewData[0];
+document.getElementById('review_modify_btn').addEventListener('click', function () {
+  // 리뷰 모달창 데이터 임시 할당
+  let thisData = reviewData[0];
   // 비밀번호 확인 프롬프트
   let getPw = prompt('비밀번호를 입력하세요')
 
-// 프롬프트 입력 값과 데이터상의 pw 일치시 실행
-// 선택한 리뷰 모달창 데이터 가져올 필요 있음
-  if(getPw === testData.pw /* <=(임시값) 리뷰 모달창 pw 데이터 필요*/){
+  // 프롬프트 입력 값과 데이터상 pw 일치시 실행
+  // 선택한 리뷰 모달창 데이터 가져올 필요 있음
+  if (getPw === thisData.pw /* <=(임시값)*/) {
 
     //리뷰 작성 모달창 띄우기 
     const modal = document.getElementsByClassName('modal_create_review')[1];
     modal.style.display = 'flex';
 
     // 기존 작성 데이터 가져오기
-    document.getElementById('fix_text').value = testData['review'];
-    document.getElementById('fix_star').value = testData['score'];
-   } else if(getPw !== null){
+    document.getElementById('fix_text').value = thisData['review'];
+    document.getElementById('fix_star').value = thisData['score'];
+
+    // 수정 등록 버튼 입력 시 데이터 수정저장
+    document.getElementById('fix_review_btn').addEventListener('click', function () {
+      let fixedReview = {
+
+        review: document.getElementById('fix_text').value,
+        score: document.getElementById('fix_star').value
+
+      }
+
+      updateReview(thisData.id, fixedReview);
+    })
+  } else if (getPw !== null) {
     alert('비밀번호가 다릅니다.')
-   }
+  }
 
 
 })
 
+// 리뷰 데이터 수정 함수식
+const updateReview = async (id, updateReview) => {
+  const reviewRef = doc(db, "review", id);
+  await updateDoc(reviewRef, updateReview);
+  alert('리뷰가 수정되었습니다.');
+  location.reload();
+}
+
+
 
 
 // 수정 취소 버튼 작동
-document.getElementById('cancel_fix_btn').addEventListener('click', function(){
+document.getElementById('cancel_fix_btn').addEventListener('click', function () {
   const modal = document.getElementsByClassName('modal_create_review')[1];
   modal.style.display = 'none';
 })
