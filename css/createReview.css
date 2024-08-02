@@ -2,9 +2,9 @@
   box-sizing: border-box;
 }
 
-body {
+/* body {
   position : relative;
-}
+} */
 /* #creat_review_btn {
   z-index: 1;
 } */
@@ -21,10 +21,10 @@ body {
   height: 100%;
 
   /* 전체화면으로 만들기 위함 */
-  position: absolute;
+  position: fixed; /*fixed로 설정시 body에 relative 속성 불필요*/
   left: 0;
   top: 0;
-  bottom: 0;
+  /* bottom: 0; 불필요*/
 
 
   background-color: rgba(128, 128, 128, 0.5);
