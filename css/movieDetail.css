@@ -136,7 +136,7 @@ main .movie_img {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: 25px;
 
   width: 100%;
 }

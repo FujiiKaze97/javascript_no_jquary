@@ -51,10 +51,8 @@ const db = getFirestore(app);
 // 리뷰 불러오기
 let docs = await getDocs(collection(db, "review"));
 docs.forEach((doc) => {
-  console.log(doc.data());
   const cardsContainer = document.getElementById('cards_container');
   const card = getReview(doc.data());
-  console.log(card)
   cardsContainer.appendChild(card);
 
 })
@@ -112,7 +110,6 @@ const options = {
 fetch(`https://api.themoviedb.org/3/movie/${receivedData}?language=ko-KR`, options)
   .then(response => response.json())
   .then(data => {
-    console.log("영화 데이터 로드");
     console.log(data);
     const movieDetail = document.getElementById('movie_poster');
     const poster = getPoster(data);
