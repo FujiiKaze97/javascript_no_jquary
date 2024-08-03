@@ -182,7 +182,7 @@ line-height: normal;
   display: flex;
   justify-content: space-between;
 }
-.button_area button {
+.register_button {
   color: #FFF;
 
 font-family: Pretendard;
@@ -200,4 +200,24 @@ gap: 10px;
 border-radius: 10px;
 border:0px;
 background: var(--blue, #0057FF);
+}
+
+.cancel_button {
+  color: #0057FF;
+
+  font-family: Pretendard;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+    display: flex;
+  width: 250px;
+  height: 56px;
+  padding: 26px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  border-color:#0057FF ;
+  background:white;
 }
