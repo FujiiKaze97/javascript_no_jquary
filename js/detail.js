@@ -76,12 +76,17 @@ const getTitle = (data) => {
   const card = document.createElement('div');
   card.className = 'movie-title';
   card.innerHTML = `
-    ${data.title}
+    <div class = "korean_title">${data.title}</div>
+    <div class = "original_title">${data.original_title}</div>
   `;
   return card;
 }
+
+
 // 영화 설명 함수
 const getOverview = (data) => {
+  let genreArr = data.genres.map(x => x.name);
+  console.log(genreArr)
   const card = document.createElement('div');
   card.className = 'movie-overview';
   card.innerHTML = `
@@ -92,7 +97,8 @@ const getOverview = (data) => {
   <div class = "vote_average">${data.vote_average.toFixed(1)}</div>
   </div>
   </div>
-  <p class = "divider"><p>
+  <p class = "movie_info">${data.release_date} | ${genreArr} | ${data.runtime}분</p>
+  <p class = "divider"></p>
   <div>${data.overview}</div>
   `;
   return card;
@@ -120,6 +126,7 @@ fetch(`https://api.themoviedb.org/3/movie/${receivedData}?language=ko-KR`, optio
     movieTitle.appendChild(title);
 
     const movieOverview = document.getElementById('movie_overview');
+    
     const overview = getOverview(data);
     movieOverview.appendChild(overview);
 

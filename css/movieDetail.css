@@ -11,11 +11,21 @@ header {
   width: 100%;
   padding: 50px 50px 20px 50px;
 }
-
 .movie-title {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  gap: 30px;
+}
+.korean_title {
   font-family: Pretendard;
   font-size: 64px;
   font-weight: 700;
+}
+.original_title {
+  font-family: Pretendard;
+  font-size: 40px;
+  font-weight: 600;
 }
 
 /* 상세 페이지 메인 */
@@ -96,6 +106,16 @@ main .movie_img {
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+}
+.movie_info {
+  color: #000;
+
+font-family: Pretendard;
+font-size: 24px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+margin-top: 20px;
 }
 
 .divider {
