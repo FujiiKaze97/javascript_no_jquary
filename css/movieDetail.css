@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: #f4f4f9;
+}
+
 /* 헤더 header */
 header {
   width: 100%;
@@ -9,7 +13,7 @@ header {
 }
 
 .movie-title {
-  font-family: Inter;
+  font-family: Pretendard;
   font-size: 64px;
   font-weight: 700;
 }
@@ -20,7 +24,7 @@ main {
   flex-direction: row;
 
   height: 550px;
-  padding: 20px 20px 50px 50px;
+  padding: 20px 50px 50px 50px;
   margin-bottom: 50px;
 }
 
@@ -52,7 +56,7 @@ main .movie_img {
   margin-right: auto;
 
   color: var(--grey700, #616161);
-  font-family: Inter;
+  font-family: Pretendard;
   font-size: 24x;
   font-style: normal;
   font-weight: 400;
@@ -65,12 +69,18 @@ main .movie_img {
   gap: 30px;
 }
 
+.star_box {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
 .movie_overview .vote {
   color: #000;
-  font-family: Inter;
+  font-family: Pretendard;
   font-size: 36px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: normal;
 }
 
@@ -81,7 +91,7 @@ main .movie_img {
 
 .vote_average {
   color: #000;
-  font-family: Inter;
+  font-family: Pretendard;
   font-size: 36px;
   font-style: normal;
   font-weight: 700;
@@ -92,7 +102,7 @@ main .movie_img {
   background-color: #616161;
   width: auto;
   height: 1px;
-  margin: 10px auto 10px auto;
+  margin: 20px auto 20px auto;
 }
 
 /* 리뷰 카드란 */
@@ -105,7 +115,6 @@ main .movie_img {
 .reviews .review_header {
   display: flex;
   justify-content: space-between;
-
   align-items: center;
 
   height: 50px;
@@ -114,10 +123,11 @@ main .movie_img {
 
 .review_title {
   color: #000;
-  font-family: Inter;
+
+  font-family: Pretendard;
   font-size: 40px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: normal;
 }
 
@@ -126,7 +136,7 @@ main .movie_img {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 30px;
 
   width: 100%;
 }
@@ -134,7 +144,7 @@ main .movie_img {
 .write_review_btn {
   color: #FFF;
 
-  font-family: Inter;
+  font-family: Pretendard;
   font-size: 24px;
   font-style: normal;
   font-weight: 400;
@@ -142,25 +152,27 @@ main .movie_img {
 
   display: flex;
 
-padding: 10px 20px 10px 20px;
-justify-content: center;
-align-items: center;
+  padding: 10px 30px 10px 30px;
+  justify-content: center;
+  align-items: center;
 
   border-radius: 10px;
+  border: 0px;
   background: var(--blue, #0057FF);
 }
 
 /* 카드 */
 .cards {
-  width: 440px;
-  height: 440px;
+  width: 340px;
+  height: 360px;
 
   border-radius: 26px;
-  background: var(--grey300, #F2F2F2);
+  background: var(--grey300, white);
   box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
   padding: 25px 25px 25px 25px;
-
-
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
 }
 
 .cards_header {
@@ -170,8 +182,8 @@ align-items: center;
 
 .userid {
   color: #000;
-  font-family: Inter;
-  font-size: 36px;
+  font-family: Pretendard;
+  font-size: 24px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -184,34 +196,20 @@ align-items: center;
   gap: 10px;
 }
 
-.cardstar {
-  width: 30px;
-  height: 30px;
-}
-
-.rating {
-  color: #000;
-
-  font-family: Inter;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
 
 .carddivider {
   background-color: #616161;
-  width: 400px;
+  width: 285px;
   height: 1px;
-  margin: 20px auto 20px auto;
+  margin: 10px auto 10px auto;
 }
 
 .userreview {
 
   color: #000;
 
-  font-family: Inter;
-  font-size: 24px;
+  font-family: Pretendard;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -225,7 +223,7 @@ align-items: center;
 /* home btn */
 .home_btn_container {
   width: 100%;
-  height: 100px;
+  height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -234,34 +232,64 @@ align-items: center;
 .home_btn_container #home_btn {
   color: #FFF;
 
-  font-family: Inter;
-  font-size: 24px;
+  font-family: Pretendard;
+  font-size: 30px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 
-  display: flex;
+  padding: 20px 30px 20px 30px;
 
-padding: 10px 20px 10px 20px;
-justify-content: center;
-align-items: center;
-
-  border-radius: 10px;
+  border-radius: 20px;
+  border: 0px;
   background: var(--blue, #0057FF);
 }
 
 /* footer */
 footer {
-  background-color: black;
+  background: var(--grey700, #616161);
+  
   width: 100%;
-  height: 100px;
-  padding: 30px 0 30px 0;
+  height: 220px;
+  padding: 50px 0 50px 0;
   text-align: center;
 
   color: #ffffff;
-  font-family: Inter;
+  font-family: Pretendard;
   font-size: 32px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+.camp {
+  color: #FFF;
+
+font-family: Pretendard;
+font-size: 32px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+margin-bottom: 5px;
+
+}
+
+.react {
+  color: #FFF;
+
+text-align: center;
+font-family: Pretendard;
+font-size: 32px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+.team {
+  color: #FFF;
+  font-family: Pretendard;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 20px
 }

@@ -18,6 +18,15 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// 폰트
+(function(d) {
+  var config = {
+    kitId: 'xlw1ylc',
+    scriptTimeout: 3000,
+    async: true
+  },
+  h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+})(document);
 
   //  리뷰 카드 함수
   const getReview = (data) => {
@@ -26,7 +35,6 @@ const db = getFirestore(app);
        card.innerHTML = `<div class="cards_header">
           <div class="userid">${data.name}</div>
           <div class="cardrating">
-            
             <div class="rating">${data.score}</div>
           </div>
         </div>
@@ -81,8 +89,10 @@ const getOverview = (data) => {
   card.innerHTML = `
   <div class = "votebox">
   <div class = "vote">평균 별점</div>
-  <img class = "star" src = "source/Star 8.png"></img>
+  <div class = "star_box">
+  <img class = "star" src = "source/Star_yellow.png"></img>
   <div class = "vote_average">${data.vote_average.toFixed(1)}</div>
+  </div>
   </div>
   <p class = "divider"><p>
   <div>${data.overview}</div>
