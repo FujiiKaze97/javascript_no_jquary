@@ -1,6 +1,7 @@
 // code by 해인
 // 최근 클릭한 영화 보여주기
 
+// options가 movie.js에 선언되어 있어 여기서는 별도 선언 안함.
 
 // localStorage에 저장하기
 const SaveData = (id) => {
