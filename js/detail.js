@@ -155,3 +155,77 @@ fetch(`https://api.themoviedb.org/3/movie/${receivedData}?language=ko-KR`, optio
 
   })
   .catch(err => console.error(err));
+
+
+
+
+  // localStorage에 저장하기
+const SaveData = (id) => {
+  localStorage.setItem('recent_movies', JSON.stringify(id));
+}
+// localStorage 불러오기
+const GetData = (key) => {
+  let localData = JSON.parse(localStorage.getItem(key))
+  return localData;
+}
+
+
+
+// 포스터 함수
+const getRecentPoster = (data) => {
+  const card = document.createElement('div');
+  card.className = 'recent_movie_card';
+  card.innerHTML = `
+    <img src="https://image.tmdb.org/t/p/w500/${data.poster_path}">
+  `;
+  card.addEventListener('click', () => window.location.href = `movieDetail.html?${data.id}`);
+  return card;
+}
+
+const recentContainer = document.getElementsByClassName('close_recent_movies_btn_container')[0]
+                                .nextElementSibling; // recentMovie.js와 다른 부분 (container라는 다른 요소 존재해서 수정)
+console.log('recent Movie Container :', recentContainer);
+const showRecentMovies = (ids) => {
+  console.log('ids :', ids);
+  ids.forEach(async (id) => {
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=ko-KR`, options);
+    const data = await response.json();
+
+    const card = getRecentPoster(data);
+    console.log(card);
+    recentContainer.appendChild(card);
+  })
+  console.log('recent movie cards created')
+}
+
+console.log(GetData('recent_movies'));
+showRecentMovies(GetData('recent_movies'));
+
+
+
+// '최근' 버튼 누르면 최근 본 영화 보이게 하기
+const recentMovieContainer = document.getElementsByClassName('recent_movies_container')[0];
+const recentMoviesBtn = document.getElementById('recent_movies_btn');
+recentMoviesBtn.addEventListener('click', () => {
+  
+  recentMovieContainer.classList.add('open');
+  recentMovieContainer.style.display = 'block';
+
+  recentMoviesBtn.style.display = 'none';
+  setTimeout(() => {
+    recentMovieContainer.classList.remove('open');
+  }, 800);
+})
+
+// // '최근' 버튼 누르면 최근 본 영화 보이게 하기
+const closeMoviesBtn = document.getElementById('close_recent_movies_btn');
+closeMoviesBtn.addEventListener('click', () => {
+  
+  recentMovieContainer.classList.add('close');
+
+  setTimeout(() => {
+  recentMoviesBtn.style.display = 'block';
+  recentMovieContainer.classList.remove('close');
+  recentMovieContainer.style.display = 'none';
+  }, 800);
+})

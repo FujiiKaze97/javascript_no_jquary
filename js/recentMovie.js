@@ -36,8 +36,10 @@ const showRecentMovies = (ids) => {
     const card = getRecentPoster(data);
     recentContainer.appendChild(card);
   })
+  console.log('recent movie cards created')
 }
 
+console.log(GetData('recent_movies'));
 showRecentMovies(GetData('recent_movies'));
 
 
