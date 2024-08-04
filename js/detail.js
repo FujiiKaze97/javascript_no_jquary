@@ -55,6 +55,43 @@ docs.forEach((doc) => {
 const receivedData = location.href.split('?')[1];
 console.log(receivedData); // data
 
+// 클릭 시 받은 id값 local storage에 저장 - by 해인 start ==========
+// localStorage에 저장하기
+const SaveId = (id) => {
+  localStorage.setItem('recent_movies', JSON.stringify(id));
+}
+// localStorage 불러오기
+const GetIds = (key) => {
+  let localData = JSON.parse(localStorage.getItem(key))
+  return localData;
+}
+if (localStorage.getItem('recent_movies')) {
+  //로컬 스토리지에 recent_movies 가 있을경우 내용 추가
+  let recentMovieList = GetIds('recent_movies');
+
+  if (!recentMovieList.includes(receivedData)) {
+    console.log(recentMovieList)
+    recentMovieList.unshift(receivedData);
+    localStorage.setItem('recent_movies', JSON.stringify(recentMovieList));
+  } else { // 이미 본 영화도 최신 순위로 올림
+    const idx = recentMovieList.indexOf(receivedData);
+    recentMovieList.splice(idx,1);
+    recentMovieList.unshift(receivedData);
+    SaveId(recentMovieList);
+  }
+
+
+  if (GetIds('recent_movies').length > 5) {
+    const newMovieList = recentMovieList.splice(0,5);
+    SaveId(newMovieList);
+  }
+
+} else {
+  //로컬 스토리지에 reviews가 없을 경우 새로운 배열 저장
+  SaveId([receivedData]);
+}
+// 클릭 시 받은 id값 local storage에 저장 - by 해인 end ==========
+
 // 포스터 함수
 const getPoster = (data) => {
   const card = document.createElement('div');
