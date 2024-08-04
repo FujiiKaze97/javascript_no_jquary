@@ -42,8 +42,9 @@ const db = getFirestore(app);
         <div class="userreview">
           ${data.review}
         </div>
-        <div class = "cardfooter">
-          
+        <div class = "card_footer">
+          <img class = "comment_icon" src ="source/comments.png"></img>
+          <div class = "comment_num">5</div>
         </div>`;
       return card;
      }
