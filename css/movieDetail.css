@@ -375,6 +375,7 @@ footer {
 .recent_movie_card:hover img {
   translate: -2px -5px;
   border: 2px solid rgb(0, 123, 255);
+  box-sizing: content-box;
 }
 
 #recent_movies_btn {

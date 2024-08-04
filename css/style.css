@@ -1,13 +1,17 @@
 /* 기본 스타일 초기화 */
-body,
+*{
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* body,
 h3,
 p,
 span {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
+} */
 
 body {
   background-color: #f4f4f9;
