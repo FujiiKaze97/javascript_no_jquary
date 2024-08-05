@@ -1,5 +1,5 @@
 /* 기본 스타일 초기화 */
-*{
+* {
   box-sizing: border-box;
   font-family: Arial, sans-serif;
 }
@@ -28,7 +28,7 @@ body {
   text-align: center;
   top: 0;
   position: fixed;
-  z-index: 1; /*100은 너무 커서 1로 수정 : 해인*/
+  z-index: 2; /*100은 너무 커서 2로 수정 : 해인*/
   background-color: #f4f4f9;
 }
 
@@ -62,7 +62,7 @@ body {
 
 #search_button {
   padding: 10px 20px;
-  background-color: #0057FF;
+  background-color: #0057ff;
   color: #fff;
   border: none;
   border-radius: 0 5px 5px 0;
@@ -73,6 +73,23 @@ body {
 
 #search_button:hover {
   background-color: #0056b3;
+}
+
+.header_border {
+  width: 100%;
+  height: 5px;
+  background-color: #afafaf;
+  position: relative;
+  top: 125px;
+  z-index: 1; /* z-index 값이 header태그보다 높아지면 header태그를 관통하며 지나감 */
+  border-radius: 3px;
+  margin-bottom: 10px;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgb(0 0 0 / 45%),
+    rgba(0, 0, 0, 0)
+  );
 }
 
 /* 영화 카드 컨테이너 스타일 */
@@ -195,7 +212,6 @@ h2 {
   text-align: center;
 }
 
-
 /* 최근 클릭한 영화  by 해인*/
 .recent_movies_container {
   display: none;
@@ -247,7 +263,7 @@ h2 {
   width: 100%;
   height: 25px;
   background-color: transparent;
-  
+
   z-index: 2;
 }
 
@@ -278,7 +294,8 @@ h2 {
 }
 .recent_movie_card:first-child {
   margin-top: 10px;
-}.recent_movie_card:first-child:hover {
+}
+.recent_movie_card:first-child:hover {
   margin-top: 6px;
 }
 .recent_movie_card:last-child {
@@ -287,8 +304,6 @@ h2 {
 }
 .recent_movie_card img {
   width: 100%;
-  ;
-
   object-fit: cover;
 
   padding: 0;
@@ -301,7 +316,7 @@ h2 {
 
 .recent_movie_card:hover img {
   translate: -2px -5px;
-  border: 2px solid #0057FF;
+  border: 2px solid #0057ff;
   box-sizing: content-box;
 }
 
@@ -316,7 +331,7 @@ h2 {
   height: 50px;
 
   color: white;
-  background-color:#0057FF;
+  background-color: #0057ff;
   border: 0;
   border-radius: 50px;
 
