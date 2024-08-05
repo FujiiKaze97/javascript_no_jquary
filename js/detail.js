@@ -50,6 +50,12 @@ const getReview = (data) => {
           <div><img class = "comment_icon" src ="source/comments.png"></img></div>
           <div class = "comment_num">5</div>
         </div>`;
+
+  // 카드에 데이터 속성 추가 (이름, 점수, 리뷰)
+  card.dataset.name = data.name;
+  card.dataset.score = data.score;
+  card.dataset.review = data.review;
+  card.dataset.id = data.movie;
   return card;
 }
 
@@ -262,6 +268,13 @@ function addCardClickEvent() {
     cards.forEach((card) => {
       card.addEventListener('click', (e) => {
         const modal = document.getElementsByClassName('modal_review')[0];
+        const reviewId = document.getElementById("review_id");
+        const reviewStar = document.getElementById("review_star");
+        const reviewContent = document.getElementById("review_content");
+        reviewId.innerHTML = card.dataset.name;
+        //score = 별 모양.. 별모양 안불러와짐.. console찍으면 잘 보임 -> 수정 필요
+        reviewStar.innerHTML = card.dataset.score; 
+        reviewContent.innerHTML = card.dataset.review;
         modal.style.display = 'flex';
       });
     });
