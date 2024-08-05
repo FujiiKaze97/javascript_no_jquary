@@ -117,16 +117,19 @@ body {
 .movie-card-content {
   padding: 20px;
   text-align: left;
+
 }
 
 .movie_card h3 {
+  font-family: Pretendard;
   font-size: 20px;
   margin-bottom: 10px;
-  color: #444;
+  color: #000000;
   font-weight: bold;
 }
 
 .movie_card p {
+  font-family: Pretendard;
   font-size: 14px;
   color: #666;
   margin-bottom: 10px;
@@ -146,7 +149,8 @@ body {
   height: 20px;  
 }
 .movie_card span {
-  font-size: 14px;
+  font-family: Pretendard;
+  font-size: 20px;
   color: #555;
   font-weight: bold;
   display: flex;
