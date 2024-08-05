@@ -27,12 +27,12 @@
   /* bottom: 0; 불필요*/
 
 
-  background-color: rgba(128, 128, 128, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 /* 주 modal 창 */
 .modal_window {
   width: 600px;
-  height: 600px;
+  height: 620px;
 
   display: flex;
   flex-direction: column;
@@ -43,11 +43,11 @@
   left: 50%;
   transform: translate(-50%, -50%);
 
-  background-color: bisque;
+  background-color: #f4f4f9;
   border-radius: 30px;
 
   margin: auto;
-  padding: 50px;
+  padding: 30px;
 }
 
 /* modal header */
@@ -58,6 +58,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: #000;
+
+font-family: Pretendard;
+font-size: 32px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
 }
 .modal_header .select_star {
   padding-left: 5px;
@@ -71,16 +78,19 @@
 /* modal body */
 .modal_body {
   width: 100%;
-  height: 80%;
+  height: 65%;
+  margin-top: 10px;
+ 
 }
 .modal_body p {
   width: 100%;
-  height: 95%;
+  height: 98%;
+  
 }
 .modal_body p #review_text {
   width: 100%;
   height: 100%;
-
+  
   /* 입력칸 크기 조절 불가 */
   resize: none;
 
@@ -105,29 +115,19 @@
 .modal_footer {
   width: 100%;
   height: 10%;
-
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
-
-  margin: auto;
-}
-.modal_footer button {
-  width: 15%;
-  height: 60%;
-
-  border: 1px solid black;
-  border-radius: 5px;
 }
 .modal_footer .name_pw {
   width: 70%;
   height: 100%;
 
   display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
 
   /* margin-left: 10px;
   margin-right: 10px; */
   justify-content: space-around;
+  margin-bottom: 10px;
 }
 .name_pw .container {
   width: 48%;
@@ -144,7 +144,7 @@
   background-color: rgb(170, 170, 170);
 
   border-radius: 5px;
-  padding: 3px;
+  padding: 5px;
 
   display: flex;
   align-items: center;
@@ -163,7 +163,8 @@
   height: 100%;
 
   border: 1px solid black;
-  border-radius: 3px;
+  border-radius: 5px;
+  margin-left: 0px;
 
   /* margin: 3px 3px 3px 0; */
 }
@@ -175,5 +176,53 @@
   color: red;
   font-size: xx-small;
   text-align: end;
-  padding: 3px;
+  padding: 5px;
+}
+.button_area {
+  display: flex;
+  justify-content: space-between;
+}
+.register_button {
+  color: #FFF;
+
+font-family: Pretendard;
+font-size: 28px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+  display: flex;
+width: 250px;
+height: 56px;
+padding: 26px 20px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+border-radius: 10px;
+border:0px;
+background: var(--blue, #0057FF);
+}
+.register_button:hover {
+  background: var(--blue, #0056b3);
+}
+.cancel_button {
+  color: #0057FF;
+
+  font-family: Pretendard;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+    display: flex;
+  width: 250px;
+  height: 56px;
+  padding: 26px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  border-color:#0057FF ;
+  background:white;
+}
+.cancel_button:hover {
+  background: var(--blue, #ededed);
 }
