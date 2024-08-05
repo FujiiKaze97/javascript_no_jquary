@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('theme-toggle'); // 토글버튼
     const savedTheme = localStorage.getItem('theme') || 'light'; // 로컬스토리지 테마 불러오기
     const isDarkMode = savedTheme === 'dark'; // 테마 다크모드 판단
-    applyTheme(isDarkMode);
 
 // 토글버튼 이벤트
     themeToggle.addEventListener('click', () => {
@@ -13,6 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
         applyTheme(isDarkMode);
     });
+
+    // 초기 테마 적용
+    if(isDarkMode){
+        themeToggle.click();
+    }
 });
 
 // 테마 적용 함수
@@ -27,7 +31,8 @@ function applyTheme(isDarkMode) {
             link.rel = 'stylesheet';
             link.href = './css/darkMode.css';
             // head 에 다크모드 link 태그 추가하기
-            document.head.appendChild(link);        }
+            document.head.appendChild(link);
+        }
     } else {
         // 저장 테마 dark 아닐 경우
         if (darkModeStylesheet) {
