@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="./css/reset.css">
   <link rel="stylesheet" href="./css/movieDetail.css">
   <link rel="stylesheet" href="./css/createReview.css">
+  <link rel="stylesheet" href="./css/swiper.css">
   <link rel="stylesheet" href="./css/themeToggle.css">
   <link rel="stylesheet" href="./css/modal.css">
 </head>
@@ -38,12 +39,16 @@
   <div class="reviews">
     <div class="review_header">
       <h4 class="review_title">네티즌 리뷰</h4>
-      <button class ="write_review_btn" id="write_review_btn">리뷰쓰기</button>
+      <button class="write_review_btn" id="write_review_btn">리뷰 작성</button>
       <button id="review_modify_btn">수정테스트</button><br> <!--수정버튼 테스트용-->
       <button id="review_delete_btn">삭제테스트</button> <!--삭제버튼 테스트용-->
 
     </div>
-    <div class="cards_container" id="cards_container">
+    <div class="slide slide_wrap">
+      <!-- 리뷰 카드 들어갈 곳 -->
+      <div class="slide_prev_button slide_button">◀</div>
+      <div class="slide_next_button slide_button">▶</div>
+      <ul class="slide_pagination"></ul>
     </div>
   </div>
 
