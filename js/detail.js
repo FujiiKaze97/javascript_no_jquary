@@ -33,13 +33,13 @@ const db = getFirestore(app);
     const card = document.createElement('div');
      card.className = 'cards';
        card.innerHTML = `<div class="cards_header">
-          <div class="userid">${data.name}</div>
-          <div class="cardrating">
+          <div class="user_id">${data.name}</div>
+          <div class="card_rating">
             <div class="rating">${data.score}</div>
           </div>
         </div>
-        <p class="carddivider"></p>
-        <div class="userreview">
+        <p class="card_divider"></p>
+        <div class="user_review">
           ${data.review}
         </div>
         <div class = "card_footer">
@@ -102,7 +102,7 @@ if (localStorage.getItem('recent_movies')) {
 // 포스터 함수
 const getPoster = (data) => {
   const card = document.createElement('div');
-  card.className = 'movie-poster';
+  card.className = 'movie_poster';
   card.innerHTML = `
     <img src="https://image.tmdb.org/t/p/w500/${data.poster_path}" height ="480">
   `;
@@ -112,7 +112,7 @@ const getPoster = (data) => {
 // 영화 제목 함수
 const getTitle = (data) => {
   const card = document.createElement('div');
-  card.className = 'movie-title';
+  card.className = 'movie_title';
   card.innerHTML = `
     <div class = "korean_title">${data.title}</div>
     <div class = "original_title">${data.original_title}</div>
@@ -128,7 +128,7 @@ const getOverview = (data) => {
   const card = document.createElement('div');
   card.className = 'movie-overview';
   card.innerHTML = `
-  <div class = "votebox">
+  <div class = "vote_box">
   <div class = "vote">평균 별점</div>
   <div class = "star_box">
   <img class = "star" src = "source/Star_yellow.png"></img>
