@@ -19,6 +19,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// movie id 받기
+const receivedData = location.href.split('?')[1];
+
 // 폰트
 (function (d) {
   var config = {
@@ -52,6 +55,7 @@ const getReview = (data) => {
 
 document.addEventListener('DOMContentLoaded', async () => {
   try {
+    getMovieData();
     const queryDataSet = await getDocs(query(
       collection(db, "review"), // review 컬렉션 지정
       where("movie", "==", receivedData) // movie 필드와 일치하는 값으로 필터링
@@ -69,8 +73,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.error(e);
   }
 });
-// movie id 받기
-const receivedData = location.href.split('?')[1];
+
 
 // 클릭 시 받은 id값 local storage에 저장 - by 해인 start ==========
 // localStorage에 저장하기
@@ -159,7 +162,7 @@ const options = {
   }
 };
 
-
+function getMovieData() {
 fetch(`https://api.themoviedb.org/3/movie/${receivedData}?language=ko-KR`, options)
   .then(response => response.json())
   .then(data => {
@@ -178,8 +181,7 @@ fetch(`https://api.themoviedb.org/3/movie/${receivedData}?language=ko-KR`, optio
 
   })
   .catch(err => console.error(err));
-
-
+}
 
 
 // localStorage에 저장하기
@@ -196,28 +198,28 @@ const GetData = (key) => {
 
 
 // 포스터 함수
-const getRecentPoster = (data) => {
-  const card = document.createElement('div');
-  card.className = 'recent_movie_card';
-  card.innerHTML = `
-    <img src="https://image.tmdb.org/t/p/w500/${data.poster_path}">
-  `;
-  card.addEventListener('click', () => window.location.href = `movieDetail.html?${data.id}`);
-  return card;
-}
+// const getRecentPoster = (data) => {
+//   const card = document.createElement('div');
+//   card.className = 'recent_movie_card';
+//   card.innerHTML = `
+//     <img src="https://image.tmdb.org/t/p/w500/${data.poster_path}">
+//   `;
+//   card.addEventListener('click', () => window.location.href = `movieDetail.html?${data.id}`);
+//   return card;
+// }
 
-const recentContainer = document.getElementsByClassName('close_recent_movies_btn_container')[0]
-  .nextElementSibling; // recentMovie.js와 다른 부분 (container라는 다른 요소 존재해서 수정)
-const showRecentMovies = (ids) => {
-  ids.forEach(async (id) => {
-    const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=ko-KR`, options);
-    const data = await response.json();
-    const card = getRecentPoster(data);
-    recentContainer.appendChild(card);
-  })
-}
+// const recentContainer = document.getElementsByClassName('close_recent_movies_btn_container')[0]
+//   .nextElementSibling; // recentMovie.js와 다른 부분 (container라는 다른 요소 존재해서 수정)
+// const showRecentMovies = (ids) => {
+//   ids.forEach(async (id) => {
+//     const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=ko-KR`, options);
+//     const data = await response.json();
+//     const card = getRecentPoster(data);
+//     recentContainer.appendChild(card);
+//   })
+// }
 
-showRecentMovies(GetData('recent_movies'));
+// showRecentMovies(GetData('recent_movies'));
 
 
 
@@ -262,40 +264,3 @@ function addCardClickEvent() {
     console.log(e);
   }
 }
-
-// // 모달 관련  */
-//   // 모달 초기화 및 이벤트 설정
-//   const modal = document.querySelector('.modal');
-//   const modalOpen = document.querySelectorAll('.cards');
-const modalClose = document.querySelector('.close_btn');
-
-//   // 모달 열기 함수
-//   const openModal = (userId,userRating,userReview) => {
-//       const rvCont = modal.getElementById('userId');
-//       rvCont.textContent = userId;
-//       rvCont.textContent = userRating;
-//       rvCont.textContent = userReview;
-
-//       document.body.style.overflow = "hidden";
-//       modal.classList.add('on');
-//   };
-
-// 모달 닫기 버튼 이벤트
-modalClose.addEventListener('click') = () => {
-  try {
-    console.log("여기쳐왔어?");
-    const modal = document.getElementsByClassName('modal_create_review')[0];
-    modal.style.display = 'none';
-  } catch (e) {
-    console.log(e);
-  }
-};
-
-
-// DOMContentLoaded 이후 카드에 클릭 이벤트 설정
-document.addEventListener('DOMContentLoaded', () => {
-  // 카드가 모두 추가된 후 이벤트 리스너 추가
-  addCardClickEvents();
-});
-
-

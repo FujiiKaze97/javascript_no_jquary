@@ -86,6 +86,7 @@ cancelBtn.addEventListener('click', () => {
   CancelReview();
 })
 
+
 const CancelReview = () => {
   console.log("'cancel review button' clicked");
   const result = confirm('리뷰 작성을 취소하시겠습니까?');
@@ -106,6 +107,7 @@ const CancelReview = () => {
   // modal.style.display = 'none';
   // }
 }
+
 
 
 
