@@ -341,3 +341,32 @@ h2 {
   }
 }
 /* 최근 클릭한 영화  by 해인*/
+
+
+/*다크모드 토글*/
+.toggle-class{
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+/* 체크박스 스타일 */
+[type="checkbox"] {
+  appearance: none; /*기존 스타일 제거*/
+  position: relative;
+  border: max(2px, 0.1em) solid gray;
+  border-radius: 1.2em;
+  width: 2.25em;
+  height: 1.25em;
+}
+/*thumb 스타일*/
+[type="checkbox"]::before{
+  content: "";
+  position: absolute;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  transform: scale(0.8);
+  background-color: gray;
+  transition: left 250ms linear;
+}
