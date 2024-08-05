@@ -2,9 +2,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('theme-toggle'); // 토글버튼
     const savedTheme = localStorage.getItem('theme') || 'light'; // 로컬스토리지 테마 불러오기
-    const isDarkMode = savedTheme === 'dark'; // 테마 다크모드 판단
+    const isDarkMode = savedTheme === 'dark'; // 다크모드 boolean
 
-// 토글버튼 이벤트
+    // 토글버튼 이벤트
     themeToggle.addEventListener('click', () => {
         // body태그에 class 토글 / 다크모드 경우 true 반환
         const isDarkMode = document.body.classList.toggle('dark-mode');
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 초기 테마 적용
-    if(isDarkMode){
+    if (isDarkMode) {
         themeToggle.click();
     }
 });
