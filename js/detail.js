@@ -630,8 +630,8 @@ window.addEventListener("resize", async () => {
   const slide = document.querySelector(".slide");
   console.log('resize slide', slide);
   let slideWidth = slide.clientWidth;
-// 슬라이드 전체를 선택해 값을 변경해주기 위해 슬라이드 전체 선택하기
-let slideItems = document.querySelectorAll(".slide_items");
+  // 슬라이드 전체를 선택해 값을 변경해주기 위해 슬라이드 전체 선택하기
+  let slideItems = document.querySelectorAll(".slide_items");
 
   let currSlide = 1;
   // 슬라이드를 이동시키기 위한 offset 계산
