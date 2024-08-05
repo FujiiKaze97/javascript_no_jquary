@@ -8,14 +8,22 @@
   <link rel="stylesheet" href="./css/reset.css">
   <link rel="stylesheet" href="./css/movieDetail.css">
   <link rel="stylesheet" href="./css/createReview.css">
+  <link rel="stylesheet" href="./css/themeToggle.css">
   <link rel="stylesheet" href="./css/modal.css">
-
 </head>
 
 <body>
   <header>
     <div class="movie_title" id="movie_title">
     </div>
+    <label class="toggle-class"> <!--다크모드 토글-->
+      <input id="theme-toggle" type="checkbox"> 
+      <label for="theme-toggle" class="toggle-label">
+        <i></i>
+        <i></i>
+      </label>
+    </label>
+
   </header>
 
   <main class="movie_detail">
@@ -197,6 +205,8 @@
   <script type="module" src="./js/detail.js"></script>
   <script type="module" src="./js/createReview_db.js"></script>
   <script type="module" src="./js/deletReview.js"></script>
+  <script src="./js/darkMode.js"></script>
+  <!-- <script type="module" src="./js/recentMovie.js"></script> -->
 </body>
 
 </html>
