@@ -45,35 +45,39 @@ const ShowModal = () => {
 
 const createBtn = document.getElementById('create_review_btn');
 createBtn.addEventListener('click', async function () {
-  console.log("'create review button' clicked");
-  //등록 버튼 클릭시 컨펌 알림
-  const result = confirm('등록하시겠습니까?');
-
-
-  const name = document.getElementById('name');
-  const pw = document.getElementById('pw');
-  const review = document.getElementById('review_text');
-  const score = document.getElementById('select_star');
-
-  // console.log(name.value, pw.value);
-  // console.log('score :', score.value)
-  // console.log('review :', review.value);
-
-  if (result) {
-    //컨펌 확인 버튼 입력시 처리
-    // saveReview(reviewInfo);
-
-    // 저장 시각 저장
-
-
-    const reviewInfo = { name: name.value, pw: pw.value, score: score.value, review: review.value, key: makeKey() };
-
-    await addDoc(collection(db, "review"), reviewInfo);
-    // 저장 후 페이지 새로고침
-    location.reload();
+  try {
+    console.log("'create review button' clicked");
+    //등록 버튼 클릭시 컨펌 알림
+    const result = confirm('등록하시겠습니까?');
+  
+  
+    const name = document.getElementById('name');
+    const pw = document.getElementById('pw');
+    const review = document.getElementById('review_text');
+    const score = document.getElementById('select_star');
+  
+    // console.log(name.value, pw.value);
+    // console.log('score :', score.value)
+    // console.log('review :', review.value);
+  
+    if (result) {
+      //컨펌 확인 버튼 입력시 처리
+      // saveReview(reviewInfo);
+  
+      // 저장 시각 저장
+  
+      console.log("저장이되나요?");
+      const reviewInfo = { name: name.value, pw: pw.value, score: score.value, review: review.value, movie: location.href.split('?')[1] };
+  
+      await addDoc(collection(db, "review"), reviewInfo);
+      // 저장 후 페이지 새로고침
+      location.reload();
+    }
+    // confirm 창에서 취소를 누르면 위에 주석처리한 부분 log가 또 뜨네요?
+  } catch(e) {
+    console.log(e);
   }
-  // confirm 창에서 취소를 누르면 위에 주석처리한 부분 log가 또 뜨네요?
-
+  
 })
 
 // 취소 버튼을 누르면 모달창이 안보이도록 함.

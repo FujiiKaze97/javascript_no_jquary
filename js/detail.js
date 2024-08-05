@@ -3,6 +3,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/fireba
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 import { getDocs } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+import { query, where } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js"; // 필요한 모듈 가져오기
 
 // Firebase 구성 정보 설정
 const firebaseConfig = {
@@ -51,8 +52,11 @@ const getReview = (data) => {
 
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    const docsSnapshot = await getDocs(collection(db, "review"));
-    docsSnapshot.forEach((doc) => {
+    const queryDataSet = await getDocs(query(
+      collection(db, "review"), // review 컬렉션 지정
+      where("movie", "==", receivedData) // movie 필드와 일치하는 값으로 필터링
+    ));
+    queryDataSet.forEach((doc) => {
       const cardsContainer = document.getElementById('cards_container');
       const card = getReview(doc.data());
       card.setAttribute("id", doc.id);
@@ -152,7 +156,8 @@ const options = {
   headers: {
     accept: 'application/json',
     Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNDAyZWEyNWM2M2ZjN2RlYzg5N2FmOTlkMDJlNzU4MCIsIm5iZiI6MTcyMjg1NzY3OS4xODE0OTMsInN1YiI6IjVmN2ViNGEzYjdhYmI1MDAzODZjNGIwNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.KjkZs4T3Os7iQyt71mQRxP26d_hUw7ntES4POn6Lgco'
-  }};
+  }
+};
 
 
 fetch(`https://api.themoviedb.org/3/movie/${receivedData}?language=ko-KR`, options)
@@ -250,7 +255,7 @@ function addCardClickEvent() {
     cards.forEach((card) => {
       card.addEventListener('click', (e) => {
         const modal = document.getElementsByClassName('modal_review')[0];
-      modal.style.display = 'flex';
+        modal.style.display = 'flex';
       });
     });
   } catch (e) {
@@ -262,7 +267,7 @@ function addCardClickEvent() {
 //   // 모달 초기화 및 이벤트 설정
 //   const modal = document.querySelector('.modal');
 //   const modalOpen = document.querySelectorAll('.cards');
-  const modalClose = document.querySelector('.close_btn');
+const modalClose = document.querySelector('.close_btn');
 
 //   // 모달 열기 함수
 //   const openModal = (userId,userRating,userReview) => {
@@ -279,7 +284,7 @@ function addCardClickEvent() {
 modalClose.addEventListener('click') = () => {
   try {
     console.log("여기쳐왔어?");
-      const modal = document.getElementsByClassName('modal_create_review')[0];
+    const modal = document.getElementsByClassName('modal_create_review')[0];
     modal.style.display = 'none';
   } catch (e) {
     console.log(e);
@@ -289,8 +294,8 @@ modalClose.addEventListener('click') = () => {
 
 // DOMContentLoaded 이후 카드에 클릭 이벤트 설정
 document.addEventListener('DOMContentLoaded', () => {
-    // 카드가 모두 추가된 후 이벤트 리스너 추가
-    addCardClickEvents();
+  // 카드가 모두 추가된 후 이벤트 리스너 추가
+  addCardClickEvents();
 });
 
 
