@@ -10,8 +10,10 @@ const cardData = (movie) => {
     <div class="movie-card-content">
       <h3>${movie.title}</h3>
       <p>${movie.overview}</p>
-      <span> 
-      ${movie.vote_average.toFixed(1)}</span>
+      <div class ="movie_card_rating">
+      <img class = "star_main" src = "source/Star_yellow.png"></img>
+      <span>${movie.vote_average.toFixed(1)}</span>
+      </div>
     </div>
   `;
   // 화살표 함수 사용

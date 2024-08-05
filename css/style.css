@@ -136,9 +136,14 @@ body {
   white-space: nowrap;
 }
 
-.star_main {
-  width: 5px;
-  height: 5px;
+.movie_card_rating {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.movie_card_rating img {
+  width: 20px;
+  height: 20px;  
 }
 .movie_card span {
   font-size: 14px;
