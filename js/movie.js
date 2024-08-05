@@ -1,5 +1,5 @@
 // 현재 페이지 상태 관리
-let currentPage = 1;
+let currentPage = window.localStorage.getItem('currentPage') !== null ? parseInt(window.localStorage.getItem('currentPage')) : 1;
 
 
 const cardData = (movie) => {
@@ -13,8 +13,13 @@ const cardData = (movie) => {
       <span>Rating: ${movie.vote_average}</span>
     </div>
   `;
-  // 화살표 함수 사용
-  card.addEventListener('click', () => window.location.href = `movieDetail.html?${movie.id}`);
+
+  
+  // 화살표 함수 사용 
+  card.addEventListener('click', () => {
+    window.location.href = `movieDetail.html?${movie.id}`
+  }
+  );
   return card;
 }
 
@@ -25,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     searchInput.focus();
   }
   // 초기 데이터 로드
-  loadMovies(currentPage);
+  loadMovies();
   // 페이지네이션 Number 처리
   setPageNum();
   addPageClickEvent();
@@ -43,16 +48,16 @@ const options = {
   method: 'GET',
   headers: {
     accept: 'application/json',
-    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNDAyZWEyNWM2M2ZjN2RlYzg5N2FmOTlkMDJlNzU4MCIsIm5iZiI6MTcyMjE5MTEyMy43MTIwMywic3ViIjoiNWY3ZWI0YTNiN2FiYjUwMDM4NmM0YjA0Iiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.xRlIv96oS8Xd0Wx7vuqZS3uktVygLdfQWwbuFEXnFBU'
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNDAyZWEyNWM2M2ZjN2RlYzg5N2FmOTlkMDJlNzU4MCIsIm5iZiI6MTcyMjg1NzY3OS4xODE0OTMsInN1YiI6IjVmN2ViNGEzYjdhYmI1MDAzODZjNGIwNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.KjkZs4T3Os7iQyt71mQRxP26d_hUw7ntES4POn6Lgco'
   }
 };
 
 
 // 영화 데이터를 로드하는 함수
-function loadMovies(page) {
+function loadMovies() {
 
   try {
-    fetch(`https://api.themoviedb.org/3/movie/popular?page=${page}&language=ko-KR&region=KR`, options)
+    fetch(`https://api.themoviedb.org/3/movie/popular?page=${currentPage}&language=ko-KR&region=KR`, options)
       .then(response => response.json())
       .then(data => {
         const movies = data.results;
@@ -74,7 +79,8 @@ function loadMovies(page) {
 document.getElementById('prev_page').addEventListener('click', () => {
   try {
     if (currentPage > 1) {
-      loadMovies(--currentPage);
+      currentPage--;
+      loadMovies();
       setPageNum();
       addPageClickEvent();
       isPrevNext();
@@ -86,7 +92,8 @@ document.getElementById('prev_page').addEventListener('click', () => {
 
 document.getElementById('next_page').addEventListener('click', () => {
   try {
-    loadMovies(++currentPage);
+    currentPage++;
+    loadMovies();
     setPageNum();
     addPageClickEvent();
     isPrevNext();
@@ -120,10 +127,10 @@ function setPageNum() {
   try {
     const numberButtonWrapper = document.querySelector('.number_button_wrapper');
     numberButtonWrapper.innerHTML = ''; // 페이지 번호 wrapper 내부를 비워줌
-    
+    window.localStorage.setItem('currentPage',currentPage);
     if (currentPage >= 6) {
       for (let i = currentPage - 5; i < currentPage + 5; i++) {
-        numberButtonWrapper.innerHTML += `<span class="number_button ${currentPage === i ? 'selected' : ''}"> ${i} </span`;
+        numberButtonWrapper.innerHTML += `<span class="number_button ${currentPage === i ? 'selected' : ''}"> ${i} </span`; 
       }
     } else {
       for (let i = 1; i <= 10; i++) {
