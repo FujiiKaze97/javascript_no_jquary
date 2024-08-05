@@ -2,16 +2,33 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: #f4f4f9;
+}
+
 /* 헤더 header */
 header {
   width: 100%;
   padding: 50px 50px 20px 50px;
 }
 
-.movie-title {
-  font-family: Inter;
+.movie_title {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  gap: 30px;
+}
+
+.korean_title {
+  font-family: Pretendard;
   font-size: 64px;
   font-weight: 700;
+}
+
+.original_title {
+  font-family: Pretendard;
+  font-size: 40px;
+  font-weight: 600;
 }
 
 /* 상세 페이지 메인 */
@@ -20,7 +37,7 @@ main {
   flex-direction: row;
 
   height: 550px;
-  padding: 20px 20px 50px 50px;
+  padding: 20px 50px 50px 50px;
   margin-bottom: 50px;
 }
 
@@ -36,7 +53,7 @@ main .movie_img {
   background-size: cover; */
 }
 
-.movie-poster {
+.movie_poster {
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -52,25 +69,31 @@ main .movie_img {
   margin-right: auto;
 
   color: var(--grey700, #616161);
-  font-family: Inter;
+  font-family: Pretendard;
   font-size: 24x;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 }
 
-.votebox {
+.vote_box {
   display: flex;
   flex-direction: row;
   gap: 30px;
 }
 
+.star_box {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
 .movie_overview .vote {
   color: #000;
-  font-family: Inter;
+  font-family: Pretendard;
   font-size: 36px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: normal;
 }
 
@@ -81,18 +104,29 @@ main .movie_img {
 
 .vote_average {
   color: #000;
-  font-family: Inter;
+  font-family: Pretendard;
   font-size: 36px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
 }
 
+.movie_info {
+  color: #000;
+
+  font-family: Pretendard;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 20px;
+}
+
 .divider {
   background-color: #616161;
   width: auto;
   height: 1px;
-  margin: 10px auto 10px auto;
+  margin: 20px auto 20px auto;
 }
 
 /* 리뷰 카드란 */
@@ -105,7 +139,6 @@ main .movie_img {
 .reviews .review_header {
   display: flex;
   justify-content: space-between;
-
   align-items: center;
 
   height: 50px;
@@ -114,10 +147,11 @@ main .movie_img {
 
 .review_title {
   color: #000;
-  font-family: Inter;
+
+  font-family: Pretendard;
   font-size: 40px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: normal;
 }
 
@@ -126,7 +160,7 @@ main .movie_img {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 25px;
 
   width: 100%;
 }
@@ -134,7 +168,7 @@ main .movie_img {
 .write_review_btn {
   color: #FFF;
 
-  font-family: Inter;
+  font-family: Pretendard;
   font-size: 24px;
   font-style: normal;
   font-weight: 400;
@@ -142,25 +176,36 @@ main .movie_img {
 
   display: flex;
 
-padding: 10px 20px 10px 20px;
-justify-content: center;
-align-items: center;
+  padding: 10px 30px 10px 30px;
+  justify-content: center;
+  align-items: center;
 
   border-radius: 10px;
+  border: 0px;
   background: var(--blue, #0057FF);
+}
+#write_review_btn:hover {
+  background-color: #0056b3;
 }
 
 /* 카드 */
 .cards {
-  width: 440px;
-  height: 440px;
+  width: 340px;
+  height: 360px;
 
   border-radius: 26px;
-  background: var(--grey300, #F2F2F2);
-  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  background: var(--grey300, white);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
   padding: 25px 25px 25px 25px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  position: relative;
+}
 
-
+.cards:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .cards_header {
@@ -168,64 +213,69 @@ align-items: center;
   justify-content: space-between;
 }
 
-.userid {
+.user_id {
   color: #000;
-  font-family: Inter;
-  font-size: 36px;
+  font-family: Pretendard;
+  font-size: 24px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 }
 
-.cardrating {
+.card_rating {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 10px;
 }
 
-.cardstar {
-  width: 30px;
-  height: 30px;
-}
 
-.rating {
-  color: #000;
-
-  font-family: Inter;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.carddivider {
+.card_divider {
   background-color: #616161;
-  width: 400px;
+  width: 285px;
   height: 1px;
-  margin: 20px auto 20px auto;
+  margin: 10px auto 10px auto;
 }
 
-.userreview {
+.user_review {
 
   color: #000;
 
-  font-family: Inter;
-  font-size: 24px;
+  font-family: Pretendard;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 }
 
-.commenticon {
-  width: 30px;
-  height: 30px;
+.card_footer {
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+  display: flex;
+  flex-direction: row;
+  gap:10px;
+}
+
+.comment_icon {
+  width: 24px;
+  height: 24px;
+  
+}
+.comment_num {
+  color: #000;
+
+font-family: Pretendard;
+font-size: 20px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
 }
 
 /* home btn */
 .home_btn_container {
   width: 100%;
-  height: 100px;
+  height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -234,38 +284,67 @@ align-items: center;
 .home_btn_container #home_btn {
   color: #FFF;
 
-  font-family: Inter;
-  font-size: 24px;
+  font-family: Pretendard;
+  font-size: 30px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 
-  display: flex;
+  padding: 20px 30px 20px 30px;
 
-padding: 10px 20px 10px 20px;
-justify-content: center;
-align-items: center;
-
-  border-radius: 10px;
+  border-radius: 20px;
+  border: 0px;
   background: var(--blue, #0057FF);
 }
 
 /* footer */
 footer {
-  background-color: black;
+  background: var(--grey700, #616161);
+
   width: 100%;
-  height: 100px;
-  padding: 30px 0 30px 0;
+  height: 220px;
+  padding: 50px 0 50px 0;
   text-align: center;
 
   color: #ffffff;
-  font-family: Inter;
+  font-family: Pretendard;
   font-size: 32px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 }
 
+.camp {
+  color: #FFF;
+
+  font-family: Pretendard;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-bottom: 5px;
+
+}
+
+.react {
+  color: #FFF;
+
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.team {
+  color: #FFF;
+  font-family: Pretendard;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-top: 20px
+}
 
 
 
@@ -374,7 +453,7 @@ footer {
 
 .recent_movie_card:hover img {
   translate: -2px -5px;
-  border: 2px solid rgb(0, 123, 255);
+  border: 2px solid #0057FF;
   box-sizing: content-box;
 }
 
@@ -389,7 +468,7 @@ footer {
   height: 50px;
 
   color: white;
-  background-color: rgb(0, 123, 255);
+  background-color: #0057FF;
   border: 0;
   border-radius: 50px;
 
@@ -412,3 +491,4 @@ footer {
   }
 }
 /* 최근 클릭한 영화  by 해인*/
+
