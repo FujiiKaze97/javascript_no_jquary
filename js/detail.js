@@ -118,3 +118,21 @@ fetch(`https://api.themoviedb.org/3/movie/${receivedData}?language=ko-KR`, optio
 
   })
   .catch(err => console.error(err));
+
+  // 카드별 클릭 이벤트
+function addCardClickEvent() {
+
+  try {
+    const cardsHeader = document.querySelectorAll('.cards');
+
+    cardsHeader.forEach((card) => {
+      card.addEventListener('click', (e) => {
+        console.log("친구야 카드 클릭했니???");
+      });
+    });
+
+  } catch (e) {
+    console.log(e);
+  }
+}
+addCardClickEvent();

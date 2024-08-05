@@ -13,6 +13,8 @@ const cardData = (movie) => {
       <span>Rating: ${movie.vote_average}</span>
     </div>
   `;
+
+  
   // 화살표 함수 사용 
   card.addEventListener('click', () => {
     window.location.href = `movieDetail.html?${movie.id}`
