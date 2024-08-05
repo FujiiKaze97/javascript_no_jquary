@@ -44,7 +44,6 @@ const loadReviews = async () => {
     };
     reviewData.push(dataInfo);
   });
-  console.log(reviewData);
 };
 
 loadReviews();

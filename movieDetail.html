@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="./css/movieDetail.css">
   <link rel="stylesheet" href="./css/createReview.css">
   <link rel="stylesheet" href="./css/themeToggle.css">
+  <link rel="stylesheet" href="./css/modal.css">
 </head>
 
 <body>
@@ -47,8 +48,7 @@
   </div>
 
   <div class="home_btn_container">
-    <button id="home_btn"><a href="./index.html">메인화면으로</a></button>
-
+    <button id="home_btn" onclick="location.href='./index.html'">메인 페이지</button>
   </div>
 
   <footer>
@@ -58,7 +58,7 @@
   </footer>
 
 
-
+  <!-- 리뷰 쓰기  Form -->
   <div class="modal_create_review">
     <form class="modal_window">
       <div class="modal_header">
@@ -103,6 +103,41 @@
     </form>
   </div>
 
+  <!-- 리뷰 카드 터치 / 홍승우-->
+  <div class="modal_review">
+    <form class="modal_window">
+      <!-- 리뷰 작성자 아이디, 리뷰 내용, 별점 수 , 리뷰 삭제, 리뷰 수정 -->
+      <div class="modal_header" id="review_id">
+        test
+        <div class="modal_star" id="review_star">
+          ⭐
+        </div>
+        <button class="close_btn">X</button>
+      </div>
+      <hr class="modal_line">
+      <div class="modal_body_card" id="review_content">
+        test
+      </div>
+        <div class ="button_area">
+        <button class ="cancel_button" id="review_del_btn" type="button">리뷰 삭제</button>
+        <button class ="register_button" id="review_mod_btn"  type="button">리뷰 수정</button>
+      </div>
+      <br><br><br>
+      <!-- 댓글, 댓글 사용자 , 댓글 내용--> 
+      <div class="modal_header">
+        댓글 
+      </div>
+      <hr class="modal_line">
+      <div class="modal_body_card" id="review_comment">
+        test
+      </div>
+      <div class="modal_comment">
+        <input type="text" class="form-control" placeholder="댓글을 작성해보세요" style="width: 80%; height: 50%;">
+        <button class ="comment_button" type="button">댓글 등록</button>
+      </div>
+    </form>
+  </div>
+
   <!--리뷰 수정 모달창 / 이석원-->
   <div class="modal_create_review">
     <form class="modal_window">
@@ -117,7 +152,7 @@
         </select>
       </div>
       <div class="modal_body">
-        <p><textarea style="width: 100%; height: 100%; resize: none; overflow: scroll;" id="fix_text" placeholder="리뷰를 작성해주세요"></textarea></p>
+        <p><textarea id="fix_text" placeholder="리뷰를 작성해주세요"></textarea></p>
       </div>
       <div class="modal_footer">
         <button id="cancel_fix_btn" type="button">수정취소</button>
@@ -128,22 +163,44 @@
     </form>
   </div>
 
-    <!-- 최근 클릭한 영화 시작 by 해인-->
-    <div class="recent_movies_container">
-      <div class="close_recent_movies_btn_container">
-        <button id="close_recent_movies_btn">&#215
-      </div>
-      <div class="container">
-        <!-- 포스터가 들어갈 곳 -->
-        <!-- <div class="recent_movie_card">
+  <!-- 최근 클릭한 영화 시작 by 해인-->
+  <div class="recent_movies_container">
+    <div class="close_recent_movies_btn_container">
+      <button id="close_recent_movies_btn">&#215
+    </div>
+    <div class="container">
+      <!-- 포스터가 들어갈 곳 -->
+      <!-- <div class="recent_movie_card">
           <img src="https://image.tmdb.org/t/p/w500//wIrhEUBWjRmZuL1Ix41cF2LhJrW.jpg">
         </div> -->
+    </div>
+  </div>
+
+  <button id="recent_movies_btn">최근</button>
+  <!-- 최근 클릭한 영화 끝 -->
+
+
+  <!-- 모달 팝업 추기 by hongseungwoo -->
+  <!-- 수정 진행 중인 사항이여요.. -->
+  <!-- <div class="modal">
+    <div class="modal_popup">
+      <button type="button" class="close_btn">X</button>
+      <div class="review">
+        <p>리뷰 내용 : 너무 재밌어요!. 완전짱!</p>
+        <div class="reviewBtn">
+          <button type="button" id="review_modify_btn">리뷰 수정</button>
+          <button type="button" id="review_delete_btn">리뷰 삭제</button>
+        </div>
+      </div>
+
+      <div class="comments">
+        <h2>댓글</h2>
+        <div></div>
+        <input type="text" name="comment_input">
+        <button type="button" id="comment_create_btn">댓글쓰기</button>
       </div>
     </div>
-  
-    <button id="recent_movies_btn">최근</button>
-    <!-- 최근 클릭한 영화 끝 -->
-
+  </div> -->
 
   <script type="module" src="./js/detail.js"></script>
   <script type="module" src="./js/createReview_db.js"></script>
