@@ -62,6 +62,43 @@ docs.forEach((doc) => {
 const receivedData = location.href.split('?')[1];
 console.log(receivedData); // data
 
+// 클릭 시 받은 id값 local storage에 저장 - by 해인 start ==========
+// localStorage에 저장하기
+const SaveId = (id) => {
+  localStorage.setItem('recent_movies', JSON.stringify(id));
+}
+// localStorage 불러오기
+const GetIds = (key) => {
+  let localData = JSON.parse(localStorage.getItem(key))
+  return localData;
+}
+if (localStorage.getItem('recent_movies')) {
+  //로컬 스토리지에 recent_movies 가 있을경우 내용 추가
+  let recentMovieList = GetIds('recent_movies');
+
+  if (!recentMovieList.includes(receivedData)) {
+    console.log(recentMovieList)
+    recentMovieList.unshift(receivedData);
+    localStorage.setItem('recent_movies', JSON.stringify(recentMovieList));
+  } else { // 이미 본 영화도 최신 순위로 올림
+    const idx = recentMovieList.indexOf(receivedData);
+    recentMovieList.splice(idx,1);
+    recentMovieList.unshift(receivedData);
+    SaveId(recentMovieList);
+  }
+
+
+  if (GetIds('recent_movies').length > 5) {
+    const newMovieList = recentMovieList.splice(0,5);
+    SaveId(newMovieList);
+  }
+
+} else {
+  //로컬 스토리지에 reviews가 없을 경우 새로운 배열 저장
+  SaveId([receivedData]);
+}
+// 클릭 시 받은 id값 local storage에 저장 - by 해인 end ==========
+
 // 포스터 함수
 const getPoster = (data) => {
   const card = document.createElement('div');
@@ -133,3 +170,77 @@ fetch(`https://api.themoviedb.org/3/movie/${receivedData}?language=ko-KR`, optio
 
   })
   .catch(err => console.error(err));
+
+
+
+
+  // localStorage에 저장하기
+const SaveData = (id) => {
+  localStorage.setItem('recent_movies', JSON.stringify(id));
+}
+// localStorage 불러오기
+const GetData = (key) => {
+  let localData = JSON.parse(localStorage.getItem(key))
+  return localData;
+}
+
+
+
+// 포스터 함수
+const getRecentPoster = (data) => {
+  const card = document.createElement('div');
+  card.className = 'recent_movie_card';
+  card.innerHTML = `
+    <img src="https://image.tmdb.org/t/p/w500/${data.poster_path}">
+  `;
+  card.addEventListener('click', () => window.location.href = `movieDetail.html?${data.id}`);
+  return card;
+}
+
+const recentContainer = document.getElementsByClassName('close_recent_movies_btn_container')[0]
+                                .nextElementSibling; // recentMovie.js와 다른 부분 (container라는 다른 요소 존재해서 수정)
+console.log('recent Movie Container :', recentContainer);
+const showRecentMovies = (ids) => {
+  console.log('ids :', ids);
+  ids.forEach(async (id) => {
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=ko-KR`, options);
+    const data = await response.json();
+
+    const card = getRecentPoster(data);
+    console.log(card);
+    recentContainer.appendChild(card);
+  })
+  console.log('recent movie cards created')
+}
+
+console.log(GetData('recent_movies'));
+showRecentMovies(GetData('recent_movies'));
+
+
+
+// '최근' 버튼 누르면 최근 본 영화 보이게 하기
+const recentMovieContainer = document.getElementsByClassName('recent_movies_container')[0];
+const recentMoviesBtn = document.getElementById('recent_movies_btn');
+recentMoviesBtn.addEventListener('click', () => {
+  
+  recentMovieContainer.classList.add('open');
+  recentMovieContainer.style.display = 'block';
+
+  recentMoviesBtn.style.display = 'none';
+  setTimeout(() => {
+    recentMovieContainer.classList.remove('open');
+  }, 800);
+})
+
+// // '최근' 버튼 누르면 최근 본 영화 보이게 하기
+const closeMoviesBtn = document.getElementById('close_recent_movies_btn');
+closeMoviesBtn.addEventListener('click', () => {
+  
+  recentMovieContainer.classList.add('close');
+
+  setTimeout(() => {
+  recentMoviesBtn.style.display = 'block';
+  recentMovieContainer.classList.remove('close');
+  recentMovieContainer.style.display = 'none';
+  }, 800);
+})
