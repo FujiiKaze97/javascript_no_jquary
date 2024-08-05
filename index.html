@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="./css/reset.css">
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/modal.css">
+  <link rel="stylesheet" href="./css/themeToggle.css">
 </head>
 
 <body>
@@ -16,6 +17,13 @@
     <div class="search_container">
       <input autofocus type="text" id="search_input" placeholder="Search for a movie...">
       <button id="search_button">Search</button>
+      <label class="toggle-class"> <!--다크모드 토글-->
+        <input id="theme-toggle" type="checkbox"> 
+        <label for="theme-toggle" class="toggle-label">
+          <i></i>
+          <i></i>
+        </label>
+      </label>
     </div>
   </div>
 
@@ -81,6 +89,7 @@
   <script src="./js/movie.js"></script>
   <script src="./js/modal.js"></script>
   <script src="./js/recentMovie.js"></script>
+  <script src="./js/darkMode.js"></script>
 </body>
 
 </html>
