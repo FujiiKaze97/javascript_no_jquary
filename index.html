@@ -16,7 +16,10 @@
     <div class="search_container">
       <input autofocus type="text" id="search_input" placeholder="Search for a movie...">
       <button id="search_button">Search</button>
-      <button id="theme-toggle"> toggle </button> <!--다크모드 토글-->
+      <label class="toggle-class"> <!--다크모드 토글-->
+        <input id="theme-toggle" type="checkbox"> 
+        <span>다크모드</span>
+      </label>
     </div>
   </div>
 
@@ -57,23 +60,24 @@
 
 
 
-    <!-- 최근 클릭한 영화 시작 by 해인-->
-    <div class="recent_movies_container">
-      <div class="close_recent_movies_btn_container">
-        <button id="close_recent_movies_btn">&#215</div>
-      <div class="container">
+  <!-- 최근 클릭한 영화 시작 by 해인-->
+  <div class="recent_movies_container">
+    <div class="close_recent_movies_btn_container">
+      <button id="close_recent_movies_btn">&#215
+    </div>
+    <div class="container">
       <!-- 포스터가 들어갈 곳 -->
       <!-- <div class="recent_movie_card">
         <img src="https://image.tmdb.org/t/p/w500//wIrhEUBWjRmZuL1Ix41cF2LhJrW.jpg">
       </div> -->
-      </div>
     </div>
-  
-    <button id="recent_movies_btn">최근</button>
-    <!-- 최근 클릭한 영화 끝 -->
+  </div>
+
+  <button id="recent_movies_btn">최근</button>
+  <!-- 최근 클릭한 영화 끝 -->
 
 
-    
+
 
 
   <br>
