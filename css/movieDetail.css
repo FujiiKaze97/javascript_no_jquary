@@ -184,6 +184,7 @@ main .movie_img {
   border: 0px;
   background: var(--blue, #0057FF);
 }
+
 #write_review_btn:hover {
   background-color: #0056b3;
 }
@@ -254,22 +255,23 @@ main .movie_img {
   right: 25px;
   display: flex;
   flex-direction: row;
-  gap:10px;
+  gap: 10px;
 }
 
 .comment_icon {
   width: 24px;
   height: 24px;
-  
+
 }
+
 .comment_num {
   color: #000;
 
-font-family: Pretendard;
-font-size: 20px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 /* home btn */
@@ -341,6 +343,7 @@ footer {
   font-weight: 400;
   line-height: normal;
 }
+
 .team {
   color: #FFF;
   font-family: Pretendard;
@@ -374,6 +377,7 @@ footer {
 
   /* animation: openClose 0.8s ease-in-out; */
 }
+
 .recent_movies_container .container {
   width: 100%;
   height: calc(100% - 25px);
@@ -385,26 +389,31 @@ footer {
 
   overflow-y: scroll;
 }
+
 .open {
   animation: openClose 0.8s ease-in-out;
 }
+
 .close {
   animation: openClose 0.8s ease-in-out;
   animation-direction: reverse;
 }
+
 @keyframes openClose {
   0% {
     translate: 100%;
   }
+
   100% {
     translate: 0%;
   }
 }
+
 .close_recent_movies_btn_container {
   width: 100%;
   height: 25px;
   background-color: transparent;
-  
+
   z-index: 2;
 }
 
@@ -421,6 +430,7 @@ footer {
   border: 0;
   cursor: pointer;
 }
+
 .recent_movie_card {
   width: 250px;
   height: fit-content;
@@ -433,15 +443,20 @@ footer {
 
   cursor: pointer;
 }
+
 .recent_movie_card:first-child {
   margin-top: 10px;
-}.recent_movie_card:first-child:hover {
+}
+
+.recent_movie_card:first-child:hover {
   margin-top: 6px;
 }
+
 .recent_movie_card:last-child {
   margin-top: 25px;
   margin-bottom: 25px;
 }
+
 .recent_movie_card img {
   width: 100%;
   ;
@@ -451,6 +466,7 @@ footer {
   padding: 0;
   margin: 0;
 }
+
 .recent_movie_card:hover {
   /* img에 강조 더하면서 다른 카드 밀리지 않도록 조정 */
   margin-top: 21px;
@@ -495,5 +511,5 @@ footer {
     bottom: 25px;
   }
 }
-/* 최근 클릭한 영화  by 해인*/
 
+/* 최근 클릭한 영화  by 해인*/

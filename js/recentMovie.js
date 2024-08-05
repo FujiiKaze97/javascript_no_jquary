@@ -27,12 +27,10 @@ const getRecentPoster = (data) => {
 }
 
 const recentContainer = document.getElementsByClassName('container')[0];
-// console.log(recentMovieContainer);
 const showRecentMovies = (ids) => {
   ids.forEach(async (id) => {
     const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=ko-KR`, options);
     const data = await response.json();
-    // console.log(data);
 
     const card = getRecentPoster(data);
     recentContainer.appendChild(card);
