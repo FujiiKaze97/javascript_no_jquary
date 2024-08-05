@@ -163,24 +163,29 @@ const options = {
 };
 
 function getMovieData() {
-fetch(`https://api.themoviedb.org/3/movie/${receivedData}?language=ko-KR`, options)
-  .then(response => response.json())
-  .then(data => {
-    const movieDetail = document.getElementById('movie_poster');
-    const poster = getPoster(data);
-    movieDetail.appendChild(poster);
+  try {
+    fetch(`https://api.themoviedb.org/3/movie/${receivedData}?language=ko-KR`, options)
+      .then(response => response.json())
+      .then(data => {
+        const movieDetail = document.getElementById('movie_poster');
+        const poster = getPoster(data);
+        movieDetail.appendChild(poster);
 
-    const movieTitle = document.getElementById('movie_title');
-    const title = getTitle(data);
-    movieTitle.appendChild(title);
+        const movieTitle = document.getElementById('movie_title');
+        const title = getTitle(data);
+        movieTitle.appendChild(title);
 
-    const movieOverview = document.getElementById('movie_overview');
+        const movieOverview = document.getElementById('movie_overview');
 
-    const overview = getOverview(data);
-    movieOverview.appendChild(overview);
+        const overview = getOverview(data);
+        movieOverview.appendChild(overview);
 
-  })
-  .catch(err => console.error(err));
+      })
+      .catch(err => console.error(err));
+  } catch (e) {
+    console.log(e)
+  }
+
 }
 
 

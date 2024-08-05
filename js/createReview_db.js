@@ -80,12 +80,22 @@ createBtn.addEventListener('click', async function () {
   
 })
 
+
+
 // 취소 버튼을 누르면 모달창이 안보이도록 함.
 const cancelBtn = document.getElementById('cancel_review_btn');
 cancelBtn.addEventListener('click', () => {
   CancelReview();
+  
 })
 
+
+// 'X' 버튼을 누르면 모달창이 안보이도록 함.
+const closeBtn = document.getElementById('review_close_btn');
+closeBtn.addEventListener('click', () => {
+  console.log("자꾸 이상한 창으로 넘어가요...");
+  // CancelReview();
+})
 
 const CancelReview = () => {
   console.log("'cancel review button' clicked");
@@ -110,6 +120,37 @@ const CancelReview = () => {
 
 
 
+// 카드 리뷰 정보 안보이도록 
+
+// closeBtn.addEventListener('click', () => {
+//   const id = document.getElementById('review_id');
+//   const score = document.getElementById('review_star');
+//   const content = document.getElementById('review_content');
+//   const comment = document.getElementById('review_comment');
+
+//   console.log("어디까지온거임1111");
+//   ClearCardContent(id, score, content, comment);
+//   console.log("어디까지온거임12222");
+//   const modal = document.getElementsByClassName('modal_review')[0];
+//   modal.style.display = 'none';
+//   console.log("어디까지온거임3333");
+// })
+
+// const ClearCardContent = (id, score, content, comment) => {
+//   // reset : 기존 모달창에 있던 내용 초기화
+//   console.log("어디까지온거4444");
+//   id.value = '';
+//   score.value = '';
+//   content.value = '';
+//   comment.value = '';
+//   console.log("어디까지온거임5555");
+// }
+
+
+
+
+
+
 
 const ClearModal = (name, pw, review, score) => {
   // reset : 기존 모달창에 있던 내용 초기화
@@ -118,6 +159,11 @@ const ClearModal = (name, pw, review, score) => {
   review.value = '';
   score.value = '⭐⭐⭐⭐⭐';
 }
+
+
+
+
+
 
 
 // 실시간 리뷰 글자수 확인
@@ -210,3 +256,4 @@ const showDespription = (event, input) => {
 
   }
 }
+

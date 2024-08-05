@@ -38,9 +38,6 @@
     <div class="review_header">
       <h4 class="review_title">네티즌 리뷰</h4>
       <button class ="write_review_btn" id="write_review_btn">리뷰쓰기</button>
-      <button id="review_modify_btn">수정테스트</button><br> <!--수정버튼 테스트용-->
-      <button id="review_delete_btn">삭제테스트</button> <!--삭제버튼 테스트용-->
-
     </div>
     <div class="cards_container" id="cards_container">
     </div>
@@ -118,8 +115,8 @@
         test
       </div>
         <div class ="button_area">
-        <button class ="cancel_button" id="review_del_btn" type="button">리뷰 삭제</button>
-        <button class ="register_button" id="review_mod_btn"  type="button">리뷰 수정</button>
+        <button class ="cancel_button" id="review_delete_btn" type="button">리뷰 삭제</button>
+        <button class ="register_button" id="review_modify_btn"  type="button">리뷰 수정</button>
       </div>
       <br><br><br>
       <!-- 댓글, 댓글 사용자 , 댓글 내용--> 
@@ -180,10 +177,9 @@
 
   <script type="module" src="./js/detail.js"></script>
   <script type="module" src="./js/createReview_db.js"></script>
-  <script type="module" src="./js/deletReview.js"></script>
-  <script src="./js/darkMode.js"></script>
+  <script type="module" src="./js/deleteReview.js"></script>
+  <script type="module" src="./js/darkMode.js"></script>
   <script type="module" src="./js/recentMovie.js"></script>
-  <script type="module" src="./js/reviewCard.js"></script>
 </body>
 
 </html>
