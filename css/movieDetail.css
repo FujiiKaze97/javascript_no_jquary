@@ -62,13 +62,15 @@ main .movie_img {
 
 .movie_overview {
   /* display: inline-block; */
+  background-color: white;
   width: 70%;
   height: 100%;
 
   margin-left: 50px;
   margin-right: auto;
-
-  color: var(--grey700, #616161);
+  padding: 40px;
+  border-radius: 25px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
   font-family: Pretendard;
   font-size: 24x;
   font-style: normal;

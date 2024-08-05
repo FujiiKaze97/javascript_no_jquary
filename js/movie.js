@@ -10,7 +10,8 @@ const cardData = (movie) => {
     <div class="movie-card-content">
       <h3>${movie.title}</h3>
       <p>${movie.overview}</p>
-      <span>Rating: ${movie.vote_average}</span>
+      <span> 
+      ${movie.vote_average.toFixed(1)}</span>
     </div>
   `;
   // 화살표 함수 사용

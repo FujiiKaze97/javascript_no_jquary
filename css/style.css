@@ -114,7 +114,7 @@ body {
 /* 카드 본문 설명 부분 */
 .movie-card-content {
   padding: 20px;
-  text-align: center;
+  text-align: left;
 }
 
 .movie_card h3 {
@@ -134,10 +134,16 @@ body {
   white-space: nowrap;
 }
 
+.star_main {
+  width: 5px;
+  height: 5px;
+}
 .movie_card span {
   font-size: 14px;
   color: #555;
   font-weight: bold;
+  display: flex;
+  flex-direction: row;
 }
 
 /* 페이지네이션 스타일 */
