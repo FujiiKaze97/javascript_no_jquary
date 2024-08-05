@@ -29,7 +29,7 @@
   <div class="reviews">
     <div class="review_header">
       <h4 class="review_title">네티즌 리뷰</h4>
-      <button class ="write_review_btn" id="write_review_btn">리뷰 작성</button>
+      <button class ="write_review_btn" id="write_review_btn">리뷰쓰기</button>
       <button id="review_modify_btn">수정테스트</button><br> <!--수정버튼 테스트용-->
       <button id="review_delete_btn">삭제테스트</button> <!--삭제버튼 테스트용-->
 
@@ -44,7 +44,9 @@
   </div>
 
   <footer>
-    13조_튜탕사(튜터님 탕후루 사주세요)
+    <p class = "camp">2024 내일배움캠프</p>
+    <p class = "react">React_6기</p>
+    <p class = "team">13조_튜탕사(튜터님 탕후루 사주세요)</p>
   </footer>
 
 
@@ -68,7 +70,7 @@
         </div>
       </div>
       <div class="modal_footer">
-        <button id="cancel_review_btn" type="button">취소</button>
+        
         <div class="name_pw">
           <div class="container">
             <div class="input_box">
@@ -85,7 +87,10 @@
             <p class="input_description">영문 대소문자, 숫자, !@#$%^&_ 중 <br> 2개 이상 사용한 4-12글자</p>
           </div>
         </div>
-        <button id="create_review_btn"  type="button">등록</button>
+        <div class ="button_area">
+        <button class ="cancel_button" id="cancel_review_btn" type="button">취소</button>
+        <button class ="register_button" id="create_review_btn"  type="button">등록</button>
+      </div>
       </div>
     </form>
   </div>

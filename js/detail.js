@@ -18,24 +18,33 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// 폰트
+(function(d) {
+  var config = {
+    kitId: 'xlw1ylc',
+    scriptTimeout: 3000,
+    async: true
+  },
+  h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+})(document);
 
   //  리뷰 카드 함수
   const getReview = (data) => {
     const card = document.createElement('div');
      card.className = 'cards';
        card.innerHTML = `<div class="cards_header">
-          <div class="userid">${data.name}</div>
-          <div class="cardrating">
-            
+          <div class="user_id">${data.name}</div>
+          <div class="card_rating">
             <div class="rating">${data.score}</div>
           </div>
         </div>
-        <p class="carddivider"></p>
-        <div class="userreview">
+        <p class="card_divider"></p>
+        <div class="user_review">
           ${data.review}
         </div>
-        <div class = "cardfooter">
-          
+        <div class = "card_footer">
+          <div><img class = "comment_icon" src ="source/comments.png"></img></div>
+          <div class = "comment_num">5</div>
         </div>`;
       return card;
      }
@@ -43,10 +52,8 @@ const db = getFirestore(app);
 // 리뷰 불러오기
 let docs = await getDocs(collection(db, "review"));
 docs.forEach((doc) => {
-  console.log(doc.data());
   const cardsContainer = document.getElementById('cards_container');
   const card = getReview(doc.data());
-  console.log(card)
   cardsContainer.appendChild(card);
 
 })
@@ -95,7 +102,7 @@ if (localStorage.getItem('recent_movies')) {
 // 포스터 함수
 const getPoster = (data) => {
   const card = document.createElement('div');
-  card.className = 'movie-poster';
+  card.className = 'movie_poster';
   card.innerHTML = `
     <img src="https://image.tmdb.org/t/p/w500/${data.poster_path}" height ="480">
   `;
@@ -105,23 +112,31 @@ const getPoster = (data) => {
 // 영화 제목 함수
 const getTitle = (data) => {
   const card = document.createElement('div');
-  card.className = 'movie-title';
+  card.className = 'movie_title';
   card.innerHTML = `
-    ${data.title}
+    <div class = "korean_title">${data.title}</div>
+    <div class = "original_title">${data.original_title}</div>
   `;
   return card;
 }
+
+
 // 영화 설명 함수
 const getOverview = (data) => {
+  let genreArr = data.genres.map(x => x.name);
+  console.log(genreArr)
   const card = document.createElement('div');
   card.className = 'movie-overview';
   card.innerHTML = `
-  <div class = "votebox">
+  <div class = "vote_box">
   <div class = "vote">평균 별점</div>
-  <img class = "star" src = "source/Star 8.png"></img>
+  <div class = "star_box">
+  <img class = "star" src = "source/Star_yellow.png"></img>
   <div class = "vote_average">${data.vote_average.toFixed(1)}</div>
   </div>
-  <p class = "divider"><p>
+  </div>
+  <p class = "movie_info">${data.release_date} | ${genreArr} | ${data.runtime}분</p>
+  <p class = "divider"></p>
   <div>${data.overview}</div>
   `;
   return card;
@@ -139,7 +154,6 @@ const options = {
 fetch(`https://api.themoviedb.org/3/movie/${receivedData}?language=ko-KR`, options)
   .then(response => response.json())
   .then(data => {
-    console.log("영화 데이터 로드");
     console.log(data);
     const movieDetail = document.getElementById('movie_poster');
     const poster = getPoster(data);
@@ -150,6 +164,7 @@ fetch(`https://api.themoviedb.org/3/movie/${receivedData}?language=ko-KR`, optio
     movieTitle.appendChild(title);
 
     const movieOverview = document.getElementById('movie_overview');
+    
     const overview = getOverview(data);
     movieOverview.appendChild(overview);
 
