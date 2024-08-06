@@ -92,15 +92,15 @@
   line-height: normal;
 }
 
+#review_comment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .modal_star {
   padding-bottom: 8px;
 }
-
-/* .modal_header p {
-리뷰 작성란 제목 부분
-
-} */
-
 
 /** modal 리뷰 / 홍승우 **/
 /* modal header */
@@ -296,11 +296,6 @@
 .register_button:hover {
   background: var(--blue, #0056b3);
 }
-
-
-
-
-
 
 .cancel_button {
   color: #0057FF;

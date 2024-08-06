@@ -20,6 +20,7 @@ import { MOVIE_ID } from './detail.js';
 //   messagingSenderId: "299955746969",
 //   appId: "1:299955746969:web:b6cbca8f52d9469732e008"
 // };
+
 const firebaseConfig = { // 홍승우
   apiKey: "AIzaSyAr-pkDJkrblenxK5GSlWssdFrSEhvLdrU",
   authDomain: "sparta-90385.firebaseapp.com",
@@ -34,20 +35,14 @@ const firebaseConfig = { // 홍승우
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-
-
-
 // '리뷰 작성' 버튼을 클릭하면 모달창이 뜨도록 함
 const creatReviewBtn = document.getElementById('write_review_btn');
 creatReviewBtn.addEventListener('click', () => {
   ShowModal();
 })
 const ShowModal = () => {
-  console.log('"write_review_btn" clicked');
-
   const modal = document.getElementsByClassName('modal_create_review')[0];
   modal.style.display = 'flex';
-
 }
 
 
@@ -126,31 +121,27 @@ closeBtn.addEventListener('click', () => {
 const commentBtn = document.getElementById('comment_btn');
 commentBtn.addEventListener('click', () => {
   try {
-    console.log();
-    const commentInfo = { comment: document.getElementById('comment').value, id: MOVIE_ID , date : getCurrentTime()};
+    const commentInfo = { comment: document.getElementById('comment').value, id: MOVIE_ID , date : getCurrentTime() ,review:document.getElementById('review_comment').innerText };
     addDoc(collection(db, "comment"), commentInfo);
-    console.log("getData");
-    console.log(getComment());
-   
   } 
   catch (e) {
     console.log(e);
+  }finally {
+    getComment();
+    console.log("여기까진 잘 온거임?");
   }
 })
 
 
 async function getComment() {
   try {
-    const docsSnapshot = await getDocs(query(
-      collection(db, "comment"),
-      where("id", "==", MOVIE_ID)
-    ));
-
-    docsSnapshot.forEach((doc) => {
-      console.log(doc.id, "=>", doc.data());
-    });
-  } catch (error) {
-    console.error("Error fetching documents: ", error);
+    db.collection('comment').get().then((결과)=>{
+      결과.forEach((doc)=>{
+        console.log(doc.data())
+      })
+    })
+  } catch (e) {
+    console.error("Error fetching documents: ", e);
   }
 }
 
