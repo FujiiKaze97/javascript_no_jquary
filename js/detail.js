@@ -22,13 +22,13 @@ const firebaseConfig = { // 홍승우
   messagingSenderId: "299275891543",
   appId: "1:299275891543:web:6224af1407759225310412"
 };
+
 // Firebase 인스턴스 초기화
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // movie id 받기
 export const MOVIE_ID = location.href.split('?')[1];
-
 
 
 // 폰트
@@ -274,7 +274,7 @@ const getTitle = (data) => {
 const getOverview = (data) => {
   let genreArr = data.genres.map(x => x.name);
   const card = document.createElement('div');
-  card.className = 'movie_overview';
+  card.className = 'movie-overview';
   card.innerHTML = `
   <div class = "vote_box">
   <div class = "vote">평균 별점</div>
@@ -285,7 +285,7 @@ const getOverview = (data) => {
   </div>
   <p class = "movie_info">${data.release_date} | ${genreArr} | ${data.runtime}분</p>
   <p class = "divider"></p>
-  <div class = "overview">${data.overview}</div>
+  <div>${data.overview}</div>
   `;
   return card;
 }
@@ -366,7 +366,7 @@ showRecentMovies(GetData('recent_movies'));
 
 
 // '최근' 버튼 누르면 최근 본 영화 보이게 하기
-const recentMovieContainer = document.getElementsByClassName('recent_movies_container_outer')[0];
+const recentMovieContainer = document.getElementsByClassName('recent_movies_container')[0];
 const recentMoviesBtn = document.getElementById('recent_movies_btn');
 recentMoviesBtn.addEventListener('click', () => {
 
