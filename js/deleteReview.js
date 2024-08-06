@@ -77,7 +77,7 @@ document.getElementById('review_modify_btn').addEventListener('click', function 
   let getPw = prompt('비밀번호를 입력하세요')
 
   // 프롬프트 입력 값과 데이터상 pw 일치시 실행
-  if (getPw === thisData.pw /* <=(임시값)*/) {
+  if (getPw === thisData.pw) {
 
     //리뷰 작성 모달창 띄우기 
     const modal = document.getElementsByClassName('modal_create_review')[1];
@@ -106,7 +106,6 @@ document.getElementById('review_modify_btn').addEventListener('click', function 
 })
 
 // 리뷰 데이터 수정 함수식
-//비동기 함수 사용
 const updateReview = async (id, updateReview) => {
   /* doc함수: 파이어스토어 특정 문서 참조
      db : 파이어스토어 데이터베이스 인스턴스
