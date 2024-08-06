@@ -122,7 +122,8 @@ document.getElementById('search_button').addEventListener('click', () => {
   }
 });
 
-// Feature : MainPage Pagenation 
+// 메인화면 Pagenation - 전 세션 번호 기억하여, 해당 번호로 이동하고, 뒤로가기나 홈으로 가도
+// 해당 선택한 영화의 페이지로 바로 클라이언트가 이동할 수 있도록... 
 function setPageNum() {
   try {
     const numberButtonWrapper = document.querySelector('.number_button_wrapper');

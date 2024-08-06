@@ -45,41 +45,56 @@ const ShowModal = () => {
 
 const createBtn = document.getElementById('create_review_btn');
 createBtn.addEventListener('click', async function () {
-  console.log("'create review button' clicked");
-  //등록 버튼 클릭시 컨펌 알림
-  const result = confirm('등록하시겠습니까?');
-
-
-  const name = document.getElementById('name');
-  const pw = document.getElementById('pw');
-  const review = document.getElementById('review_text');
-  const score = document.getElementById('select_star');
-
-  // console.log(name.value, pw.value);
-  // console.log('score :', score.value)
-  // console.log('review :', review.value);
-
-  if (result) {
-    //컨펌 확인 버튼 입력시 처리
-    // saveReview(reviewInfo);
-
-    // 저장 시각 저장
-
-
-    const reviewInfo = { name: name.value, pw: pw.value, score: score.value, review: review.value, key: makeKey() };
-
-    await addDoc(collection(db, "review"), reviewInfo);
-    // 저장 후 페이지 새로고침
-    location.reload();
+  try {
+    console.log("'create review button' clicked");
+    //등록 버튼 클릭시 컨펌 알림
+    const result = confirm('등록하시겠습니까?');
+  
+  
+    const name = document.getElementById('name');
+    const pw = document.getElementById('pw');
+    const review = document.getElementById('review_text');
+    const score = document.getElementById('select_star');
+  
+    // console.log(name.value, pw.value);
+    // console.log('score :', score.value)
+    // console.log('review :', review.value);
+  
+    if (result) {
+      //컨펌 확인 버튼 입력시 처리
+      // saveReview(reviewInfo);
+  
+      // 저장 시각 저장
+  
+      console.log("저장이되나요?");
+      const reviewInfo = { name: name.value, pw: pw.value, score: score.value, review: review.value, movie: location.href.split('?')[1] };
+  
+      await addDoc(collection(db, "review"), reviewInfo);
+      // 저장 후 페이지 새로고침
+      location.reload();
+    }
+    // confirm 창에서 취소를 누르면 위에 주석처리한 부분 log가 또 뜨네요?
+  } catch(e) {
+    console.log(e);
   }
-  // confirm 창에서 취소를 누르면 위에 주석처리한 부분 log가 또 뜨네요?
-
+  
 })
+
+
 
 // 취소 버튼을 누르면 모달창이 안보이도록 함.
 const cancelBtn = document.getElementById('cancel_review_btn');
 cancelBtn.addEventListener('click', () => {
   CancelReview();
+  
+})
+
+
+// 'X' 버튼을 누르면 모달창이 안보이도록 함.
+const closeBtn = document.getElementById('review_close_btn');
+closeBtn.addEventListener('click', () => {
+  console.log("자꾸 이상한 창으로 넘어가요...");
+  // CancelReview();
 })
 
 const CancelReview = () => {
@@ -105,6 +120,38 @@ const CancelReview = () => {
 
 
 
+// 카드 리뷰 정보 안보이도록 
+
+// closeBtn.addEventListener('click', () => {
+//   const id = document.getElementById('review_id');
+//   const score = document.getElementById('review_star');
+//   const content = document.getElementById('review_content');
+//   const comment = document.getElementById('review_comment');
+
+//   console.log("어디까지온거임1111");
+//   ClearCardContent(id, score, content, comment);
+//   console.log("어디까지온거임12222");
+//   const modal = document.getElementsByClassName('modal_review')[0];
+//   modal.style.display = 'none';
+//   console.log("어디까지온거임3333");
+// })
+
+// const ClearCardContent = (id, score, content, comment) => {
+//   // reset : 기존 모달창에 있던 내용 초기화
+//   console.log("어디까지온거4444");
+//   id.value = '';
+//   score.value = '';
+//   content.value = '';
+//   comment.value = '';
+//   console.log("어디까지온거임5555");
+// }
+
+
+
+
+
+
+
 const ClearModal = (name, pw, review, score) => {
   // reset : 기존 모달창에 있던 내용 초기화
   name.value = '';
@@ -112,6 +159,11 @@ const ClearModal = (name, pw, review, score) => {
   review.value = '';
   score.value = '⭐⭐⭐⭐⭐';
 }
+
+
+
+
+
 
 
 // 실시간 리뷰 글자수 확인
@@ -204,3 +256,4 @@ const showDespription = (event, input) => {
 
   }
 }
+

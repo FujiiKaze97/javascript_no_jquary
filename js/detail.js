@@ -3,6 +3,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/fireba
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 import { getDocs } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+import { query, where } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js"; // 필요한 모듈 가져오기
 
 // Firebase 구성 정보 설정
 const firebaseConfig = {
@@ -17,6 +18,9 @@ const firebaseConfig = {
 // Firebase 인스턴스 초기화
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+// movie id 받기
+const receivedData = location.href.split('?')[1];
 
 // 폰트
 (function (d) {
@@ -46,27 +50,33 @@ const getReview = (data) => {
           <div><img class = "comment_icon" src ="source/comments.png"></img></div>
           <div class = "comment_num">5</div>
         </div>`;
+
+  // 카드에 데이터 속성 추가 (이름, 점수, 리뷰)
+  card.dataset.name = data.name;
+  card.dataset.score = data.score;
+  card.dataset.review = data.review;
+  card.dataset.id = data.movie;
   return card;
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
   try {
     const reviewContainer = document.getElementsByClassName('slide')[0];
-
     reviewContainer.innerHTML = `
-      <div class="slide_prev_button slide_button">◀</div>
-      <div class="slide_next_button slide_button">▶</div>
+      <div class="slide_prev_button slide_button">:뒤쪽_화살표:</div>
+      <div class="slide_next_button slide_button">:앞쪽_화살표:</div>
       <ul class="slide_pagination">`;
 
-    const docsSnapshot = await getDocs(collection(db, "review"));
-
+      const docsSnapshot = await getDocs(query(
+        collection(db, "review"), // review 컬렉션 지정
+        where("movie", "==", receivedData) // movie 필드와 일치하는 값으로 필터링
+      ));
+      
     let cardsContainer = document.createElement('ul');
     cardsContainer.className = 'slide_items';
-
     let gridColumn = 0;
     let windowWidth = window.innerWidth;
     console.log('window width:', windowWidth);
-
     if (windowWidth > 1460) {
       gridColumn = 4;
     } else if (windowWidth > 992) {
@@ -76,68 +86,48 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else {
       gridColumn = 1;
     }
-
     console.log('grid col :', gridColumn);
     let cardCount = 0;
-
-
-
     docsSnapshot.forEach((doc) => {
       cardCount++;
-
       const card = getReview(doc.data());
       cardsContainer.appendChild(card);
-
       if (cardCount % (gridColumn * 2) === 0) {
         reviewContainer.appendChild(cardsContainer);
         cardsContainer = document.createElement('ul');
         // cardsContainer.id = 'cards_container';
         cardsContainer.className = 'slide_items';
       }
-
-
       // const cardsContainer = document.getElementById('cards_container');
       // const card = getReview(doc.data());
       // card.setAttribute("id", doc.id);
       // cardsContainer.appendChild(card);
     });
     reviewContainer.appendChild(cardsContainer);
-
-
-
     // swipe 추가 - 해인 =======================
-
     // 슬라이크 전체 크기(width 구하기)
     const slide = document.querySelector(".slide");
     let slideWidth = slide.clientWidth;
-
     // // 버튼 엘리먼트 선택하기
     // let prevBtn = document.querySelector(".slide_prev_button");
     // let nextBtn = document.querySelector(".slide_next_button");
-
     // 슬라이드 전체를 선택해 값을 변경해주기 위해 슬라이드 전체 선택하기
     let slideItems = document.querySelectorAll(".slide_items");
     console.log('slide items :', slideItems)
     // console.log('slide items ', slideItems.length);
     // 현재 슬라이드 위치가 슬라이드 개수를 넘기지 않게 하기 위한 변수
     let maxSlide = slideItems.length;
-
     // 버튼 클릭할 때 마다 현재 슬라이드가 어디인지 알려주기 위한 변수
     let currSlide = 1;
-
     // 페이지네이션 생성
     const pagination = document.querySelector(".slide_pagination");
-
     for (let i = 0; i < maxSlide; i++) {
       if (i === 0) pagination.innerHTML += `<li class="active">•</li>`;
       else pagination.innerHTML += `<li>•</li>`;
     }
-
     const paginationItems = document.querySelectorAll(".slide_pagination > li");
-
     function nextMove(slideItems) {
       console.log('nextMove clicked');
-
       currSlide++;
       // 마지막 슬라이드 이상으로 넘어가지 않게 하기 위해서
       if (currSlide <= maxSlide) {
@@ -155,11 +145,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
       console.log('currSlide', currSlide);
       console.log('maxSlide', maxSlide);
-
     }
     function prevMove(slideItems) {
       console.log('prevMove clicked');
-
       currSlide--;
       // 1번째 슬라이드 이하로 넘어가지 않게 하기 위해서
       if (currSlide > 0) {
@@ -178,12 +166,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       console.log('currSlide', currSlide);
       console.log('maxSlide', maxSlide);
     }
-
     // 버튼 엘리먼트 선택하기
     let prevBtn = document.querySelector(".slide_prev_button");
     let nextBtn = document.querySelector(".slide_next_button");
-
-
     // 버튼 엘리먼트에 클릭 이벤트 추가하기
     nextBtn.addEventListener("click", () => {
       // 이후 버튼 누를 경우 현재 슬라이드를 변경
@@ -195,16 +180,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       prevMove(slideItems);
     });
     // swipe 추가 - 해인 END =======================
-
-
-
-
-
     // 카드가 모두 추가된 후 이벤트 리스너 추가
     addCardClickEvent();
-
-
-
   } catch (e) {
     console.error(e);
   }
@@ -212,9 +189,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 
 
-
-// movie id 받기
-const receivedData = location.href.split('?')[1];
 
 // 클릭 시 받은 id값 local storage에 저장 - by 해인 start ==========
 // localStorage에 저장하기
@@ -303,27 +277,31 @@ const options = {
   }
 };
 
+function getMovieData() {
+  try {
+    fetch(`https://api.themoviedb.org/3/movie/${receivedData}?language=ko-KR`, options)
+      .then(response => response.json())
+      .then(data => {
+        const movieDetail = document.getElementById('movie_poster');
+        const poster = getPoster(data);
+        movieDetail.appendChild(poster);
 
-fetch(`https://api.themoviedb.org/3/movie/${receivedData}?language=ko-KR`, options)
-  .then(response => response.json())
-  .then(data => {
-    const movieDetail = document.getElementById('movie_poster');
-    const poster = getPoster(data);
-    movieDetail.appendChild(poster);
+        const movieTitle = document.getElementById('movie_title');
+        const title = getTitle(data);
+        movieTitle.appendChild(title);
 
-    const movieTitle = document.getElementById('movie_title');
-    const title = getTitle(data);
-    movieTitle.appendChild(title);
+        const movieOverview = document.getElementById('movie_overview');
 
-    const movieOverview = document.getElementById('movie_overview');
+        const overview = getOverview(data);
+        movieOverview.appendChild(overview);
 
-    const overview = getOverview(data);
-    movieOverview.appendChild(overview);
+      })
+      .catch(err => console.error(err));
+  } catch (e) {
+    console.log(e)
+  }
 
-  })
-  .catch(err => console.error(err));
-
-
+}
 
 
 // localStorage에 저장하기
@@ -340,28 +318,28 @@ const GetData = (key) => {
 
 
 // 포스터 함수
-const getRecentPoster = (data) => {
-  const card = document.createElement('div');
-  card.className = 'recent_movie_card';
-  card.innerHTML = `
-    <img src="https://image.tmdb.org/t/p/w500/${data.poster_path}">
-  `;
-  card.addEventListener('click', () => window.location.href = `movieDetail.html?${data.id}`);
-  return card;
-}
+// const getRecentPoster = (data) => {
+//   const card = document.createElement('div');
+//   card.className = 'recent_movie_card';
+//   card.innerHTML = `
+//     <img src="https://image.tmdb.org/t/p/w500/${data.poster_path}">
+//   `;
+//   card.addEventListener('click', () => window.location.href = `movieDetail.html?${data.id}`);
+//   return card;
+// }
 
-const recentContainer = document.getElementsByClassName('close_recent_movies_btn_container')[0]
-  .nextElementSibling; // recentMovie.js와 다른 부분 (container라는 다른 요소 존재해서 수정)
-const showRecentMovies = (ids) => {
-  ids.forEach(async (id) => {
-    const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=ko-KR`, options);
-    const data = await response.json();
-    const card = getRecentPoster(data);
-    recentContainer.appendChild(card);
-  })
-}
+// const recentContainer = document.getElementsByClassName('close_recent_movies_btn_container')[0]
+//   .nextElementSibling; // recentMovie.js와 다른 부분 (container라는 다른 요소 존재해서 수정)
+// const showRecentMovies = (ids) => {
+//   ids.forEach(async (id) => {
+//     const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=ko-KR`, options);
+//     const data = await response.json();
+//     const card = getRecentPoster(data);
+//     recentContainer.appendChild(card);
+//   })
+// }
 
-showRecentMovies(GetData('recent_movies'));
+// showRecentMovies(GetData('recent_movies'));
 
 
 
@@ -400,6 +378,14 @@ function addCardClickEvent() {
       card.addEventListener('click', (e) => {
         const modal = document.getElementsByClassName('modal_review')[0];
         modal.style.display = 'flex';
+        const reviewId = document.getElementById("review_id");
+        const reviewStar = document.getElementById("review_star");
+        const reviewContent = document.getElementById("review_content");
+        reviewId.innerHTML = card.dataset.name;
+        //score = 별 모양.. 별모양 안불러와짐.. console찍으면 잘 보임 -> 수정 필요
+        reviewStar.innerHTML = card.dataset.score; 
+        reviewContent.innerHTML = card.dataset.review;
+        modal.style.display = 'flex';
       });
     });
 
@@ -423,6 +409,7 @@ function addCardClickEvent() {
     console.log(e);
   }
 }
+
 
 // // 모달 관련  */
 //   // 모달 초기화 및 이벤트 설정
@@ -470,7 +457,11 @@ const resizeCards = async () => {
       <div class="slide_next_button slide_button">▶</div>
       <ul class="slide_pagination">`;
 
-    const docsSnapshot = await getDocs(collection(db, "review"));
+    const docsSnapshot = await getDocs(query(
+      collection(db, "review"), // review 컬렉션 지정
+      where("movie", "==", receivedData) // movie 필드와 일치하는 값으로 필터링
+    ));
+
 
     let cardsContainer = document.createElement('ul');
     cardsContainer.className = 'slide_items';
