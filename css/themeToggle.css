@@ -1,5 +1,5 @@
 /*다크모드 토글*/
-.toggle-class{
+.toggle_class{
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -48,7 +48,7 @@
 
   /* ========== 반응형 ========= */
   @media screen and (max-width: 630px) {
-    .toggle-class{
+    .toggle_class{
       top: 4px;
       right: 0;
     }

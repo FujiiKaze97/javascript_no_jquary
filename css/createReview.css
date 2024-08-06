@@ -116,10 +116,12 @@
   align-items: center;
   font-family: Pretendard;
 }
+
 .comment_input {
   width: 60vh;
   height: 40px;
 }
+
 .comment_button {
   color: #FFF;
   font-family: Pretendard;
@@ -143,17 +145,18 @@
 /* modal body */
 .modal_body {
   width: 100%;
-  height: 65%;
-  margin-top: 10px;
+  height: 70%;
+  /* margin-top: 10px; */
+
 }
 
-.modal_body p {
+.modal_body>p {
   width: 100%;
-  height: 98%;
+  height: 95%;
 
 }
 
-.modal_body p #review_text, #fix_text {
+.modal_body p #review_text {
   width: 100%;
   height: 100%;
 
@@ -188,47 +191,50 @@
   margin-top: 10px;
   /* 창 크기를 넘기면 스크롤 가능하게 */
   overflow: scroll;
-  overflow-x: hidden; /* 가로 스크롤 숨김 */
-  padding: 10px; /* 내용물과 경계선 사이에 여백 추가 */
-  border: 1px solid #ccc; /* 경계선 추가 */
-  box-sizing: border-box; /* 패딩과 경계선을 포함하여 크기를 계산 */
+  overflow-x: hidden;
+  /* 가로 스크롤 숨김 */
+  padding: 10px;
+  /* 내용물과 경계선 사이에 여백 추가 */
+  border: 1px solid #ccc;
+  /* 경계선 추가 */
+  box-sizing: border-box;
+  /* 패딩과 경계선을 포함하여 크기를 계산 */
 }
 
 
 /* modal footer */
 .modal_footer {
   width: 100%;
-  height: 10%;
+  height: 20%;
 }
 
 .modal_footer .name_pw {
-  width: 70%;
-  height: 100%;
+  width: 100%;
+  height: 50%;
 
   display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
+  justify-content: space-between;
+  align-items: center;
 
-  /* margin-left: 10px;
-  margin-right: 10px; */
-  justify-content: space-around;
-  margin-bottom: 10px;
+  margin: auto;
 }
 
 .modal_line {
-  border: none; /* 기본 border 제거 */
-  border-top: 1px solid #817e7e; /* 회색 선 추가 */
-  margin: 10px 0; /* 위아래 여백 추가 */
+  border: none;
+  /* 기본 border 제거 */
+  border-top: 1px solid #817e7e;
+  /* 회색 선 추가 */
+  margin: 10px 0;
+  /* 위아래 여백 추가 */
 }
 
 .name_pw .container {
-  width: 48%;
+  width: 49%;
   height: 100%;
 
   display: flex;
   /* justify-content: flex-end; */
-  /* align-items: center; */
-  flex-wrap: wrap;
+  align-items: center;
 }
 
 .container .input_box {
@@ -244,14 +250,14 @@
 }
 
 .container label {
-  width: 30%;
+  width: 20%;
   /* height: 100%; */
 
   text-align: center;
 }
 
 .container input {
-  width: 70%;
+  width: 80%;
   height: 100%;
 
   border: 1px solid black;
@@ -337,8 +343,185 @@
   cursor: pointer;
   transition: box-shadow 0.2s;
 }
+
 .close_btn:hover {
   color: white;
   border-color: #ff0000;
   background-color: rgb(255, 0, 0);
 }
+
+
+/* ========= 반응형 ========= */
+/* @media screen and (max-width: 1460px) {
+} */
+/* @media screen and (max-width: 992px) {
+  
+} */
+/* @media screen and (max-width: 630px) { */
+
+  /* 주 modal 창 */
+  /* .modal_window {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    width: calc(100% - 20px);
+    height: 400px;
+    padding: 20px;
+  } */
+
+  /* modal header */
+  /* .modal_header {
+    width: 100%;
+    height: 10%;
+    font-size: 22px;
+  } */
+
+  /* .modal_star {
+    padding-bottom: 8px;
+  } */
+
+
+  /** modal 리뷰 / 홍승우 **/
+  /* modal header */
+  /* .modal_comment {
+    width: 100%;
+    height: 25%;
+    display: flex;
+    align-items: center;
+    font-family: Pretendard;
+  } */
+
+  /* .comment_input {
+    width: 60vh;
+    height: 40px;
+  } */
+
+  /* .comment_button {
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 14px;
+    display: flex;
+    width: 10vh;
+    height: 40px;
+    padding: 11px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0px;
+    border: 0px;
+    background: var(--blue, #858585);
+  } */
+
+  /* .comment_button:hover {
+    background: var(--blue, #5f5f5f);
+  } */
+
+
+  /* modal body */
+  /* .modal_body {
+    width: 100%;
+    height: 70%;
+  } */
+
+  /* .modal_body>p {
+    height: 90%;
+  } */
+  
+  /* .modal_body .review_length {
+    height: 10%;
+  } */
+
+
+  /* modal footer */
+  /* .modal_footer {
+    width: 100%;
+    height: 20%;
+
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+
+    margin: 0;
+  } */
+
+  /* .modal_footer .name_pw {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 0;
+  } */
+
+  /* .name_pw .container {
+    width: 100%;
+    height: 80%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  } */
+
+  /* .container .input_box {
+    width: 100%;
+    height: 70%;
+    padding: 3px;
+  }
+
+  .container label {
+    width: 20%;
+    height: 100%;
+
+    text-align: center;
+  }
+
+  .container input {
+    width: 80%;
+    height: 100%;
+
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-left: 0px;
+  }
+
+  .container .input_description {
+    display: none;
+
+    width: 100%;
+    height: auto;
+
+    color: red;
+    font-size: xx-small;
+    text-align: end;
+    padding: 0px;
+  } */
+
+  /* .button_area {
+    height: 100%;
+    width: 80%;
+
+    margin-left: auto;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .register_button {
+    width: 100%;
+    height: 80%;
+
+    font-size: 20px;
+    padding: 0;
+  }
+
+  .cancel_button {
+    width: 100%;
+    height: 80%;
+    
+    font-size: 20px;
+    padding: 0;
+  } */
+/* } */
