@@ -499,7 +499,8 @@ footer {
   animation: upDown 1s ease-in-out infinite;
   cursor: pointer;
 
-  box-shadow: 4px 4px 4px 4px rgb(255, 255, 255);
+  box-shadow: -1px -1px 8px rgba(255, 255, 255, 0.489);
+
 }
 
 /* 최근 버튼 상하 움직임 */
