@@ -17,7 +17,7 @@
     <div class="movie_title" id="movie_title">
     </div>
     <label class="toggle-class"> <!--다크모드 토글-->
-      <input id="theme-toggle" type="checkbox"> 
+      <input id="theme-toggle" type="checkbox">
       <label for="theme-toggle" class="toggle-label">
         <i></i>
         <i></i>
@@ -38,7 +38,7 @@
   <div class="reviews">
     <div class="review_header">
       <h4 class="review_title">네티즌 리뷰</h4>
-      <button class ="write_review_btn" id="write_review_btn">리뷰 작성</button>
+      <button class="write_review_btn" id="write_review_btn">리뷰 작성</button>
     </div>
     <div class="slide slide_wrap">
       <!-- 리뷰 카드 들어갈 곳 -->
@@ -53,9 +53,9 @@
   </div>
 
   <footer>
-    <p class = "camp">2024 내일배움캠프</p>
-    <p class = "react">React_6기</p>
-    <p class = "team">13조_튜탕사(튜터님 탕후루 사주세요)</p>
+    <p class="camp">2024 내일배움캠프</p>
+    <p class="react">React_6기</p>
+    <p class="team">13조_튜탕사(튜터님 탕후루 사주세요)</p>
   </footer>
 
 
@@ -79,7 +79,7 @@
         </div>
       </div>
       <div class="modal_footer">
-        
+
         <div class="name_pw">
           <div class="container">
             <div class="input_box">
@@ -96,10 +96,10 @@
             <p class="input_description">영문 대소문자, 숫자, !@#$%^&_ 중 <br> 2개 이상 사용한 4-12글자</p>
           </div>
         </div>
-        <div class ="button_area">
-        <button class ="cancel_button" id="cancel_review_btn" type="button">취소</button>
-        <button class ="register_button" id="create_review_btn"  type="button">등록</button>
-      </div>
+        <div class="button_area">
+          <button class="cancel_button" id="cancel_review_btn" type="button">취소</button>
+          <button class="register_button" id="create_review_btn" type="button">등록</button>
+        </div>
       </div>
     </form>
   </div>
@@ -117,14 +117,14 @@
       <div class="modal_body_card" id="review_content">
         test
       </div>
-        <div class ="button_area">
-        <button class ="cancel_button" id="review_delete_btn" type="button">리뷰 삭제</button>
-        <button class ="register_button" id="review_modify_btn"  type="button">리뷰 수정</button>
+      <div class="button_area">
+        <button class="cancel_button" id="review_delete_btn" type="button">리뷰 삭제</button>
+        <button class="register_button" id="review_modify_btn" type="button">리뷰 수정</button>
       </div>
       <br><br><br>
-      <!-- 댓글, 댓글 사용자 , 댓글 내용--> 
+      <!-- 댓글, 댓글 사용자 , 댓글 내용-->
       <div class="modal_header">
-        댓글 
+        댓글
       </div>
       <hr class="modal_line">
       <div class="modal_body_card" id="review_comment">
@@ -132,7 +132,7 @@
       </div>
       <div class="modal_comment">
         <input type="text" class="comment_input" placeholder="댓글을 작성해보세요">
-        <button type="button" class ="comment_button" id="comment_btn">댓글 등록</button>
+        <button type="button" class="comment_button" id="comment_btn">댓글 등록</button>
       </div>
     </form>
   </div>
@@ -152,12 +152,18 @@
       </div>
       <div class="modal_body">
         <p><textarea id="fix_text" placeholder="리뷰를 작성해주세요"></textarea></p>
+        <div class="review_length">
+          <p>(<span id="current_length">0</span>/500)</p>
+        </div>
       </div>
       <div class="modal_footer">
-        <button id="cancel_fix_btn" type="button">수정취소</button>
         <div class="name_pw">
         </div>
-        <button id="fix_review_btn" type="button">수정등록</button>
+        <div class="button_area">
+          <button class="cancel_button" id="cancel_fix_btn" type="button">수정취소</button>
+
+          <button class="register_button" id="fix_review_btn" type="button">수정등록</button>
+        </div>
       </div>
     </form>
   </div>
@@ -180,7 +186,7 @@
 
   <script type="module" src="./js/detail.js"></script>
   <script type="module" src="./js/createReview_db.js"></script>
-  <!-- <script type="module" src="./js/deleteReview.js"></script> -->
+  <script type="module" src="./js/deleteReview.js"></script>
   <script type="module" src="./js/darkMode.js"></script>
   <script type="module" src="./js/recentMovie.js"></script>
 </body>
