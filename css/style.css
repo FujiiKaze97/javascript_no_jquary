@@ -473,11 +473,12 @@ h2 {
   
   /* 영화 카드 스타일 */
   .movie_card {
-    width: 50%;
+    width: 100%;
+    height: 600px;
     /* height: fit-content; */
-
+    display: block;
     flex-direction: row;
-
+    flex-wrap: nowrap;
 
     background-color: #fff;
     border-radius: 10px;
@@ -488,9 +489,11 @@ h2 {
   }
   
   .movie_card img {
-    width: 100%;
-    height: 360px;
+    width: 50%;
+    height: 400px;
     /* height: 450px; */
+
+    display: inline-block;
     object-fit: cover;
   }
   
