@@ -9,16 +9,15 @@ import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.4/f
 import { getDocs } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
 
-// Firebase 구성 정보 설정
-const firebaseConfig = {
-  apiKey: "AIzaSyAcTX_5mbzFJeUantOQ4xZXah_aJtW96EQ",
-  authDomain: "prac-0717.firebaseapp.com",
-  projectId: "prac-0717",
-  storageBucket: "prac-0717.appspot.com",
-  messagingSenderId: "299955746969",
-  appId: "1:299955746969:web:b6cbca8f52d9469732e008"
-};
-
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyAr-pkDJkrblenxK5GSlWssdFrSEhvLdrU",
+    authDomain: "sparta-90385.firebaseapp.com",
+    projectId: "sparta-90385",
+    storageBucket: "sparta-90385.appspot.com",
+    messagingSenderId: "299275891543",
+    appId: "1:299275891543:web:6224af1407759225310412"
+  };
 
 // Firebase 인스턴스 초기화
 const app = initializeApp(firebaseConfig);
@@ -90,11 +89,18 @@ cancelBtn.addEventListener('click', () => {
 })
 
 
-// 'X' 버튼을 누르면 모달창이 안보이도록 함.
+// 'X' 버튼 Click Event
 const closeBtn = document.getElementById('review_close_btn');
 closeBtn.addEventListener('click', () => {
   const modal = document.getElementsByClassName('modal_review')[0];
   modal.style.display = 'none';
+})
+
+
+// '댓글 등록' 버튼 Click Event
+const commentBtn = document.getElementById('comment_btn');
+commentBtn.addEventListener('click', () => {
+    console.log("여기눌렀니??");
 })
 
 const CancelReview = () => {
