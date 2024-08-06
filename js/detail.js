@@ -203,11 +203,16 @@ const GetIds = (key) => {
   let localData = JSON.parse(localStorage.getItem(key))
   return localData;
 }
+
 if (localStorage.getItem('recent_movies')) {
-  //로컬 스토리지에 recent_movies 가 있을경우 내용 추가
+  //로컬 스토리지에 recent_movies 가 있을 경우 내용 추가
   let recentMovieList = GetIds('recent_movies');
 
-  if (!recentMovieList.includes(receivedData)) {
+
+  if (!receivedData) {
+    console.log('Improper ID :', receivedData);
+  }
+  else if (!recentMovieList.includes(receivedData)) {
     recentMovieList.unshift(receivedData);
     localStorage.setItem('recent_movies', JSON.stringify(recentMovieList));
   } else { // 이미 본 영화도 최신 순위로 올림
@@ -223,9 +228,14 @@ if (localStorage.getItem('recent_movies')) {
     SaveId(newMovieList);
   }
 
+  
 } else {
+  if (receivedData) {
+    console.log('Save new local storage :', [receivedData]);
+    SaveId([receivedData]);
+  }
   //로컬 스토리지에 reviews가 없을 경우 새로운 배열 저장
-  SaveId([receivedData]);
+  
 }
 // 클릭 시 받은 id값 local storage에 저장 - by 해인 end ==========
 
@@ -360,7 +370,7 @@ recentMoviesBtn.addEventListener('click', () => {
   }, 800);
 })
 
-// // '최근' 버튼 누르면 최근 본 영화 보이게 하기
+// '최근'에서 X 버튼 누르면 최근 본 영화 닫기
 const closeMoviesBtn = document.getElementById('close_recent_movies_btn');
 closeMoviesBtn.addEventListener('click', () => {
 

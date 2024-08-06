@@ -6,6 +6,7 @@
 
 // localStorage에 저장하기
 const SaveData = (id) => {
+  console.log('save data :', id)
   localStorage.setItem('recent_movies', JSON.stringify(id));
 }
 // localStorage 불러오기
