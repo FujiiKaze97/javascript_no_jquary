@@ -155,6 +155,8 @@ async function getComment() {
 }
 
 
+
+// 댓글 가져온거 설정하는 상황
 function setComment(comments) {
 
 }
