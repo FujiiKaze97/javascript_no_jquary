@@ -48,7 +48,7 @@
 
   /* ========== 반응형 ========= */
   @media screen and (max-width: 630px) {
-    .toggle-class{
+    .toggle_class{
       top: 4px;
       right: 0;
     }
