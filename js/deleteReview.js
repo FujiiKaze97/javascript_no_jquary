@@ -7,15 +7,24 @@ import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.4/f
 import { getDocs } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 import { deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyAr-pkDJkrblenxK5GSlWssdFrSEhvLdrU",
-    authDomain: "sparta-90385.firebaseapp.com",
-    projectId: "sparta-90385",
-    storageBucket: "sparta-90385.appspot.com",
-    messagingSenderId: "299275891543",
-    appId: "1:299275891543:web:6224af1407759225310412"
-  };
+// Firebase 구성 정보 설정
+// const firebaseConfig = { // 해인
+//   apiKey: "AIzaSyAcTX_5mbzFJeUantOQ4xZXah_aJtW96EQ",
+//   authDomain: "prac-0717.firebaseapp.com",
+//   projectId: "prac-0717",
+//   storageBucket: "prac-0717.appspot.com",
+//   messagingSenderId: "299955746969",
+//   appId: "1:299955746969:web:b6cbca8f52d9469732e008"
+// };
+const firebaseConfig = { // 홍승우
+  apiKey: "AIzaSyAr-pkDJkrblenxK5GSlWssdFrSEhvLdrU",
+  authDomain: "sparta-90385.firebaseapp.com",
+  projectId: "sparta-90385",
+  storageBucket: "sparta-90385.appspot.com",
+  messagingSenderId: "299275891543",
+  appId: "1:299275891543:web:6224af1407759225310412"
+};
+
 
 // Firebase 인스턴스 초기화
 const app = initializeApp(firebaseConfig);

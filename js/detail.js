@@ -5,22 +5,32 @@ import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.4/f
 import { getDocs } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 import { query, where } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js"; // 필요한 모듈 가져오기
 
-  // Your web app's Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyAr-pkDJkrblenxK5GSlWssdFrSEhvLdrU",
-    authDomain: "sparta-90385.firebaseapp.com",
-    projectId: "sparta-90385",
-    storageBucket: "sparta-90385.appspot.com",
-    messagingSenderId: "299275891543",
-    appId: "1:299275891543:web:6224af1407759225310412"
-  };
+// Firebase 구성 정보 설정
+// const firebaseConfig = { // 해인
+//   apiKey: "AIzaSyAcTX_5mbzFJeUantOQ4xZXah_aJtW96EQ",
+//   authDomain: "prac-0717.firebaseapp.com",
+//   projectId: "prac-0717",
+//   storageBucket: "prac-0717.appspot.com",
+//   messagingSenderId: "299955746969",
+//   appId: "1:299955746969:web:b6cbca8f52d9469732e008"
+// };
+const firebaseConfig = { // 홍승우
+  apiKey: "AIzaSyAr-pkDJkrblenxK5GSlWssdFrSEhvLdrU",
+  authDomain: "sparta-90385.firebaseapp.com",
+  projectId: "sparta-90385",
+  storageBucket: "sparta-90385.appspot.com",
+  messagingSenderId: "299275891543",
+  appId: "1:299275891543:web:6224af1407759225310412"
+};
+
 // Firebase 인스턴스 초기화
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // movie id 받기
-const receivedData = location.href.split('?')[1];
-console.log('current ID :', receivedData);
+export const MOVIE_ID = location.href.split('?')[1];
+
+
 
 // 폰트
 (function (d) {
@@ -56,6 +66,7 @@ const getReview = (data) => {
   card.dataset.score = data.score;
   card.dataset.review = data.review;
   card.dataset.id = data.movie;
+
   return card;
 }
 
@@ -71,7 +82,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       const docsSnapshot = await getDocs(query(
         collection(db, "review"), // review 컬렉션 지정
-        where("movie", "==", receivedData) // movie 필드와 일치하는 값으로 필터링
+        where("movie", "==", MOVIE_ID) // movie 필드와 일치하는 값으로 필터링
       ));
       
     let cardsContainer = document.createElement('ul');
@@ -208,16 +219,16 @@ if (localStorage.getItem('recent_movies')) {
   let recentMovieList = GetIds('recent_movies');
 
 
-  if (!receivedData) {
-    console.log('Improper ID :', receivedData);
+  if (!MOVIE_ID) {
+    console.log('Improper ID :', MOVIE_ID);
   }
-  else if (!recentMovieList.includes(receivedData)) {
-    recentMovieList.unshift(receivedData);
+  else if (!recentMovieList.includes(MOVIE_ID)) {
+    recentMovieList.unshift(MOVIE_ID);
     localStorage.setItem('recent_movies', JSON.stringify(recentMovieList));
   } else { // 이미 본 영화도 최신 순위로 올림
-    const idx = recentMovieList.indexOf(receivedData);
+    const idx = recentMovieList.indexOf(MOVIE_ID);
     recentMovieList.splice(idx, 1);
-    recentMovieList.unshift(receivedData);
+    recentMovieList.unshift(MOVIE_ID);
     SaveId(recentMovieList);
   }
 
@@ -229,9 +240,9 @@ if (localStorage.getItem('recent_movies')) {
 
 
 } else {
-  if (receivedData) {
-    console.log('Save new local storage :', [receivedData]);
-    SaveId([receivedData]);
+  if (MOVIE_ID) {
+    console.log('Save new local storage :', [MOVIE_ID]);
+    SaveId([MOVIE_ID]);
   }
   //로컬 스토리지에 reviews가 없을 경우 새로운 배열 저장
   
@@ -291,7 +302,7 @@ let options = {
 
 function getMovieData() {
   try {
-    fetch(`https://api.themoviedb.org/3/movie/${receivedData}?language=ko-KR`, options)
+    fetch(`https://api.themoviedb.org/3/movie/${MOVIE_ID}?language=ko-KR`, options)
       .then(response => response.json())
       .then(data => {
         const movieDetail = document.getElementById('movie_poster');
@@ -471,7 +482,7 @@ const resizeCards = async () => {
 
     const docsSnapshot = await getDocs(query(
       collection(db, "review"), // review 컬렉션 지정
-      where("movie", "==", receivedData) // movie 필드와 일치하는 값으로 필터링
+      where("movie", "==", MOVIE_ID) // movie 필드와 일치하는 값으로 필터링
     ));
 
 
@@ -611,14 +622,8 @@ const resizeCards = async () => {
     });
     // swipe 추가 - 해인 END =======================
 
-
-
-
-
     // 카드가 모두 추가된 후 이벤트 리스너 추가
     addCardClickEvent();
-
-
 
   } catch (e) {
     console.error(e);
@@ -648,13 +653,17 @@ window.addEventListener("resize", async () => {
       <div class="slide_next_button slide_button">▶</div>
       <ul class="slide_pagination">`;
     console.log('innerHTML :', reviewContainer.innerHTML);
-
-
-
-
   })
 
   resizeCards();
+
+
+
+
+const getCurrentTime = () => {
+  const now = new Date();
+  return `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}${String(now.getSeconds()).padStart(2, '0')}`;
+};
 
   // const paginationItems = document.querySelectorAll(".slide_pagination > li");
   // // 각 페이지네이션 클릭 시 해당 슬라이드로 이동하기
