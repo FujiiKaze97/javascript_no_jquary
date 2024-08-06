@@ -28,7 +28,7 @@ const getRecentPoster = (data) => {
   return card;
 }
 
-const recentContainer = document.getElementsByClassName('container')[0];
+const recentContainer = document.getElementsByClassName('recent_movie_container')[0];
 const showRecentMovies = (ids) => {
   // 영화 데이터 로드
   let options = {
