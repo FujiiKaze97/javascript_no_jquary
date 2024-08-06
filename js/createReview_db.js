@@ -7,6 +7,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/fireba
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 import { getDocs } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+import { query, where } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js"; // 필요한 모듈 가져오기
+import { MOVIE_ID } from './detail.js';
 
 
 // Firebase 구성 정보 설정
@@ -26,6 +28,7 @@ const firebaseConfig = { // 홍승우
   messagingSenderId: "299275891543",
   appId: "1:299275891543:web:6224af1407759225310412"
 };
+
 
 // Firebase 인스턴스 초기화
 const app = initializeApp(firebaseConfig);
@@ -63,31 +66,31 @@ createBtn.addEventListener('click', async function () {
     }
     else if (!validateInput(nameInput) || !validateInput(pwInput)) {
       alert('닉네임이나 비밀번호 형식이 올바르지 않습니다.');
-    }else{
-    // 닉네임과 pw 입력이 올바른 경우
+    } else {
+      // 닉네임과 pw 입력이 올바른 경우
 
       //등록 버튼 클릭시 컨펌 알림
       const result = confirm('등록하시겠습니까?');
-    
-    
+
+
       const name = document.getElementById('name');
       const pw = document.getElementById('pw');
       const review = document.getElementById('review_text');
       const score = document.getElementById('select_star');
-    
+
       // console.log(name.value, pw.value);
       // console.log('score :', score.value)
       // console.log('review :', review.value);
-    
+
       if (result) {
         //컨펌 확인 버튼 입력시 처리
         // saveReview(reviewInfo);
-    
+
         // 저장 시각 저장
-    
+
         console.log("저장이되나요?");
         const reviewInfo = { name: name.value, pw: pw.value, score: score.value, review: review.value, movie: location.href.split('?')[1] };
-    
+
         await addDoc(collection(db, "review"), reviewInfo);
         // 저장 후 페이지 새로고침
         location.reload();
@@ -95,11 +98,11 @@ createBtn.addEventListener('click', async function () {
       // confirm 창에서 취소를 누르면 위에 주석처리한 부분 log가 또 뜨네요?
     }
 
-    
-  } catch(e) {
+
+  } catch (e) {
     console.log(e);
   }
-  
+
 })
 
 
@@ -108,16 +111,59 @@ createBtn.addEventListener('click', async function () {
 const cancelBtn = document.getElementById('cancel_review_btn');
 cancelBtn.addEventListener('click', () => {
   CancelReview();
-  
 })
 
 
-// 'X' 버튼을 누르면 모달창이 안보이도록 함.
+// 'X' 버튼 Click Event
 const closeBtn = document.getElementById('review_close_btn');
 closeBtn.addEventListener('click', () => {
   const modal = document.getElementsByClassName('modal_review')[0];
   modal.style.display = 'none';
 })
+
+
+// '댓글 등록' 버튼 Click Event
+const commentBtn = document.getElementById('comment_btn');
+commentBtn.addEventListener('click', () => {
+  try {
+    console.log();
+    const commentInfo = { comment: document.getElementById('comment').value, id: MOVIE_ID , date : getCurrentTime()};
+    addDoc(collection(db, "comment"), commentInfo);
+    console.log("getData");
+    console.log(getComment());
+   
+  } 
+  catch (e) {
+    console.log(e);
+  }
+})
+
+
+async function getComment() {
+  try {
+    const docsSnapshot = await getDocs(query(
+      collection(db, "comment"),
+      where("id", "==", MOVIE_ID)
+    ));
+
+    docsSnapshot.forEach((doc) => {
+      console.log(doc.id, "=>", doc.data());
+    });
+  } catch (error) {
+    console.error("Error fetching documents: ", error);
+  }
+}
+
+
+function setComment(comments) {
+
+}
+
+
+const getCurrentTime = () => {
+  const now = new Date();
+  return `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}${String(now.getSeconds()).padStart(2, '0')}`;
+};
 
 const CancelReview = () => {
   console.log("'cancel review button' clicked");
@@ -168,12 +214,6 @@ const CancelReview = () => {
 //   console.log("어디까지온거임5555");
 // }
 
-
-
-
-
-
-
 const ClearModal = (name, pw, review, score) => {
   // reset : 기존 모달창에 있던 내용 초기화
   name.value = '';
@@ -181,12 +221,6 @@ const ClearModal = (name, pw, review, score) => {
   review.value = '';
   score.value = '⭐⭐⭐⭐⭐';
 }
-
-
-
-
-
-
 
 // 실시간 리뷰 글자수 확인
 const review = document.getElementById('review_text');
