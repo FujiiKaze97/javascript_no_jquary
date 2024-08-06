@@ -131,17 +131,20 @@ body {
 /* 카드 본문 설명 부분 */
 .movie-card-content {
   padding: 20px;
-  text-align: center;
+  text-align: left;
+
 }
 
 .movie_card h3 {
+  font-family: Pretendard;
   font-size: 20px;
   margin-bottom: 10px;
-  color: #444;
+  color: #000000;
   font-weight: bold;
 }
 
 .movie_card p {
+  font-family: Pretendard;
   font-size: 14px;
   color: #666;
   margin-bottom: 10px;
@@ -151,10 +154,22 @@ body {
   white-space: nowrap;
 }
 
+.movie_card_rating {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.movie_card_rating img {
+  width: 20px;
+  height: 20px;  
+}
 .movie_card span {
-  font-size: 14px;
+  font-family: Pretendard;
+  font-size: 20px;
   color: #555;
   font-weight: bold;
+  display: flex;
+  flex-direction: row;
 }
 
 /* 페이지네이션 스타일 */
@@ -230,6 +245,7 @@ h2 {
   flex-shrink: 0;
 
   background-color: rgba(255, 255, 255, 0.7);
+  padding-left: 25px;
 
   /* animation: openClose 0.8s ease-in-out; */
 }
@@ -337,6 +353,7 @@ h2 {
 
   animation: upDown 1s ease-in-out infinite;
   cursor: pointer;
+  box-shadow: -1px -1px 8px rgba(255, 255, 255, 0.5);
 }
 
 /* 최근 버튼 상하 움직임 */

@@ -10,15 +10,22 @@ import { getDocs } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-fir
 
 
 // Firebase 구성 정보 설정
-const firebaseConfig = {
-  apiKey: "AIzaSyAcTX_5mbzFJeUantOQ4xZXah_aJtW96EQ",
-  authDomain: "prac-0717.firebaseapp.com",
-  projectId: "prac-0717",
-  storageBucket: "prac-0717.appspot.com",
-  messagingSenderId: "299955746969",
-  appId: "1:299955746969:web:b6cbca8f52d9469732e008"
+// const firebaseConfig = { // 해인
+//   apiKey: "AIzaSyAcTX_5mbzFJeUantOQ4xZXah_aJtW96EQ",
+//   authDomain: "prac-0717.firebaseapp.com",
+//   projectId: "prac-0717",
+//   storageBucket: "prac-0717.appspot.com",
+//   messagingSenderId: "299955746969",
+//   appId: "1:299955746969:web:b6cbca8f52d9469732e008"
+// };
+const firebaseConfig = { // 홍승우
+  apiKey: "AIzaSyAr-pkDJkrblenxK5GSlWssdFrSEhvLdrU",
+  authDomain: "sparta-90385.firebaseapp.com",
+  projectId: "sparta-90385",
+  storageBucket: "sparta-90385.appspot.com",
+  messagingSenderId: "299275891543",
+  appId: "1:299275891543:web:6224af1407759225310412"
 };
-
 
 // Firebase 인스턴스 초기화
 const app = initializeApp(firebaseConfig);
@@ -47,33 +54,48 @@ const createBtn = document.getElementById('create_review_btn');
 createBtn.addEventListener('click', async function () {
   try {
     console.log("'create review button' clicked");
-    //등록 버튼 클릭시 컨펌 알림
-    const result = confirm('등록하시겠습니까?');
-  
-  
-    const name = document.getElementById('name');
-    const pw = document.getElementById('pw');
-    const review = document.getElementById('review_text');
-    const score = document.getElementById('select_star');
-  
-    // console.log(name.value, pw.value);
-    // console.log('score :', score.value)
-    // console.log('review :', review.value);
-  
-    if (result) {
-      //컨펌 확인 버튼 입력시 처리
-      // saveReview(reviewInfo);
-  
-      // 저장 시각 저장
-  
-      console.log("저장이되나요?");
-      const reviewInfo = { name: name.value, pw: pw.value, score: score.value, review: review.value, movie: location.href.split('?')[1] };
-  
-      await addDoc(collection(db, "review"), reviewInfo);
-      // 저장 후 페이지 새로고침
-      location.reload();
+    const nameInput = document.getElementById('name');
+    const pwInput = document.getElementById('pw');
+
+    // 닉네임이나 pw 입력이 잘못된 경우
+    if (nameInput.value.length === 0 || pwInput.value.length === 0) {
+      alert('닉네임이나 비밀번호가 입력되지 않았습니다.')
     }
-    // confirm 창에서 취소를 누르면 위에 주석처리한 부분 log가 또 뜨네요?
+    else if (!validateInput(nameInput) || !validateInput(pwInput)) {
+      alert('닉네임이나 비밀번호 형식이 올바르지 않습니다.');
+    }else{
+    // 닉네임과 pw 입력이 올바른 경우
+
+      //등록 버튼 클릭시 컨펌 알림
+      const result = confirm('등록하시겠습니까?');
+    
+    
+      const name = document.getElementById('name');
+      const pw = document.getElementById('pw');
+      const review = document.getElementById('review_text');
+      const score = document.getElementById('select_star');
+    
+      // console.log(name.value, pw.value);
+      // console.log('score :', score.value)
+      // console.log('review :', review.value);
+    
+      if (result) {
+        //컨펌 확인 버튼 입력시 처리
+        // saveReview(reviewInfo);
+    
+        // 저장 시각 저장
+    
+        console.log("저장이되나요?");
+        const reviewInfo = { name: name.value, pw: pw.value, score: score.value, review: review.value, movie: location.href.split('?')[1] };
+    
+        await addDoc(collection(db, "review"), reviewInfo);
+        // 저장 후 페이지 새로고침
+        location.reload();
+      }
+      // confirm 창에서 취소를 누르면 위에 주석처리한 부분 log가 또 뜨네요?
+    }
+
+    
   } catch(e) {
     console.log(e);
   }
@@ -93,8 +115,8 @@ cancelBtn.addEventListener('click', () => {
 // 'X' 버튼을 누르면 모달창이 안보이도록 함.
 const closeBtn = document.getElementById('review_close_btn');
 closeBtn.addEventListener('click', () => {
-  console.log("자꾸 이상한 창으로 넘어가요...");
-  // CancelReview();
+  const modal = document.getElementsByClassName('modal_review')[0];
+  modal.style.display = 'none';
 })
 
 const CancelReview = () => {
@@ -195,15 +217,15 @@ const nameInput = document.getElementById('name');
 const pwInput = document.getElementById('pw');
 nameInput.addEventListener('keyup', (event) => {
   // console.log(event.target.getAttribute('id'))
-  showDespription(event, nameInput)
+  showDespription(nameInput)
 })
 pwInput.addEventListener('keyup', (event) => {
-  showDespription(event, pwInput)
+  showDespription(pwInput)
 })
 
 
 // 유효성 검사 함수
-const validateInput = (event, input) => {
+const validateInput = (input) => {
   let text = input.value;
 
   // 길이 확인
@@ -223,11 +245,11 @@ const validateInput = (event, input) => {
   const hasSpecialChar = /[!@#$%^&_]/.test(text);
 
   // 포함된 종류의 수 계산
-  if (event.target.getAttribute('id') === 'pw') {
+  if (input.getAttribute('id') === 'pw') {
     const typesCount = [hasUpperCase, hasLowerCase, hasDigit, hasSpecialChar].filter(Boolean).length;
     // 최소 두 종류 이상 사용 여부 확인
     return typesCount >= 2;
-  } else if (event.target.getAttribute('id') === 'name') {
+  } else if (input.getAttribute('id') === 'name') {
     if (hasSpecialChar) { // 특수기호 제외
       return false;
     }
@@ -237,17 +259,17 @@ const validateInput = (event, input) => {
   }
 }
 // 유효성 검사에 따라 display 바꿔주는 함수
-const showDespription = (event, input) => {
+const showDespription = (input) => {
   let parent = input.parentElement; // input_box
   let description = parent.nextElementSibling; // input_description
 
   if (input.value.length === 0) {
     console.log('length 0')
     description.style.display = 'none';
-  } else if (input.value.length > 0 && validateInput(event, input)) {
+  } else if (input.value.length > 0 && validateInput(input)) {
     console.log('okay');
     description.style.display = 'none';
-  } else if (!validateInput(event, input)) { // input이 잘못 입력된 경우
+  } else if (!validateInput(input)) { // input이 잘못 입력된 경우
     console.log('false')
     description.style.display = 'block';
   } else {

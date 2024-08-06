@@ -41,7 +41,7 @@
     <div class="movie_img" id="movie_poster">
     </div>
 
-    <div class="movie_overview" id="movie_overview">
+    <div class="movie_overview_container" id="movie_overview">
 
     </div>
   </main>
@@ -123,7 +123,7 @@
       <div class="modal_header">
         <div id="review_id">test</div>
         <div class="modal_star" id="review_star">⭐</div>
-        <button class="close_btn" id="review_close_btn">X</button>
+        <button type="button" class="close_btn" id="review_close_btn">X</button>
       </div>
       <hr class="modal_line">
       <div class="modal_body_card" id="review_content">
@@ -144,7 +144,7 @@
       </div>
       <div class="modal_comment">
         <input type="text" class="comment_input" placeholder="댓글을 작성해보세요">
-        <button class="comment_button" type="button">댓글 등록</button>
+        <button type="button" class="comment_button" id="comment_btn">댓글 등록</button>
       </div>
     </form>
   </div>
@@ -175,11 +175,11 @@
   </div>
 
   <!-- 최근 클릭한 영화 시작 by 해인-->
-  <div class="recent_movies_container">
+  <div class="recent_movies_container_outer">
     <div class="close_recent_movies_btn_container">
       <button id="close_recent_movies_btn">&#215
     </div>
-    <div class="container">
+    <div class="recent_movie_container">
       <!-- 포스터가 들어갈 곳 -->
       <!-- <div class="recent_movie_card">
           <img src="https://image.tmdb.org/t/p/w500//wIrhEUBWjRmZuL1Ix41cF2LhJrW.jpg">
