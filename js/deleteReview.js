@@ -67,6 +67,7 @@ console.log(reviewData);
 // 리뷰 수정버튼 클릭시 수정 모달창 생성
 document.getElementById('review_modify_btn').addEventListener('click', function () {
   
+  //모달창에 띄워진 정보와 겹치는 데이터 가져오기
   const thisData = reviewData.find((review) =>
     review.name === document.getElementById('review_id').innerText &&
     review.content === document.getElementById('review_content').innerText &&
@@ -130,7 +131,12 @@ document.getElementById('cancel_fix_btn').addEventListener('click', function () 
 document.getElementById('review_delete_btn').addEventListener('click', function (){
   
   // 해당 페이지 영화 정보 가져올 필요 있음
-  let thisData = reviewData[0]
+  //모달창에 띄워진 정보와 겹치는 데이터 가져오기
+  const thisData = reviewData.find((review) =>
+    review.name === document.getElementById('review_id').innerText &&
+    review.content === document.getElementById('review_content').innerText &&
+    review.score.toString() === document.getElementById('review_star').innerText)
+
   let getPw = prompt('비밀번호를 입력하세요')
 
   if(getPw === thisData.pw){
@@ -149,3 +155,11 @@ const deleteData = async (id)=>{
   alert('리뷰가 삭제되었습니다.')
   location.reload();
 }
+
+// 실시간 리뷰 글자수 확인
+const review = document.getElementById('fix_text');
+const lengthPosition = document.getElementById('fix_length');
+review.addEventListener('keyup', (e) => {
+  let reviewLength = review.value.length;
+  lengthPosition.innerText = reviewLength;
+})
