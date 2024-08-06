@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // let nextBtn = document.querySelector(".slide_next_button");
     // 슬라이드 전체를 선택해 값을 변경해주기 위해 슬라이드 전체 선택하기
     let slideItems = document.querySelectorAll(".slide_items");
-    console.log('slide items :', slideItems)
+    console.log('slide items :', slideItems);
     // console.log('slide items ', slideItems.length);
     // 현재 슬라이드 위치가 슬라이드 개수를 넘기지 않게 하기 위한 변수
     let maxSlide = slideItems.length;
@@ -228,7 +228,7 @@ if (localStorage.getItem('recent_movies')) {
     SaveId(newMovieList);
   }
 
-  
+
 } else {
   if (receivedData) {
     console.log('Save new local storage :', [receivedData]);

@@ -38,9 +38,9 @@ const showRecentMovies = (ids) => {
       Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNDAyZWEyNWM2M2ZjN2RlYzg5N2FmOTlkMDJlNzU4MCIsIm5iZiI6MTcyMjg1NzY3OS4xODE0OTMsInN1YiI6IjVmN2ViNGEzYjdhYmI1MDAzODZjNGIwNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.KjkZs4T3Os7iQyt71mQRxP26d_hUw7ntES4POn6Lgco'
     }
   };
-  console.log('ids :', ids);
+  // console.log('ids :', ids);
   ids.forEach(async (id) => {
-    console.log('recent movie id:', id);
+    // console.log('recent movie id:', id);
     const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=ko-KR`, options);
     const data = await response.json();
 
