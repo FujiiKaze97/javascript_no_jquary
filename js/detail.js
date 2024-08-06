@@ -21,6 +21,7 @@ const db = getFirestore(app);
 
 // movie id 받기
 const receivedData = location.href.split('?')[1];
+console.log('current ID :', receivedData);
 
 // 폰트
 (function (d) {
@@ -59,8 +60,10 @@ const getReview = (data) => {
   return card;
 }
 
+
 document.addEventListener('DOMContentLoaded', async () => {
   try {
+    getMovieData();
     const reviewContainer = document.getElementsByClassName('slide')[0];
     reviewContainer.innerHTML = `
       <div class="slide_prev_button slide_button">:뒤쪽_화살표:</div>
@@ -269,7 +272,7 @@ const getOverview = (data) => {
 }
 
 // 영화 데이터 로드
-const options = {
+let options = {
   method: 'GET',
   headers: {
     accept: 'application/json',
@@ -318,28 +321,28 @@ const GetData = (key) => {
 
 
 // 포스터 함수
-// const getRecentPoster = (data) => {
-//   const card = document.createElement('div');
-//   card.className = 'recent_movie_card';
-//   card.innerHTML = `
-//     <img src="https://image.tmdb.org/t/p/w500/${data.poster_path}">
-//   `;
-//   card.addEventListener('click', () => window.location.href = `movieDetail.html?${data.id}`);
-//   return card;
-// }
+const getRecentPoster = (data) => {
+  const card = document.createElement('div');
+  card.className = 'recent_movie_card';
+  card.innerHTML = `
+    <img src="https://image.tmdb.org/t/p/w500/${data.poster_path}">
+  `;
+  card.addEventListener('click', () => window.location.href = `movieDetail.html?${data.id}`);
+  return card;
+}
 
-// const recentContainer = document.getElementsByClassName('close_recent_movies_btn_container')[0]
-//   .nextElementSibling; // recentMovie.js와 다른 부분 (container라는 다른 요소 존재해서 수정)
-// const showRecentMovies = (ids) => {
-//   ids.forEach(async (id) => {
-//     const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=ko-KR`, options);
-//     const data = await response.json();
-//     const card = getRecentPoster(data);
-//     recentContainer.appendChild(card);
-//   })
-// }
+const recentContainer = document.getElementsByClassName('close_recent_movies_btn_container')[0]
+  .nextElementSibling; // recentMovie.js와 다른 부분 (container라는 다른 요소 존재해서 수정)
+const showRecentMovies = (ids) => {
+  ids.forEach(async (id) => {
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=ko-KR`, options);
+    const data = await response.json();
+    const card = getRecentPoster(data);
+    recentContainer.appendChild(card);
+  })
+}
 
-// showRecentMovies(GetData('recent_movies'));
+showRecentMovies(GetData('recent_movies'));
 
 
 
