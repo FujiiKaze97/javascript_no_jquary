@@ -2,6 +2,7 @@
 * {
   box-sizing: border-box;
   font-family: Arial, sans-serif;
+  transition: background-color 0.3s, color 0.3s; /*테마 변경 transition*/
 }
 
 /* body,
@@ -28,7 +29,7 @@ body {
   text-align: center;
   top: 0;
   position: fixed;
-  z-index: 2; /*100은 너무 커서 2로 수정 : 해인*/
+  z-index: 1; /*100은 너무 커서 1로 수정 : 해인*/
   background-color: #f4f4f9;
 }
 
@@ -81,7 +82,6 @@ body {
   background-color: #afafaf;
   position: relative;
   top: 125px;
-  z-index: 1; /* z-index 값이 header태그보다 높아지면 header태그를 관통하며 지나감 */
   border-radius: 3px;
   margin-bottom: 10px;
   background-image: linear-gradient(

@@ -8,13 +8,24 @@
   <link rel="stylesheet" href="./css/reset.css">
   <link rel="stylesheet" href="./css/movieDetail.css">
   <link rel="stylesheet" href="./css/createReview.css">
-  
+  <link rel="stylesheet" href="./css/themeToggle.css">
 </head>
 
 <body>
   <header>
     <div class="movie_title" id="movie_title">
     </div>
+
+    <button id="home_btn"><a href="./index.html">메인화면으로</a></button>
+
+    <label class="toggle-class"> <!--다크모드 토글-->
+      <input id="theme-toggle" type="checkbox">
+      <label for="theme-toggle" class="toggle-label">
+        <i></i>
+        <i></i>
+      </label>
+    </label>
+
   </header>
 
   <main class="movie_detail">
@@ -29,7 +40,7 @@
   <div class="reviews">
     <div class="review_header">
       <h4 class="review_title">네티즌 리뷰</h4>
-      <button class ="write_review_btn" id="write_review_btn">리뷰쓰기</button>
+      <button class="write_review_btn" id="write_review_btn">리뷰쓰기</button>
       <button id="review_modify_btn">수정테스트</button><br> <!--수정버튼 테스트용-->
       <button id="review_delete_btn">삭제테스트</button> <!--삭제버튼 테스트용-->
 
@@ -44,9 +55,9 @@
   </div>
 
   <footer>
-    <p class = "camp">2024 내일배움캠프</p>
-    <p class = "react">React_6기</p>
-    <p class = "team">13조_튜탕사(튜터님 탕후루 사주세요)</p>
+    <p class="camp">2024 내일배움캠프</p>
+    <p class="react">React_6기</p>
+    <p class="team">13조_튜탕사(튜터님 탕후루 사주세요)</p>
   </footer>
 
 
@@ -70,7 +81,7 @@
         </div>
       </div>
       <div class="modal_footer">
-        
+
         <div class="name_pw">
           <div class="container">
             <div class="input_box">
@@ -87,10 +98,10 @@
             <p class="input_description">영문 대소문자, 숫자, !@#$%^&_ 중 <br> 2개 이상 사용한 4-12글자</p>
           </div>
         </div>
-        <div class ="button_area">
-        <button class ="cancel_button" id="cancel_review_btn" type="button">취소</button>
-        <button class ="register_button" id="create_review_btn"  type="button">등록</button>
-      </div>
+        <div class="button_area">
+          <button class="cancel_button" id="cancel_review_btn" type="button">취소</button>
+          <button class="register_button" id="create_review_btn" type="button">등록</button>
+        </div>
       </div>
     </form>
   </div>
@@ -109,7 +120,8 @@
         </select>
       </div>
       <div class="modal_body">
-        <p><textarea style="width: 100%; height: 100%; resize: none; overflow: scroll;" id="fix_text" placeholder="리뷰를 작성해주세요"></textarea></p>
+        <p><textarea style="width: 100%; height: 100%; resize: none; overflow: scroll;" id="fix_text"
+            placeholder="리뷰를 작성해주세요"></textarea></p>
       </div>
       <div class="modal_footer">
         <button id="cancel_fix_btn" type="button">수정취소</button>
@@ -120,26 +132,27 @@
     </form>
   </div>
 
-    <!-- 최근 클릭한 영화 시작 by 해인-->
-    <div class="recent_movies_container">
-      <div class="close_recent_movies_btn_container">
-        <button id="close_recent_movies_btn">&#215
-      </div>
-      <div class="container">
-        <!-- 포스터가 들어갈 곳 -->
-        <!-- <div class="recent_movie_card">
+  <!-- 최근 클릭한 영화 시작 by 해인-->
+  <div class="recent_movies_container">
+    <div class="close_recent_movies_btn_container">
+      <button id="close_recent_movies_btn">&#215
+    </div>
+    <div class="container">
+      <!-- 포스터가 들어갈 곳 -->
+      <!-- <div class="recent_movie_card">
           <img src="https://image.tmdb.org/t/p/w500//wIrhEUBWjRmZuL1Ix41cF2LhJrW.jpg">
         </div> -->
-      </div>
     </div>
-  
-    <button id="recent_movies_btn">최근</button>
-    <!-- 최근 클릭한 영화 끝 -->
+  </div>
+
+  <button id="recent_movies_btn">최근</button>
+  <!-- 최근 클릭한 영화 끝 -->
 
 
   <script type="module" src="./js/detail.js"></script>
   <script type="module" src="./js/createReview_db.js"></script>
   <script type="module" src="./js/deletReview.js"></script>
+  <script src="./js/darkMode.js"></script>
   <!-- <script type="module" src="./js/recentMovie.js"></script> -->
 </body>
 
