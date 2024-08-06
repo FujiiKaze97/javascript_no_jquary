@@ -21,6 +21,7 @@ const db = getFirestore(app);
 
 // movie id 받기
 const receivedData = location.href.split('?')[1];
+console.log('current ID :', receivedData);
 
 // 폰트
 (function (d) {
@@ -59,8 +60,10 @@ const getReview = (data) => {
   return card;
 }
 
+
 document.addEventListener('DOMContentLoaded', async () => {
   try {
+    getMovieData();
     const reviewContainer = document.getElementsByClassName('slide')[0];
     reviewContainer.innerHTML = `
       <div class="slide_prev_button slide_button">:뒤쪽_화살표:</div>
@@ -113,7 +116,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // let nextBtn = document.querySelector(".slide_next_button");
     // 슬라이드 전체를 선택해 값을 변경해주기 위해 슬라이드 전체 선택하기
     let slideItems = document.querySelectorAll(".slide_items");
-    console.log('slide items :', slideItems)
+    console.log('slide items :', slideItems);
     // console.log('slide items ', slideItems.length);
     // 현재 슬라이드 위치가 슬라이드 개수를 넘기지 않게 하기 위한 변수
     let maxSlide = slideItems.length;
@@ -200,11 +203,16 @@ const GetIds = (key) => {
   let localData = JSON.parse(localStorage.getItem(key))
   return localData;
 }
+
 if (localStorage.getItem('recent_movies')) {
-  //로컬 스토리지에 recent_movies 가 있을경우 내용 추가
+  //로컬 스토리지에 recent_movies 가 있을 경우 내용 추가
   let recentMovieList = GetIds('recent_movies');
 
-  if (!recentMovieList.includes(receivedData)) {
+
+  if (!receivedData) {
+    console.log('Improper ID :', receivedData);
+  }
+  else if (!recentMovieList.includes(receivedData)) {
     recentMovieList.unshift(receivedData);
     localStorage.setItem('recent_movies', JSON.stringify(recentMovieList));
   } else { // 이미 본 영화도 최신 순위로 올림
@@ -220,9 +228,14 @@ if (localStorage.getItem('recent_movies')) {
     SaveId(newMovieList);
   }
 
+
 } else {
+  if (receivedData) {
+    console.log('Save new local storage :', [receivedData]);
+    SaveId([receivedData]);
+  }
   //로컬 스토리지에 reviews가 없을 경우 새로운 배열 저장
-  SaveId([receivedData]);
+  
 }
 // 클릭 시 받은 id값 local storage에 저장 - by 해인 end ==========
 
@@ -269,7 +282,7 @@ const getOverview = (data) => {
 }
 
 // 영화 데이터 로드
-const options = {
+let options = {
   method: 'GET',
   headers: {
     accept: 'application/json',
@@ -318,28 +331,28 @@ const GetData = (key) => {
 
 
 // 포스터 함수
-// const getRecentPoster = (data) => {
-//   const card = document.createElement('div');
-//   card.className = 'recent_movie_card';
-//   card.innerHTML = `
-//     <img src="https://image.tmdb.org/t/p/w500/${data.poster_path}">
-//   `;
-//   card.addEventListener('click', () => window.location.href = `movieDetail.html?${data.id}`);
-//   return card;
-// }
+const getRecentPoster = (data) => {
+  const card = document.createElement('div');
+  card.className = 'recent_movie_card';
+  card.innerHTML = `
+    <img src="https://image.tmdb.org/t/p/w500/${data.poster_path}">
+  `;
+  card.addEventListener('click', () => window.location.href = `movieDetail.html?${data.id}`);
+  return card;
+}
 
-// const recentContainer = document.getElementsByClassName('close_recent_movies_btn_container')[0]
-//   .nextElementSibling; // recentMovie.js와 다른 부분 (container라는 다른 요소 존재해서 수정)
-// const showRecentMovies = (ids) => {
-//   ids.forEach(async (id) => {
-//     const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=ko-KR`, options);
-//     const data = await response.json();
-//     const card = getRecentPoster(data);
-//     recentContainer.appendChild(card);
-//   })
-// }
+const recentContainer = document.getElementsByClassName('close_recent_movies_btn_container')[0]
+  .nextElementSibling; // recentMovie.js와 다른 부분 (container라는 다른 요소 존재해서 수정)
+const showRecentMovies = (ids) => {
+  ids.forEach(async (id) => {
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=ko-KR`, options);
+    const data = await response.json();
+    const card = getRecentPoster(data);
+    recentContainer.appendChild(card);
+  })
+}
 
-// showRecentMovies(GetData('recent_movies'));
+showRecentMovies(GetData('recent_movies'));
 
 
 
@@ -357,7 +370,7 @@ recentMoviesBtn.addEventListener('click', () => {
   }, 800);
 })
 
-// // '최근' 버튼 누르면 최근 본 영화 보이게 하기
+// '최근'에서 X 버튼 누르면 최근 본 영화 닫기
 const closeMoviesBtn = document.getElementById('close_recent_movies_btn');
 closeMoviesBtn.addEventListener('click', () => {
 
