@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="./css/createReview.css">
   <link rel="stylesheet" href="./css/swiper.css">
   <link rel="stylesheet" href="./css/themeToggle.css">
-  <link rel="stylesheet" href="./css/modal.css">
 </head>
 
 <body>
@@ -39,10 +38,7 @@
   <div class="reviews">
     <div class="review_header">
       <h4 class="review_title">네티즌 리뷰</h4>
-      <button class="write_review_btn" id="write_review_btn">리뷰 작성</button>
-      <button id="review_modify_btn">수정테스트</button><br> <!--수정버튼 테스트용-->
-      <button id="review_delete_btn">삭제테스트</button> <!--삭제버튼 테스트용-->
-
+      <button class ="write_review_btn" id="write_review_btn">리뷰 작성</button>
     </div>
     <div class="slide slide_wrap">
       <!-- 리뷰 카드 들어갈 곳 -->
@@ -112,20 +108,18 @@
   <div class="modal_review">
     <form class="modal_window">
       <!-- 리뷰 작성자 아이디, 리뷰 내용, 별점 수 , 리뷰 삭제, 리뷰 수정 -->
-      <div class="modal_header" id="review_id">
-        test
-        <div class="modal_star" id="review_star">
-          ⭐
-        </div>
-        <button class="close_btn">X</button>
+      <div class="modal_header">
+        <div id="review_id">test</div>
+        <div class="modal_star" id="review_star">⭐</div>
+        <button class="close_btn" id="review_close_btn">X</button>
       </div>
       <hr class="modal_line">
       <div class="modal_body_card" id="review_content">
         test
       </div>
         <div class ="button_area">
-        <button class ="cancel_button" id="review_del_btn" type="button">리뷰 삭제</button>
-        <button class ="register_button" id="review_mod_btn"  type="button">리뷰 수정</button>
+        <button class ="cancel_button" id="review_delete_btn" type="button">리뷰 삭제</button>
+        <button class ="register_button" id="review_modify_btn"  type="button">리뷰 수정</button>
       </div>
       <br><br><br>
       <!-- 댓글, 댓글 사용자 , 댓글 내용--> 
@@ -137,7 +131,7 @@
         test
       </div>
       <div class="modal_comment">
-        <input type="text" class="form-control" placeholder="댓글을 작성해보세요" style="width: 80%; height: 50%;">
+        <input type="text" class="comment_input" placeholder="댓글을 작성해보세요">
         <button class ="comment_button" type="button">댓글 등록</button>
       </div>
     </form>
@@ -184,34 +178,11 @@
   <button id="recent_movies_btn">최근</button>
   <!-- 최근 클릭한 영화 끝 -->
 
-
-  <!-- 모달 팝업 추기 by hongseungwoo -->
-  <!-- 수정 진행 중인 사항이여요.. -->
-  <!-- <div class="modal">
-    <div class="modal_popup">
-      <button type="button" class="close_btn">X</button>
-      <div class="review">
-        <p>리뷰 내용 : 너무 재밌어요!. 완전짱!</p>
-        <div class="reviewBtn">
-          <button type="button" id="review_modify_btn">리뷰 수정</button>
-          <button type="button" id="review_delete_btn">리뷰 삭제</button>
-        </div>
-      </div>
-
-      <div class="comments">
-        <h2>댓글</h2>
-        <div></div>
-        <input type="text" name="comment_input">
-        <button type="button" id="comment_create_btn">댓글쓰기</button>
-      </div>
-    </div>
-  </div> -->
-
   <script type="module" src="./js/detail.js"></script>
   <script type="module" src="./js/createReview_db.js"></script>
-  <script type="module" src="./js/deletReview.js"></script>
-  <script src="./js/darkMode.js"></script>
-  <!-- <script type="module" src="./js/recentMovie.js"></script> -->
+  <script type="module" src="./js/deleteReview.js"></script>
+  <script type="module" src="./js/darkMode.js"></script>
+  <script type="module" src="./js/recentMovie.js"></script>
 </body>
 
 </html>

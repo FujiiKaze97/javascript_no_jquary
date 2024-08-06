@@ -111,7 +111,6 @@
   display: flex;
   align-items: center;
   font-family: Pretendard;
-  align-items: center;
 }
 
 
@@ -282,13 +281,12 @@
   color: #FFF;
   font-family: Pretendard;
   display: flex;
-  width: 15vh;
+  width: 10vh;
   height: 5px;
-  padding: 13px;
+  padding: 11px;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  border-radius: 5px;
+  border-radius: 2px;
   border: 0px;
   background: var(--blue, #858585);
 }
