@@ -7,16 +7,26 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/fireba
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 import { getDocs } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+import { query, where } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js"; // 필요한 모듈 가져오기
+import { MOVIE_ID } from './detail.js';
 
 
 // Firebase 구성 정보 설정
-const firebaseConfig = {
-  apiKey: "AIzaSyAcTX_5mbzFJeUantOQ4xZXah_aJtW96EQ",
-  authDomain: "prac-0717.firebaseapp.com",
-  projectId: "prac-0717",
-  storageBucket: "prac-0717.appspot.com",
-  messagingSenderId: "299955746969",
-  appId: "1:299955746969:web:b6cbca8f52d9469732e008"
+// const firebaseConfig = { // 해인
+//   apiKey: "AIzaSyAcTX_5mbzFJeUantOQ4xZXah_aJtW96EQ",
+//   authDomain: "prac-0717.firebaseapp.com",
+//   projectId: "prac-0717",
+//   storageBucket: "prac-0717.appspot.com",
+//   messagingSenderId: "299955746969",
+//   appId: "1:299955746969:web:b6cbca8f52d9469732e008"
+// };
+const firebaseConfig = { // 홍승우
+  apiKey: "AIzaSyAr-pkDJkrblenxK5GSlWssdFrSEhvLdrU",
+  authDomain: "sparta-90385.firebaseapp.com",
+  projectId: "sparta-90385",
+  storageBucket: "sparta-90385.appspot.com",
+  messagingSenderId: "299275891543",
+  appId: "1:299275891543:web:6224af1407759225310412"
 };
 
 
@@ -45,42 +55,115 @@ const ShowModal = () => {
 
 const createBtn = document.getElementById('create_review_btn');
 createBtn.addEventListener('click', async function () {
-  console.log("'create review button' clicked");
-  //등록 버튼 클릭시 컨펌 알림
-  const result = confirm('등록하시겠습니까?');
+  try {
+    console.log("'create review button' clicked");
+    const nameInput = document.getElementById('name');
+    const pwInput = document.getElementById('pw');
+
+    // 닉네임이나 pw 입력이 잘못된 경우
+    if (nameInput.value.length === 0 || pwInput.value.length === 0) {
+      alert('닉네임이나 비밀번호가 입력되지 않았습니다.')
+    }
+    else if (!validateInput(nameInput) || !validateInput(pwInput)) {
+      alert('닉네임이나 비밀번호 형식이 올바르지 않습니다.');
+    } else {
+      // 닉네임과 pw 입력이 올바른 경우
+
+      //등록 버튼 클릭시 컨펌 알림
+      const result = confirm('등록하시겠습니까?');
 
 
-  const name = document.getElementById('name');
-  const pw = document.getElementById('pw');
-  const review = document.getElementById('review_text');
-  const score = document.getElementById('select_star');
+      const name = document.getElementById('name');
+      const pw = document.getElementById('pw');
+      const review = document.getElementById('review_text');
+      const score = document.getElementById('select_star');
 
-  // console.log(name.value, pw.value);
-  // console.log('score :', score.value)
-  // console.log('review :', review.value);
+      // console.log(name.value, pw.value);
+      // console.log('score :', score.value)
+      // console.log('review :', review.value);
 
-  if (result) {
-    //컨펌 확인 버튼 입력시 처리
-    // saveReview(reviewInfo);
+      if (result) {
+        //컨펌 확인 버튼 입력시 처리
+        // saveReview(reviewInfo);
 
-    // 저장 시각 저장
+        // 저장 시각 저장
+
+        console.log("저장이되나요?");
+        const reviewInfo = { name: name.value, pw: pw.value, score: score.value, review: review.value, movie: location.href.split('?')[1] };
+
+        await addDoc(collection(db, "review"), reviewInfo);
+        // 저장 후 페이지 새로고침
+        location.reload();
+      }
+      // confirm 창에서 취소를 누르면 위에 주석처리한 부분 log가 또 뜨네요?
+    }
 
 
-    const reviewInfo = { name: name.value, pw: pw.value, score: score.value, review: review.value, key: makeKey() };
-
-    await addDoc(collection(db, "review"), reviewInfo);
-    // 저장 후 페이지 새로고침
-    location.reload();
+  } catch (e) {
+    console.log(e);
   }
-  // confirm 창에서 취소를 누르면 위에 주석처리한 부분 log가 또 뜨네요?
 
 })
+
+
 
 // 취소 버튼을 누르면 모달창이 안보이도록 함.
 const cancelBtn = document.getElementById('cancel_review_btn');
 cancelBtn.addEventListener('click', () => {
   CancelReview();
 })
+
+
+// 'X' 버튼 Click Event
+const closeBtn = document.getElementById('review_close_btn');
+closeBtn.addEventListener('click', () => {
+  const modal = document.getElementsByClassName('modal_review')[0];
+  modal.style.display = 'none';
+})
+
+
+// '댓글 등록' 버튼 Click Event
+const commentBtn = document.getElementById('comment_btn');
+commentBtn.addEventListener('click', () => {
+  try {
+    console.log();
+    const commentInfo = { comment: document.getElementById('comment').value, id: MOVIE_ID , date : getCurrentTime()};
+    addDoc(collection(db, "comment"), commentInfo);
+    console.log("getData");
+    console.log(getComment());
+   
+  } 
+  catch (e) {
+    console.log(e);
+  }
+})
+
+
+async function getComment() {
+  try {
+    const docsSnapshot = await getDocs(query(
+      collection(db, "comment"),
+      where("id", "==", MOVIE_ID)
+    ));
+
+    docsSnapshot.forEach((doc) => {
+      console.log(doc.id, "=>", doc.data());
+    });
+  } catch (error) {
+    console.error("Error fetching documents: ", error);
+  }
+}
+
+
+function setComment(comments) {
+
+}
+
+
+const getCurrentTime = () => {
+  const now = new Date();
+  return `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}${String(now.getSeconds()).padStart(2, '0')}`;
+};
 
 const CancelReview = () => {
   console.log("'cancel review button' clicked");
@@ -105,6 +188,32 @@ const CancelReview = () => {
 
 
 
+// 카드 리뷰 정보 안보이도록 
+
+// closeBtn.addEventListener('click', () => {
+//   const id = document.getElementById('review_id');
+//   const score = document.getElementById('review_star');
+//   const content = document.getElementById('review_content');
+//   const comment = document.getElementById('review_comment');
+
+//   console.log("어디까지온거임1111");
+//   ClearCardContent(id, score, content, comment);
+//   console.log("어디까지온거임12222");
+//   const modal = document.getElementsByClassName('modal_review')[0];
+//   modal.style.display = 'none';
+//   console.log("어디까지온거임3333");
+// })
+
+// const ClearCardContent = (id, score, content, comment) => {
+//   // reset : 기존 모달창에 있던 내용 초기화
+//   console.log("어디까지온거4444");
+//   id.value = '';
+//   score.value = '';
+//   content.value = '';
+//   comment.value = '';
+//   console.log("어디까지온거임5555");
+// }
+
 const ClearModal = (name, pw, review, score) => {
   // reset : 기존 모달창에 있던 내용 초기화
   name.value = '';
@@ -112,7 +221,6 @@ const ClearModal = (name, pw, review, score) => {
   review.value = '';
   score.value = '⭐⭐⭐⭐⭐';
 }
-
 
 // 실시간 리뷰 글자수 확인
 const review = document.getElementById('review_text');
@@ -143,15 +251,15 @@ const nameInput = document.getElementById('name');
 const pwInput = document.getElementById('pw');
 nameInput.addEventListener('keyup', (event) => {
   // console.log(event.target.getAttribute('id'))
-  showDespription(event, nameInput)
+  showDespription(nameInput)
 })
 pwInput.addEventListener('keyup', (event) => {
-  showDespription(event, pwInput)
+  showDespription(pwInput)
 })
 
 
 // 유효성 검사 함수
-const validateInput = (event, input) => {
+const validateInput = (input) => {
   let text = input.value;
 
   // 길이 확인
@@ -171,11 +279,11 @@ const validateInput = (event, input) => {
   const hasSpecialChar = /[!@#$%^&_]/.test(text);
 
   // 포함된 종류의 수 계산
-  if (event.target.getAttribute('id') === 'pw') {
+  if (input.getAttribute('id') === 'pw') {
     const typesCount = [hasUpperCase, hasLowerCase, hasDigit, hasSpecialChar].filter(Boolean).length;
     // 최소 두 종류 이상 사용 여부 확인
     return typesCount >= 2;
-  } else if (event.target.getAttribute('id') === 'name') {
+  } else if (input.getAttribute('id') === 'name') {
     if (hasSpecialChar) { // 특수기호 제외
       return false;
     }
@@ -185,17 +293,17 @@ const validateInput = (event, input) => {
   }
 }
 // 유효성 검사에 따라 display 바꿔주는 함수
-const showDespription = (event, input) => {
+const showDespription = (input) => {
   let parent = input.parentElement; // input_box
   let description = parent.nextElementSibling; // input_description
 
   if (input.value.length === 0) {
     console.log('length 0')
     description.style.display = 'none';
-  } else if (input.value.length > 0 && validateInput(event, input)) {
+  } else if (input.value.length > 0 && validateInput(input)) {
     console.log('okay');
     description.style.display = 'none';
-  } else if (!validateInput(event, input)) { // input이 잘못 입력된 경우
+  } else if (!validateInput(input)) { // input이 잘못 입력된 경우
     console.log('false')
     description.style.display = 'block';
   } else {
@@ -204,3 +312,4 @@ const showDespription = (event, input) => {
 
   }
 }
+

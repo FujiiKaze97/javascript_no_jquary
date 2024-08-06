@@ -7,13 +7,12 @@ import { getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-fire
 
 // Firebase 구성 정보 설정
 const firebaseConfig = {
-  apiKey: "AIzaSyBuTJE1cLz2TeLSaqcjFvucA-kaRumbks4",
-  authDomain: "sparta-4c236.firebaseapp.com",
-  projectId: "sparta-4c236",
-  storageBucket: "sparta-4c236.appspot.com",
-  messagingSenderId: "363940226112",
-  appId: "1:363940226112:web:41bf8f24714cdea309eba5",
-  measurementId: "G-09YD2T4EFK"
+  apiKey: "AIzaSyAr-pkDJkrblenxK5GSlWssdFrSEhvLdrU",
+  authDomain: "sparta-90385.firebaseapp.com",
+  projectId: "sparta-90385",
+  storageBucket: "sparta-90385.appspot.com",
+  messagingSenderId: "299275891543",
+  appId: "1:299275891543:web:6224af1407759225310412"
 };
 
 
@@ -40,5 +39,6 @@ const db = getFirestore(app);
 // localStorage.setItem('comment', JSON.stringify(commentLoad));
 // })
 // localStorage 사용
+
 
 

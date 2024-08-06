@@ -10,7 +10,10 @@ const cardData = (movie) => {
     <div class="movie-card-content">
       <h3>${movie.title}</h3>
       <p>${movie.overview}</p>
-      <span>Rating: ${movie.vote_average}</span>
+      <div class ="movie_card_rating">
+      <img class = "star_main" src = "source/Star_yellow.png"></img>
+      <span>${movie.vote_average.toFixed(1)}</span>
+      </div>
     </div>
   `;
 
@@ -122,7 +125,8 @@ document.getElementById('search_button').addEventListener('click', () => {
   }
 });
 
-// Feature : MainPage Pagenation 
+// 메인화면 Pagenation - 전 세션 번호 기억하여, 해당 번호로 이동하고, 뒤로가기나 홈으로 가도
+// 해당 선택한 영화의 페이지로 바로 클라이언트가 이동할 수 있도록... 
 function setPageNum() {
   try {
     const numberButtonWrapper = document.querySelector('.number_button_wrapper');
