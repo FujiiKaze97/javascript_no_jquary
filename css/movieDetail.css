@@ -62,13 +62,15 @@ main .movie_img {
 
 .movie_overview {
   /* display: inline-block; */
+  background-color: white;
   width: 70%;
   height: 100%;
 
   margin-left: 50px;
   margin-right: auto;
-
-  color: var(--grey700, #616161);
+  padding: 40px;
+  border-radius: 25px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
   font-family: Pretendard;
   font-size: 24x;
   font-style: normal;
@@ -198,7 +200,7 @@ main .movie_img {
   background: var(--grey300, white);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
   margin: 15px;
-  padding: 10px;
+  padding: 20px 20px 20px 20px;
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
@@ -234,7 +236,7 @@ main .movie_img {
 
 .card_divider {
   background-color: #616161;
-  width: 285px;
+  width: auto;
   height: 1px;
   margin: 10px auto 10px auto;
 }
@@ -375,7 +377,7 @@ footer {
   flex-shrink: 0;
 
   background-color: rgba(255, 255, 255, 0.7);
-
+  padding-left: 25px;
   /* animation: openClose 0.8s ease-in-out; */
 }
 
@@ -389,6 +391,7 @@ footer {
   background-color: transparent;
 
   overflow-y: scroll;
+  
 }
 
 .open {
@@ -496,6 +499,9 @@ footer {
 
   animation: upDown 1s ease-in-out infinite;
   cursor: pointer;
+
+  box-shadow: -1px -1px 8px rgba(255, 255, 255, 0.5);
+
 }
 
 /* 최근 버튼 상하 움직임 */
