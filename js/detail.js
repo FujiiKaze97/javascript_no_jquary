@@ -61,10 +61,11 @@ const getReview = (data) => {
 
 document.addEventListener('DOMContentLoaded', async () => {
   try {
+    getMovieData();
     const reviewContainer = document.getElementsByClassName('slide')[0];
     reviewContainer.innerHTML = `
-      <div class="slide_prev_button slide_button">:뒤쪽_화살표:</div>
-      <div class="slide_next_button slide_button">:앞쪽_화살표:</div>
+      <div class="slide_prev_button slide_button">이전</div>
+      <div class="slide_next_button slide_button">다음</div>
       <ul class="slide_pagination">`;
 
       const docsSnapshot = await getDocs(query(
