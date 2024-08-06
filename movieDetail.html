@@ -12,17 +12,28 @@
   <link rel="stylesheet" href="./css/themeToggle.css">
 </head>
 
+<nav>
+
+  <ol>
+    <li class="page_list"><a href="./index.html">영화 검색 페이지</a></li>
+    <li class="page_list" style="font-weight: bold;">리뷰 페이지(영화 제목)</a></li>
+  </ol>
+
+  <label class="toggle-class"> <!--다크모드 토글-->
+    <input id="theme-toggle" type="checkbox">
+    <label for="theme-toggle" class="toggle-label">
+      <i></i>
+      <i></i>
+    </label>
+  </label>
+</nav>
+
 <body>
   <header>
     <div class="movie_title" id="movie_title">
     </div>
-    <label class="toggle-class"> <!--다크모드 토글-->
-      <input id="theme-toggle" type="checkbox">
-      <label for="theme-toggle" class="toggle-label">
-        <i></i>
-        <i></i>
-      </label>
-    </label>
+
+
 
   </header>
 
@@ -48,9 +59,10 @@
     </div>
   </div>
 
-  <div class="home_btn_container">
+  <!-- <div class="home_btn_container">
     <button id="home_btn" onclick="location.href='./index.html'">메인 페이지</button>
-  </div>
+  </div> -->
+  <!-- 상세 페이지 삭제한 버튼 -->
 
   <footer>
     <p class="camp">2024 내일배움캠프</p>
@@ -79,7 +91,7 @@
         </div>
       </div>
       <div class="modal_footer">
-
+        
         <div class="name_pw">
           <div class="container">
             <div class="input_box">
@@ -131,8 +143,8 @@
         test
       </div>
       <div class="modal_comment">
-        <input type="text" class="comment_input" placeholder="댓글을 작성해보세요">
-        <button type="button" class="comment_button" id="comment_btn">댓글 등록</button>
+        <input type="text" class="comment_input" id="comment" placeholder="댓글을 작성해보세요" maxlength="30">
+        <button type="button" class ="comment_button" id="comment_btn">댓글 등록</button>
       </div>
     </form>
   </div>

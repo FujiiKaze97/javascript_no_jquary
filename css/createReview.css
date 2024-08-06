@@ -182,12 +182,12 @@
   width: 100%;
   height: 65%;
   margin-top: 10px;
-}
-
-.modal_body_card p {
-  width: 100%;
-  height: 98%;
-
+  /* 창 크기를 넘기면 스크롤 가능하게 */
+  overflow: scroll;
+  overflow-x: hidden; /* 가로 스크롤 숨김 */
+  padding: 10px; /* 내용물과 경계선 사이에 여백 추가 */
+  border: 1px solid #ccc; /* 경계선 추가 */
+  box-sizing: border-box; /* 패딩과 경계선을 포함하여 크기를 계산 */
 }
 
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/themeToggle.css">
 </head>
+
 <body>
   <div class="header">
     <h1>Movie Search Page</h1>
@@ -15,7 +17,7 @@
       <input autofocus type="text" id="search_input">
       <button id="search_button">Search</button>
       <label class="toggle-class"> <!--다크모드 토글-->
-        <input id="theme-toggle" type="checkbox"> 
+        <input id="theme-toggle" type="checkbox">
         <label for="theme-toggle" class="toggle-label">
           <i></i>
           <i></i>
@@ -24,37 +26,38 @@
     </div>
   </div>
 
-  <hr class="hr-text" data-content="AND">
+  <div class="header_border"></div>
 
   <div id="movie_container" class="movie_container"></div>
 
-    <!-- 페이지네이션 버튼 추가 -->
-    <div class="pagination_container">
-      <button id="prev_page" class="pagination_button">이전</button>
-      <div class="number_button_wrapper"><span class="number_button">1</span></div>
-      <button id="next_page" class="pagination_button">다음</button>
-    </div>
+  <!-- 페이지네이션 버튼 추가 -->
+  <div class="pagination_container">
+    <button id="prev_page" class="pagination_button">이전</button>
+    <div class="number_button_wrapper"><span class="number_button">1</span></div>
+    <button id="next_page" class="pagination_button">다음</button>
+  </div>
 
 
 
   <!-- 최근 클릭한 영화 시작 by 해인-->
-  <div class="recent_movies_container">
+  <div class="recent_movies_container_outer">
     <div class="close_recent_movies_btn_container">
       <button id="close_recent_movies_btn">&#215
     </div>
     <div class="recent_movie_container">
       <!-- 포스터가 들어갈 곳 -->
       <!-- <div class="recent_movie_card">
-        <img src="https://image.tmdb.org/t/p/w500//wIrhEUBWjRmZuL1Ix41cF2LhJrW.jpg">
-      </div> -->
-      </div>
+          <img src="https://image.tmdb.org/t/p/w500//wIrhEUBWjRmZuL1Ix41cF2LhJrW.jpg">
+        </div> -->
     </div>
-  
-    <button id="recent_movies_btn">최근</button>
-    <!-- 최근 클릭한 영화 끝 -->
-     
+  </div>
+
+  <button id="recent_movies_btn">최근</button>
+  <!-- 최근 클릭한 영화 끝 -->
+
   <script src="./js/movie.js"></script>
   <script src="./js/recentMovie.js"></script>
   <script src="./js/darkMode.js"></script>
 </body>
+
 </html>

@@ -6,6 +6,30 @@ body {
   background-color: #f4f4f9;
 }
 
+nav {
+  display: flex;
+  padding: 20px;
+  border-bottom: 2px solid #b8b8b8;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+}
+
+.page_list {
+  display: inline-block;
+}
+
+.page_list a {
+  color: #000;
+}
+
+.page_list a::after {
+  display: inline-block;
+  content: ">";
+  font-weight: bold;
+  padding: 0 15px;
+}
+
 /* 헤더 header */
 header {
   width: 100%;
@@ -44,7 +68,6 @@ main {
 main .movie_img {
   height: 480px;
   /* margin-right: 30px; */
-
 
   /* display: inline-block;
   width: 350px;
@@ -170,7 +193,7 @@ main .movie_img {
 }
 
 .write_review_btn {
-  color: #FFF;
+  color: #fff;
 
   font-family: Pretendard;
   font-size: 24px;
@@ -186,7 +209,7 @@ main .movie_img {
 
   border-radius: 10px;
   border: 0px;
-  background: var(--blue, #0057FF);
+  background: var(--blue, #0057ff);
 }
 
 #write_review_btn:hover {
@@ -235,7 +258,6 @@ main .movie_img {
   gap: 10px;
 }
 
-
 .card_divider {
   background-color: #616161;
   width: auto;
@@ -244,7 +266,6 @@ main .movie_img {
 }
 
 .user_review {
-
   color: #000;
 
   font-family: Pretendard;
@@ -261,17 +282,22 @@ main .movie_img {
   display: flex;
   flex-direction: row;
   gap: 10px;
+  gap: 10px;
 }
 
 .comment_icon {
   width: 24px;
   height: 24px;
-
 }
 
 .comment_num {
   color: #000;
 
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
   font-family: Pretendard;
   font-size: 20px;
   font-style: normal;
@@ -290,7 +316,23 @@ main .movie_img {
 }
 
 .home_btn_container #home_btn {
-  color: #FFF;
+  color: #fff;
+
+  font-family: Pretendard;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  padding: 20px 30px 20px 30px;
+
+  border-radius: 20px;
+  border: 0px;
+  background: var(--blue, #0057ff);
+}
+
+#home_btn {
+  color: #fff;
 
   font-family: Pretendard;
   font-size: 30px;
@@ -306,7 +348,7 @@ main .movie_img {
 
   border-radius: 20px;
   border: 0px;
-  background: var(--blue, #0057FF);
+  background: var(--blue, #0057ff);
 }
 
 /* footer */
@@ -327,7 +369,7 @@ footer {
 }
 
 .camp {
-  color: #FFF;
+  color: #fff;
 
   font-family: Pretendard;
   font-size: 32px;
@@ -335,11 +377,10 @@ footer {
   font-weight: 600;
   line-height: normal;
   margin-bottom: 5px;
-
 }
 
 .react {
-  color: #FFF;
+  color: #fff;
 
   text-align: center;
   font-family: Pretendard;
@@ -350,16 +391,14 @@ footer {
 }
 
 .team {
-  color: #FFF;
+  color: #fff;
   font-family: Pretendard;
   font-size: 24px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  margin-top: 20px
+  margin-top: 20px;
 }
-
-
 
 /* 최근 클릭한 영화  by 해인*/
 .recent_movies_container_outer {
@@ -395,7 +434,6 @@ footer {
   background-color: transparent;
 
   overflow-y: scroll;
-  
 }
 
 .open {
@@ -467,8 +505,6 @@ footer {
 
 .recent_movie_card img {
   width: 100%;
-  ;
-
   object-fit: cover;
 
   padding: 0;
@@ -482,7 +518,7 @@ footer {
 
 .recent_movie_card:hover img {
   translate: -2px -5px;
-  border: 2px solid #0057FF;
+  border: 2px solid #0057ff;
   box-sizing: content-box;
 }
 
@@ -497,7 +533,7 @@ footer {
   height: 50px;
 
   color: white;
-  background-color: #0057FF;
+  background-color: #0057ff;
   border: 0;
   border-radius: 50px;
 
@@ -505,7 +541,6 @@ footer {
   cursor: pointer;
 
   box-shadow: -1px -1px 8px rgba(255, 255, 255, 0.5);
-
 }
 
 /* 최근 버튼 상하 움직임 */
@@ -525,8 +560,6 @@ footer {
 
 /* 최근 클릭한 영화  by 해인*/
 
-
-
 /* ========= 반응형 ========= */
 /* @media screen and (max-width: 1460px) {
 } */
@@ -542,13 +575,13 @@ footer {
     align-items: end;
     gap: 30px;
   }
-  
+
   .korean_title {
     font-family: Pretendard;
     font-size: 36px;
     font-weight: 700;
   }
-  
+
   .original_title {
     font-family: Pretendard;
     font-size: 30px;
@@ -589,7 +622,9 @@ footer {
   .movie_overview_container .movie_overview {
     height: 100%;
   }
-  .movie_overview_container .vote, .vote_average, .movie_info {
+  .movie_overview_container .vote,
+  .vote_average,
+  .movie_info {
     font-size: 20px;
   }
   .movie_overview_container .star {
@@ -617,23 +652,23 @@ footer {
   .reviews .review_header {
     margin-bottom: 0;
   }
-  
+
   .review_title {
     font-size: 24px;
   }
 
   .write_review_btn {
     font-size: 16px;
-  
+
     display: flex;
-  
+
     padding: 5px 10px 5px 10px;
     justify-content: center;
     align-items: center;
-  
+
     border-radius: 10px;
     border: 0px;
-    background: var(--blue, #0057FF);
+    background: var(--blue, #0057ff);
   }
 
   /* footer */
@@ -649,7 +684,6 @@ footer {
 
   .camp {
     font-size: 16px;
-
   }
 
   .react {
@@ -663,6 +697,27 @@ footer {
   }
 }
 @media screen and (max-width: 630px) {
+
+  nav {
+    padding: 10px;
+    font-size: 14px;
+  }
+  
+  .page_list {
+    display: inline-block;
+  }
+  
+  .page_list a {
+    color: #000;
+  }
+  
+  .page_list a::after {
+    display: inline-block;
+    content: ">";
+    font-weight: bold;
+    padding: 0 0 0 2px;
+  }
+
   /* 헤더 */
   header {
     padding: 10px;
@@ -674,11 +729,11 @@ footer {
     align-items: start;
     gap: 15px;
   }
-  
+
   .korean_title {
     font-size: 22px;
   }
-  
+
   .original_title {
     font-size: 18px;
   }
@@ -716,7 +771,9 @@ footer {
   .movie_overview_container .movie_overview {
     height: 100%;
   }
-  .movie_overview_container .vote, .vote_average, .movie_info {
+  .movie_overview_container .vote,
+  .vote_average,
+  .movie_info {
     font-size: 16px;
   }
   .movie_overview_container .star {
@@ -744,22 +801,22 @@ footer {
   .reviews .review_header {
     margin-bottom: 0;
   }
-  
+
   .review_title {
     font-size: 24px;
   }
 
   .write_review_btn {
     font-size: 16px;
-  
+
     display: flex;
-  
+
     padding: 5px 10px 5px 10px;
     justify-content: center;
     align-items: center;
-  
+
     border-radius: 10px;
     border: 0px;
-    background: var(--blue, #0057FF);
+    background: var(--blue, #0057ff);
   }
 }
