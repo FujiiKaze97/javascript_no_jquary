@@ -494,7 +494,6 @@ footer {
   margin-top: 10px;
 }
 
-
 .recent_movie_card:first-child:hover {
   margin-top: 6px;
 }
@@ -698,6 +697,27 @@ footer {
   }
 }
 @media screen and (max-width: 630px) {
+
+  nav {
+    padding: 10px;
+    font-size: 14px;
+  }
+  
+  .page_list {
+    display: inline-block;
+  }
+  
+  .page_list a {
+    color: #000;
+  }
+  
+  .page_list a::after {
+    display: inline-block;
+    content: ">";
+    font-weight: bold;
+    padding: 0 0 0 2px;
+  }
+
   /* 헤더 */
   header {
     padding: 10px;
