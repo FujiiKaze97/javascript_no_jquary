@@ -85,7 +85,7 @@
         </select>
       </div>
       <div class="modal_body">
-        <p><textarea id="review_text" maxlength="500" placeholder="리뷰를 작성해주세요"></textarea></p>
+        <p><textarea id="review_text" maxlength="500" placeholder="리뷰를 작성해주세요" style="overflow:auto"></textarea></p>
         <div class="review_length">
           <p>(<span id="current_length">0</span>/500)</p>
         </div>
@@ -123,10 +123,10 @@
       <div class="modal_header">
         <div id="review_id">test</div>
         <div class="modal_star" id="review_star">⭐</div>
-        <button type="button" class="close_btn" id="review_close_btn">X</button>
+        <button type="button" class="close_btn">X</button>
       </div>
       <hr class="modal_line">
-      <div class="modal_body_card" id="review_content">
+      <div class="modal_body_card" id="review_content" style="overflow:auto">
         test
       </div>
       <div class="button_area">
@@ -138,11 +138,9 @@
       <div class="modal_header">
         댓글
       </div>
-      <hr class="modal_line">
-        <div id="review_comment">
-          test
-          <button type="button" class="comment_delete_btn">X</button>
-        </div>
+      <div id ="comment_area" style="overflow:auto">
+      
+      </div>
       <div class="modal_comment">
         <input type="text" class="comment_input" id="comment" placeholder="댓글을 작성해보세요" maxlength="30">
         <button type="button" class ="comment_button" id="comment_btn">댓글 등록</button>
@@ -164,7 +162,7 @@
         </select>
       </div>
       <div class="modal_body">
-        <p><textarea id="fix_text" placeholder="리뷰를 수정하기"></textarea></p>
+        <p><textarea id="fix_text" placeholder="리뷰를 수정하기" style="overflow:auto"></textarea></p>
         <div class="review_length">
           <p>(<span id="fix_length">0</span>/500)</p>
         </div>

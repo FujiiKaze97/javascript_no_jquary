@@ -1,7 +1,7 @@
 // Firebase SDK 라이브러리 가져오기
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
-import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+import { collection, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 import { getDocs } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 import { query, where } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js"; // 필요한 모듈 가져오기
 
@@ -79,11 +79,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       <div class="slide_next_button slide_button">다음</div>
       <ul class="slide_pagination">`;
 
-      const docsSnapshot = await getDocs(query(
-        collection(db, "review"), // review 컬렉션 지정
-        where("movie", "==", MOVIE_ID) // movie 필드와 일치하는 값으로 필터링
-      ));
-      
+    const docsSnapshot = await getDocs(query(
+      collection(db, "review"), // review 컬렉션 지정
+      where("movie", "==", MOVIE_ID) // movie 필드와 일치하는 값으로 필터링
+    ));
+
     let cardsContainer = document.createElement('ul');
     cardsContainer.className = 'slide_items';
     let gridColumn = 0;
@@ -244,7 +244,7 @@ if (localStorage.getItem('recent_movies')) {
     SaveId([MOVIE_ID]);
   }
   //로컬 스토리지에 reviews가 없을 경우 새로운 배열 저장
-  
+
 }
 // 클릭 시 받은 id값 local storage에 저장 - by 해인 end ==========
 
@@ -325,79 +325,14 @@ function getMovieData() {
 
 }
 
-
-// localStorage에 저장하기
-const SaveData = (id) => {
-  localStorage.setItem('recent_movies', JSON.stringify(id));
-}
-
-// localStorage 불러오기
-const GetData = (key) => {
-  let localData = JSON.parse(localStorage.getItem(key))
-  return localData;
-}
-
-
-
-// 포스터 함수
-const getRecentPoster = (data) => {
-  const card = document.createElement('div');
-  card.className = 'recent_movie_card';
-  card.innerHTML = `
-    <img src="https://image.tmdb.org/t/p/w500/${data.poster_path}">
-  `;
-  card.addEventListener('click', () => window.location.href = `movieDetail.html?${data.id}`);
-  return card;
-}
-
-const recentContainer = document.getElementsByClassName('close_recent_movies_btn_container')[0]
-  .nextElementSibling; // recentMovie.js와 다른 부분 (container라는 다른 요소 존재해서 수정)
-const showRecentMovies = (ids) => {
-  ids.forEach(async (id) => {
-    const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=ko-KR`, options);
-    const data = await response.json();
-    const card = getRecentPoster(data);
-    recentContainer.appendChild(card);
-  })
-}
-
-showRecentMovies(GetData('recent_movies'));
-
-
-
-// '최근' 버튼 누르면 최근 본 영화 보이게 하기
-const recentMovieContainer = document.getElementsByClassName('recent_movies_container_outer')[0];
-const recentMoviesBtn = document.getElementById('recent_movies_btn');
-recentMoviesBtn.addEventListener('click', () => {
-
-  recentMovieContainer.classList.add('open');
-  recentMovieContainer.style.display = 'block';
-
-  recentMoviesBtn.style.display = 'none';
-  setTimeout(() => {
-    recentMovieContainer.classList.remove('open');
-  }, 800);
-})
-
-// '최근'에서 X 버튼 누르면 최근 본 영화 닫기
-const closeMoviesBtn = document.getElementById('close_recent_movies_btn');
-closeMoviesBtn.addEventListener('click', () => {
-
-  recentMovieContainer.classList.add('close');
-
-  setTimeout(() => {
-    recentMoviesBtn.style.display = 'block';
-    recentMovieContainer.classList.remove('close');
-    recentMovieContainer.style.display = 'none';
-  }, 800);
-})
-
 // 카드별 클릭 이벤트
 function addCardClickEvent() {
   try {
     const cards = document.querySelectorAll('.cards');
     cards.forEach((card) => {
       card.addEventListener('click', (e) => {
+        //카드 클릭 이벤트를 눌렀을 때.. 
+
         const modal = document.getElementsByClassName('modal_review')[0];
         modal.style.display = 'flex';
         const reviewId = document.getElementById("review_id");
@@ -405,61 +340,76 @@ function addCardClickEvent() {
         const reviewContent = document.getElementById("review_content");
         reviewId.innerHTML = card.dataset.name;
         //score = 별 모양.. 별모양 안불러와짐.. console찍으면 잘 보임 -> 수정 필요
-        reviewStar.innerHTML = card.dataset.score; 
+        reviewStar.innerHTML = card.dataset.score;
         reviewContent.innerHTML = card.dataset.review;
         modal.style.display = 'flex';
+
+        //comment 데이터 가져오기
+        getCommentData();
       });
     });
-
-    // // 버튼 엘리먼트 선택하기
-    // let prevBtn = document.querySelector(".slide_prev_button");
-    // let nextBtn = document.querySelector(".slide_next_button");
-
-
-    // // 버튼 엘리먼트에 클릭 이벤트 추가하기
-    // nextBtn.addEventListener("click", () => {
-    //   // 이후 버튼 누를 경우 현재 슬라이드를 변경
-    //   nextMove(slideItems);
-    // });
-    // // 버튼 엘리먼트에 클릭 이벤트 추가하기
-    // prevBtn.addEventListener("click", () => {
-    //   // 이전 버튼 누를 경우 현재 슬라이드를 변경
-    //   prevMove(slideItems);
-    // });
-
   } catch (e) {
     console.log(e);
   }
 }
 
-
-// // 모달 관련  */
-//   // 모달 초기화 및 이벤트 설정
-//   const modal = document.querySelector('.modal');
-//   const modalOpen = document.querySelectorAll('.cards');
-const modalClose = document.querySelector('.close_btn');
-
-//   // 모달 열기 함수
-//   const openModal = (userId,userRating,userReview) => {
-//       const rvCont = modal.getElementById('userId');
-//       rvCont.textContent = userId;
-//       rvCont.textContent = userRating;
-//       rvCont.textContent = userReview;
-
-//       document.body.style.overflow = "hidden";
-//       modal.classList.add('on');
-//   };
-
 // 모달 닫기 버튼 이벤트
-modalClose.addEventListener('click', () => {
+document.querySelector('.close_btn').addEventListener('click', () => {
   try {
-    console.log("여기쳐왔어?");
-    const modal = document.getElementsByClassName('modal_create_review')[0];
+    const modal = document.getElementsByClassName('modal_review')[0];
     modal.style.display = 'none';
+    document.getElementById('comment_area').innerHTML = '';
   } catch (e) {
     console.log(e);
   }
 });
+
+
+async function getCommentData() {
+  try {
+    // firebase db에서 데이터 가져오기
+    const docsSnapshot = await getDocs(query(
+      collection(db, "comment"), // review 컬렉션 지정
+      where("id", "==", MOVIE_ID) // movie 필드와 일치하는 값으로 필터링
+    ));
+
+    docsSnapshot.forEach((doc) => {
+      const data = doc.data();
+      // 새로운 div 요소를 생성합니다.
+      const newDiv = document.createElement('div');
+      newDiv.id = 'review_comment';
+      newDiv.textContent = `${data.comment} ${data.date}`;
+
+      const newLine = document.createElement('hr');
+      newLine.className = 'modal_line';
+
+      // 새로운 button 요소를 생성합니다.
+      const newButton = document.createElement('button');
+      newButton.type = 'button';
+      newButton.className = 'comment_delete_btn';
+      newButton.textContent = 'X';
+
+      newButton.addEventListener('click', async () => {
+        try {
+          const reviewRef = doc.ref; // 문서 참조를 가져옵니다.
+          await deleteDoc(reviewRef); // 문서 삭제
+          newDiv.remove(); // 삭제 후 화면에서 댓글 삭제
+          newLine.remove(); // 삭제 후 줄 삭제
+        } catch (e) {
+          console.log(e);
+        }
+      });
+
+      newDiv.appendChild(newButton);
+      const container = document.getElementById('comment_area'); // 컨테이너의 id를 지정
+      container.appendChild(newLine);
+      container.appendChild(newDiv);
+    });
+    // addCommentDelEvent();
+  } catch (e) {
+    console.log(e);
+  }
+}
 
 
 // DOMContentLoaded 이후 카드에 클릭 이벤트 설정
@@ -467,6 +417,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 카드가 모두 추가된 후 이벤트 리스너 추가
   addCardClickEvent();
 });
+
+
+// // 리뷰 삭제 함수
+//  const deleteData = 
 
 
 
@@ -655,32 +609,4 @@ window.addEventListener("resize", async () => {
   })
 
   resizeCards();
-
-
-
-
-const getCurrentTime = () => {
-  const now = new Date();
-  return `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}${String(now.getSeconds()).padStart(2, '0')}`;
-};
-
-  // const paginationItems = document.querySelectorAll(".slide_pagination > li");
-  // // 각 페이지네이션 클릭 시 해당 슬라이드로 이동하기
-  // for (let i = 0; i < maxSlide; i++) {
-  //   // 각 페이지네이션마다 클릭 이벤트 추가하기
-  //   paginationItems[i].addEventListener("click", () => {
-  //     // 클릭한 페이지네이션에 따라 현재 슬라이드 변경해주기(currSlide는 시작 위치가 1이기 때문에 + 1)
-  //     currSlide = i + 1;
-  //     // 슬라이드를 이동시키기 위한 offset 계산
-  //     const offset = slideWidth * (currSlide - 1);
-  //     // 각 슬라이드 아이템의 left에 offset 적용
-  //     slideItems.forEach((i) => {
-  //       i.setAttribute("style", `left: ${-offset}px`);
-  //     });
-  //     // 슬라이드 이동 시 현재 활성화된 pagination 변경
-  //     paginationItems.forEach((i) => i.classList.remove("active"));
-  //     paginationItems[currSlide - 1].classList.add("active");
-  //   });
-  // }
-
 });

@@ -113,7 +113,7 @@ body {
 }
 
 /* 카드 본문 설명 부분 */
-.movie-card-content {
+.movie_card_content {
   padding: 20px;
   text-align: left;
 

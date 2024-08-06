@@ -57,7 +57,6 @@ showRecentMovies(GetData('recent_movies'));
 
 // '최근' 버튼 누르면 최근 본 영화 보이게 하기
 const recentMovieContainer = document.getElementsByClassName('recent_movies_container_outer')[0];
-console.log('핸 :', recentMovieContainer);
 const recentMoviesBtn = document.getElementById('recent_movies_btn');
 recentMoviesBtn.addEventListener('click', () => {
   
