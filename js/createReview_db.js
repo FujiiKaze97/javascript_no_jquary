@@ -27,7 +27,6 @@ const firebaseConfig = { // 홍승우
   appId: "1:299275891543:web:6224af1407759225310412"
 };
 
-
 // Firebase 인스턴스 초기화
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
