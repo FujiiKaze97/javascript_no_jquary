@@ -8,13 +8,21 @@ import { getDocs } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-fir
 import { deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
 // Firebase 구성 정보 설정
-const firebaseConfig = {
+// const firebaseConfig = { // 해인
+//   apiKey: "AIzaSyAr-pkDJkrblenxK5GSlWssdFrSEhvLdrU",
+//     authDomain: "sparta-90385.firebaseapp.com",
+//     projectId: "sparta-90385",
+//     storageBucket: "sparta-90385.appspot.com",
+//     messagingSenderId: "299275891543",
+//     appId: "1:299275891543:web:6224af1407759225310412"
+// };
+const firebaseConfig = { // 홍승우
   apiKey: "AIzaSyAr-pkDJkrblenxK5GSlWssdFrSEhvLdrU",
-    authDomain: "sparta-90385.firebaseapp.com",
-    projectId: "sparta-90385",
-    storageBucket: "sparta-90385.appspot.com",
-    messagingSenderId: "299275891543",
-    appId: "1:299275891543:web:6224af1407759225310412"
+  authDomain: "sparta-90385.firebaseapp.com",
+  projectId: "sparta-90385",
+  storageBucket: "sparta-90385.appspot.com",
+  messagingSenderId: "299275891543",
+  appId: "1:299275891543:web:6224af1407759225310412"
 };
 
 
