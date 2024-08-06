@@ -58,6 +58,7 @@ body {
 }
 
 /* ===========================================모 . 달 . 창========================================== */
-/* .modal_window {
+.modal_window, .select_star, #review_text, #fix_text, .modal_header {
   background-color: #333;
-} */
+  color: #ddd;
+}
