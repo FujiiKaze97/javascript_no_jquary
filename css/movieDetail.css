@@ -377,7 +377,7 @@ footer {
   flex-shrink: 0;
 
   background-color: rgba(255, 255, 255, 0.7);
-
+  padding-left: 25px;
   /* animation: openClose 0.8s ease-in-out; */
 }
 
@@ -391,6 +391,7 @@ footer {
   background-color: transparent;
 
   overflow-y: scroll;
+  
 }
 
 .open {
@@ -499,7 +500,7 @@ footer {
   animation: upDown 1s ease-in-out infinite;
   cursor: pointer;
 
-  box-shadow: -1px -1px 8px rgba(255, 255, 255, 0.489);
+  box-shadow: -1px -1px 8px rgba(255, 255, 255, 0.5);
 
 }
 

@@ -118,17 +118,20 @@ body {
 /* 카드 본문 설명 부분 */
 .movie-card-content {
   padding: 20px;
-  text-align: center;
+  text-align: left;
+
 }
 
 .movie_card h3 {
+  font-family: Pretendard;
   font-size: 20px;
   margin-bottom: 10px;
-  color: #444;
+  color: #000000;
   font-weight: bold;
 }
 
 .movie_card p {
+  font-family: Pretendard;
   font-size: 14px;
   color: #666;
   margin-bottom: 10px;
@@ -138,10 +141,22 @@ body {
   white-space: nowrap;
 }
 
+.movie_card_rating {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.movie_card_rating img {
+  width: 20px;
+  height: 20px;  
+}
 .movie_card span {
-  font-size: 14px;
+  font-family: Pretendard;
+  font-size: 20px;
   color: #555;
   font-weight: bold;
+  display: flex;
+  flex-direction: row;
 }
 
 /* 페이지네이션 스타일 */
@@ -218,6 +233,7 @@ h2 {
   flex-shrink: 0;
 
   background-color: rgba(255, 255, 255, 0.7);
+  padding-left: 25px;
 
   /* animation: openClose 0.8s ease-in-out; */
 }
@@ -401,13 +417,15 @@ main .movie_img {
 
 .movie_overview {
   /* display: inline-block; */
+  background-color: white;
   width: 70%;
   height: 100%;
 
   margin-left: 50px;
   margin-right: auto;
-
-  color: var(--grey700, #616161);
+  padding: 40px;
+  border-radius: 25px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
   font-family: Pretendard;
   font-size: 24x;
   font-style: normal;
@@ -485,7 +503,7 @@ main .movie_img {
 }
 
 .review_title {
-  color: #000;
+  color: #ffffff;
 
   font-family: Pretendard;
   font-size: 40px;
@@ -533,7 +551,7 @@ main .movie_img {
   height: 360px;
 
   border-radius: 26px;
-  background: var(--grey300, white);
+  background: var(--grey300, rgb(209, 209, 209));
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
   padding: 25px 25px 25px 25px;
   overflow: hidden;
