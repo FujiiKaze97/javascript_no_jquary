@@ -5,7 +5,7 @@
 *{
   box-sizing: border-box;
   font-family: Arial, sans-serif;
-  transition: background-color 0.3s, color 0.3s; /*테마 변경 transition*/
+  transition: all 0.3s; /*테마 변경 transition*/
 }
 
 /* body,
@@ -20,7 +20,6 @@ span {
 body {
   background-color: #222;
   color: #fff;
-  
 }
 
 /* 검색 영역 스타일 */
@@ -31,6 +30,7 @@ body {
   position: fixed;
   z-index: 1; /*100은 너무 커서 1로 수정 : 해인*/
   background-color: #222;
+  color: white;
 }
 
 .header h1 {
@@ -318,7 +318,7 @@ h2 {
 
 .recent_movie_card:hover img {
   translate: -2px -5px;
-  border: 2px solid rgb(0, 123, 255);
+  border: 2px solid #0057FF;
   box-sizing: content-box;
 }
 
@@ -362,6 +362,7 @@ h2 {
 header {
   width: 100%;
   padding: 50px 50px 20px 50px;
+  color: #fff;
 }
 
 .movie_title {

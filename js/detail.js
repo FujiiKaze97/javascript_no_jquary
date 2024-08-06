@@ -272,7 +272,7 @@ const getTitle = (data) => {
 const getOverview = (data) => {
   let genreArr = data.genres.map(x => x.name);
   const card = document.createElement('div');
-  card.className = 'movie-overview';
+  card.className = 'movie_overview';
   card.innerHTML = `
   <div class = "vote_box">
   <div class = "vote">평균 별점</div>
