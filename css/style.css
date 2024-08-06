@@ -123,13 +123,8 @@ body {
   height: 450px;
   object-fit: cover;
 }
-
-.movie_card_content {
-  padding: 15px;
-}
-
 /* 카드 본문 설명 부분 */
-.movie-card-content {
+.movie_card_content {
   padding: 20px;
   text-align: left;
 
@@ -464,21 +459,91 @@ h2 {
 
 }
 @media screen and (max-width: 630px) {
+  /* 검색 영역 스타일 */
+
+  .header {
+    width: 100%;
+    text-align: center;
+    top: 0;
+    position: fixed;
+    z-index: 1; /*100은 너무 커서 1로 수정 : 해인*/
+    background-color: #f4f4f9;
+
+    padding: 10px 20px;
+  }
+
+  .header h1 {
+    margin: 0 0 10px 0;
+    font-size: 24px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+  }
+
+  .search_container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  #search_input {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    font-size: 12px;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+
+  #search_input:focus {
+    border-color: #007bff;
+  }
+
+  #search_button {
+    width: 20%;
+    padding: 10px;
+    background-color: #0057ff;
+    color: #fff;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
+  }
+
+  #search_button:hover {
+    background-color: #0056b3;
+  }
+
+  .header_border {
+    width: 100%;
+    height: 5px;
+    background-color: #afafaf;
+    position: relative;
+    top: 80px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0),
+      rgb(0 0 0 / 45%),
+      rgba(0, 0, 0, 0)
+    );
+  }
   /* 영화 카드 컨테이너 스타일 */
   .movie_container {
     width: 100%;
     
-    padding-top: 135px 10px 10px 10px; /* header 부분 position고정에 따라 요소가 가려지는 것 방지 */
+    padding: 95px 10px 10px 10px; /* header 부분 position고정에 따라 요소가 가려지는 것 방지 */
   }
   
   /* 영화 카드 스타일 */
   .movie_card {
     width: 100%;
-    height: 600px;
-    /* height: fit-content; */
-    display: block;
-    flex-direction: row;
-    flex-wrap: nowrap;
+    height: 400px;
+    display: flex;
 
     background-color: #fff;
     border-radius: 10px;
@@ -489,24 +554,20 @@ h2 {
   }
   
   .movie_card img {
-    width: 50%;
-    height: 400px;
+    width: 49%;
+    height: 100%;
     /* height: 450px; */
+    padding: 10px;
+    display: inline;
+    object-fit: contain;
+  }
 
-    display: inline-block;
-    object-fit: cover;
-  }
-  
+  /* 카드 본문 설명 부분 */ 
   .movie_card_content {
+    display: inline-block;
     width: 50%;
-    padding: 15px;
-  }
-  
-  /* 카드 본문 설명 부분 */
-  .movie-card-content {
-    padding: 20px;
-    text-align: left;
-  
+    height: 100%;
+    padding: 10px 10px 10px 0;
   }
   
   .movie_card h3 {
@@ -523,7 +584,10 @@ h2 {
   }
   
   .movie_card p {
-    height: 14px;
+    max-height: none;
+    height: calc(100% - 80px);
+    white-space: wrap;
+    overflow-y: scroll;
   }
   
   .movie_card_rating {
@@ -533,7 +597,8 @@ h2 {
   }
   .movie_card_rating img {
     width: 20px;
-    height: 20px;  
+    height: 20px;
+    object-fit: cover;
   }
   .movie_card span {
     font-family: Pretendard;
