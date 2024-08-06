@@ -44,3 +44,49 @@
   [type="checkbox"]:enabled:hover {
     box-shadow: 0 0 0 max(2px, 0.2em) rgb(160, 160, 160);
   }
+
+
+  /* ========== 반응형 ========= */
+  @media screen and (max-width: 630px) {
+    .toggle-class{
+      top: 4px;
+      right: 0;
+    }
+      /* 체크박스 스타일 */
+  [type="checkbox"] {
+    appearance: none; /*기존 스타일 제거*/
+    position: relative;
+    border: max(2px, 0.1em) solid gray;
+    border-radius: 20px;
+    width: 40px;
+    height:20px;
+  }
+  /*thumb 스타일*/
+  [type="checkbox"]::before{
+    content: "";
+    position: absolute;
+    top: -1px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    transform: scale(0.7);
+    background-color: gray;
+    transition: left 300ms linear;
+    left: 0;
+  }
+  
+  /*활성화 스타일*/
+  [type="checkbox"]:checked::before{  
+    background-color: white;
+    left: 17px;
+  }
+  
+  [type="checkbox"]:checked{
+    background-color: #00356e;
+    border-color: #0058b6;
+  }
+  
+  [type="checkbox"]:enabled:hover {
+    box-shadow: 0 0 0 max(2px, 0.2em) rgb(160, 160, 160);
+  }
+  }
