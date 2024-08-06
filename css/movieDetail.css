@@ -60,7 +60,7 @@ main .movie_img {
   margin: auto;
 }
 
-.movie_overview {
+.movie_overview_container {
   /* display: inline-block; */
   background-color: white;
   width: 70%;
@@ -76,6 +76,8 @@ main .movie_img {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+
+  /* overflow-y: scroll; */
 }
 
 .vote_box {
@@ -90,7 +92,7 @@ main .movie_img {
   gap: 10px;
 }
 
-.movie_overview .vote {
+.movie_overview_container .vote {
   color: #000;
   font-family: Pretendard;
   font-size: 36px;
@@ -520,3 +522,242 @@ footer {
 }
 
 /* 최근 클릭한 영화  by 해인*/
+
+
+
+/* ========= 반응형 ========= */
+/* @media screen and (max-width: 1460px) {
+} */
+@media screen and (max-width: 992px) {
+  /* 헤더 */
+  header {
+    padding: 30px 30px 0 30px;
+  }
+
+  .movie_title {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    gap: 30px;
+  }
+  
+  .korean_title {
+    font-family: Pretendard;
+    font-size: 36px;
+    font-weight: 700;
+  }
+  
+  .original_title {
+    font-family: Pretendard;
+    font-size: 30px;
+    font-weight: 600;
+  }
+
+  /* 메인 */
+  main {
+    width: 100%;
+    height: 400px;
+    padding: 20px 30px 30px 30px;
+    margin-bottom: 0;
+
+    display: flex;
+    justify-content: space-between;
+  }
+  main .movie_img {
+    height: 100%;
+  }
+  .movie_poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cver;
+    /* margin: auto; */
+  }
+  main img {
+    height: 100%;
+
+    object-fit: contain;
+  }
+
+  .movie_overview_container {
+    height: 100%;
+    margin-left: 30px;
+
+    /* overflow: scroll; */
+  }
+  .movie_overview_container .movie_overview {
+    height: 100%;
+  }
+  .movie_overview_container .vote, .vote_average, .movie_info {
+    font-size: 20px;
+  }
+  .movie_overview_container .star {
+    width: 20px;
+    height: 20px;
+  }
+  .movie_overview_container .movie_info {
+    font-size: 20px;
+    margin-top: 10px;
+  }
+  .movie_overview_container .divider {
+    margin: 10px auto 10px auto;
+  }
+  .movie_overview .overview {
+    width: 100%;
+    height: calc(100% - 71px);
+    overflow-y: scroll;
+  }
+
+  /* 리뷰 */
+  .reviews {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  .reviews .review_header {
+    margin-bottom: 0;
+  }
+  
+  .review_title {
+    font-size: 24px;
+  }
+
+  .write_review_btn {
+    font-size: 16px;
+  
+    display: flex;
+  
+    padding: 5px 10px 5px 10px;
+    justify-content: center;
+    align-items: center;
+  
+    border-radius: 10px;
+    border: 0px;
+    background: var(--blue, #0057FF);
+  }
+
+  /* footer */
+  footer {
+    height: 110px;
+    padding: 20px 0;
+    text-align: center;
+
+    color: #ffffff;
+    font-family: Pretendard;
+    font-size: 18px;
+  }
+
+  .camp {
+    font-size: 16px;
+
+  }
+
+  .react {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  .team {
+    font-size: 10px;
+    margin-top: 10px;
+  }
+}
+@media screen and (max-width: 630px) {
+  /* 헤더 */
+  header {
+    padding: 10px;
+  }
+
+  .movie_title {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 15px;
+  }
+  
+  .korean_title {
+    font-size: 22px;
+  }
+  
+  .original_title {
+    font-size: 18px;
+  }
+
+  /* 메인 */
+  main {
+    width: 100%;
+    height: fit-content;
+    padding: 10px;
+
+    flex-direction: column;
+    align-items: center;
+  }
+  main .movie_img {
+    height: 100%;
+  }
+  .movie_poster {
+    /* width: 300px; */
+    height: 300px;
+    /* margin: auto; */
+  }
+  main img {
+    height: 100%;
+
+    object-fit: contain;
+  }
+
+  .movie_overview_container {
+    width: 100%;
+    height: 400px;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 15px;
+  }
+  .movie_overview_container .movie_overview {
+    height: 100%;
+  }
+  .movie_overview_container .vote, .vote_average, .movie_info {
+    font-size: 16px;
+  }
+  .movie_overview_container .star {
+    width: 16px;
+    height: 16px;
+  }
+  .movie_overview_container .movie_info {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  .movie_overview_container .divider {
+    margin: 10px auto 10px auto;
+  }
+  .movie_overview .overview {
+    width: 100%;
+    height: calc(100% - 89px);
+    overflow-y: scroll;
+  }
+
+  /* 리뷰 */
+  .reviews {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .reviews .review_header {
+    margin-bottom: 0;
+  }
+  
+  .review_title {
+    font-size: 24px;
+  }
+
+  .write_review_btn {
+    font-size: 16px;
+  
+    display: flex;
+  
+    padding: 5px 10px 5px 10px;
+    justify-content: center;
+    align-items: center;
+  
+    border-radius: 10px;
+    border: 0px;
+    background: var(--blue, #0057FF);
+  }
+}
