@@ -26,22 +26,20 @@ const getRecentPoster = (data) => {
   return card;
 }
 
-const recentContainer = document.getElementsByClassName('container')[0];
-// console.log(recentMovieContainer);
-const showRecentMovies = (ids) => {
-  ids.forEach(async (id) => {
-    const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=ko-KR`, options);
-    const data = await response.json();
-    // console.log(data);
+// const recentContainer = document.getElementsByClassName('container')[0];
+// const showRecentMovies = (ids) => {
+//   ids.forEach(async (id) => {
+//     const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=ko-KR`, options);
+//     const data = await response.json();
 
-    const card = getRecentPoster(data);
-    recentContainer.appendChild(card);
-  })
-  console.log('recent movie cards created')
-}
+//     const card = getRecentPoster(data);
+//     recentContainer.appendChild(card);
+//   })
+//   console.log('recent movie cards created')
+// }
 
-console.log(GetData('recent_movies'));
-showRecentMovies(GetData('recent_movies'));
+// console.log(GetData('recent_movies'));
+// showRecentMovies(GetData('recent_movies'));
 
 
 
