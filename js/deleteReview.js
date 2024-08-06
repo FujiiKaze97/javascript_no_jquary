@@ -9,12 +9,12 @@ import { deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10
 
 // Firebase 구성 정보 설정
 const firebaseConfig = {
-  apiKey: "AIzaSyAcTX_5mbzFJeUantOQ4xZXah_aJtW96EQ",
-  authDomain: "prac-0717.firebaseapp.com",
-  projectId: "prac-0717",
-  storageBucket: "prac-0717.appspot.com",
-  messagingSenderId: "299955746969",
-  appId: "1:299955746969:web:b6cbca8f52d9469732e008"
+  apiKey: "AIzaSyAr-pkDJkrblenxK5GSlWssdFrSEhvLdrU",
+    authDomain: "sparta-90385.firebaseapp.com",
+    projectId: "sparta-90385",
+    storageBucket: "sparta-90385.appspot.com",
+    messagingSenderId: "299275891543",
+    appId: "1:299275891543:web:6224af1407759225310412"
 };
 
 
@@ -30,35 +30,48 @@ const db = getFirestore(app);
 // 리뷰데이터 저장 변수
 let reviewData = [];
 
+// movie id 받기
+const receivedData = location.href.split('?')[1];
+
 //리뷰 데이터 읽기
 const loadReviews = async () => {
   const querySnapshot = await getDocs(collection(db, "review"));
   querySnapshot.forEach((doc) => {
     let row = doc.data();
+    if(row.movie === receivedData){
     let dataInfo = {
       id: doc.id,
       name: row.name,
       pw: row.pw,
-      review: row.review,
+      content: row.review,
       score: row.score
     };
     reviewData.push(dataInfo);
+  }
   });
 };
 
 loadReviews();
+console.log(reviewData);
 
 // 2. 데이터 수정하기
 
 // 리뷰 수정버튼 클릭시 수정 모달창 생성
 document.getElementById('review_modify_btn').addEventListener('click', function () {
-  // 리뷰 모달창 데이터 임시 할당
-  let thisData = reviewData[0];
+  
+  const reviewId = document.getElementById("review_id");
+  const reviewStar = document.getElementById("review_star");
+  const reviewContent = document.getElementById("review_content");
+
+  let thisData = reviewData
+  .filter((review) => review.name === reviewId)
+  .filter((review) => review.score === reviewStar)
+  .filter((review) => review.content === reviewContent)
+
   // 비밀번호 확인 프롬프트
   let getPw = prompt('비밀번호를 입력하세요')
 
   // 프롬프트 입력 값과 데이터상 pw 일치시 실행
-  // 선택한 리뷰 모달창 데이터 가져올 필요 있음
   if (getPw === thisData.pw /* <=(임시값)*/) {
 
     //리뷰 작성 모달창 띄우기 
