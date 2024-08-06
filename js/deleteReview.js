@@ -67,15 +67,11 @@ console.log(reviewData);
 // 리뷰 수정버튼 클릭시 수정 모달창 생성
 document.getElementById('review_modify_btn').addEventListener('click', function () {
   
-  const reviewId = document.getElementById("review_id");
-  const reviewStar = document.getElementById("review_star");
-  const reviewContent = document.getElementById("review_content");
-
-  let thisData = reviewData
-  .filter((review) => review.name === reviewId)
-  .filter((review) => review.score === reviewStar)
-  .filter((review) => review.content === reviewContent)
-
+  const thisData = reviewData.find((review) =>
+    review.name === document.getElementById('review_id').innerText &&
+    review.content === document.getElementById('review_content').innerText &&
+    review.score.toString() === document.getElementById('review_star').innerText)
+  
   // 비밀번호 확인 프롬프트
   let getPw = prompt('비밀번호를 입력하세요')
 
@@ -87,7 +83,7 @@ document.getElementById('review_modify_btn').addEventListener('click', function 
     modal.style.display = 'flex';
 
     // 기존 작성 데이터 가져오기
-    document.getElementById('fix_text').value = thisData['review'];
+    document.getElementById('fix_text').value = thisData['content'];
     document.getElementById('fix_star').value = thisData['score'];
 
     // 수정 등록 버튼 입력 시 데이터 수정저장
