@@ -742,7 +742,7 @@ console.log('thisData : ',thisData);
     modal.style.display = 'flex';
 
     // 기존 작성 데이터 가져오기
-    document.getElementById('fix_text').value = thisData['review'];
+    document.getElementById('fix_text').value = thisData['content'];
     document.getElementById('fix_star').value = thisData['score'];
 
     // 수정 등록 버튼 입력 시 데이터 수정저장
