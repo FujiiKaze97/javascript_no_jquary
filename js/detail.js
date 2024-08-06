@@ -340,58 +340,58 @@ const GetData = (key) => {
 
 
 // 포스터 함수
-const getRecentPoster = (data) => {
-  const card = document.createElement('div');
-  card.className = 'recent_movie_card';
-  card.innerHTML = `
-    <img src="https://image.tmdb.org/t/p/w500/${data.poster_path}">
-  `;
-  card.addEventListener('click', () => window.location.href = `movieDetail.html?${data.id}`);
-  return card;
-}
+// const getRecentPoster = (data) => {
+//   const card = document.createElement('div');
+//   card.className = 'recent_movie_card';
+//   card.innerHTML = `
+//     <img src="https://image.tmdb.org/t/p/w500/${data.poster_path}">
+//   `;
+//   card.addEventListener('click', () => window.location.href = `movieDetail.html?${data.id}`);
+//   return card;
+// }
 
-const recentContainer = document.getElementsByClassName('close_recent_movies_btn_container')[0]
-  .nextElementSibling; // recentMovie.js와 다른 부분 (container라는 다른 요소 존재해서 수정)
-const showRecentMovies = (ids) => {
-  ids.forEach(async (id) => {
-    const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=ko-KR`, options);
-    const data = await response.json();
-    const card = getRecentPoster(data);
-    recentContainer.appendChild(card);
-  })
-}
+// const recentContainer = document.getElementsByClassName('close_recent_movies_btn_container')[0]
+//   .nextElementSibling; // recentMovie.js와 다른 부분 (container라는 다른 요소 존재해서 수정)
+// const showRecentMovies = (ids) => {
+//   ids.forEach(async (id) => {
+//     const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=ko-KR`, options);
+//     const data = await response.json();
+//     const card = getRecentPoster(data);
+//     recentContainer.appendChild(card);
+//   })
+// }
 
-showRecentMovies(GetData('recent_movies'));
+// showRecentMovies(GetData('recent_movies'));
 
 
 
-// '최근' 버튼 누르면 최근 본 영화 보이게 하기
-const recentMovieContainer = document.getElementsByClassName('recent_movies_container_outer')[0];
-console.log('핸 :', recentMovieContainer);
-const recentMoviesBtn = document.getElementById('recent_movies_btn');
-recentMoviesBtn.addEventListener('click', () => {
+// // '최근' 버튼 누르면 최근 본 영화 보이게 하기
+// const recentMovieContainer = document.getElementsByClassName('recent_movies_container_outer')[0];
+// console.log('핸 :', recentMovieContainer);
+// const recentMoviesBtn = document.getElementById('recent_movies_btn');
+// recentMoviesBtn.addEventListener('click', () => {
 
-  recentMovieContainer.classList.add('open');
-  recentMovieContainer.style.display = 'block';
+//   recentMovieContainer.classList.add('open');
+//   recentMovieContainer.style.display = 'block';
 
-  recentMoviesBtn.style.display = 'none';
-  setTimeout(() => {
-    recentMovieContainer.classList.remove('open');
-  }, 800);
-})
+//   recentMoviesBtn.style.display = 'none';
+//   setTimeout(() => {
+//     recentMovieContainer.classList.remove('open');
+//   }, 800);
+// })
 
-// '최근'에서 X 버튼 누르면 최근 본 영화 닫기
-const closeMoviesBtn = document.getElementById('close_recent_movies_btn');
-closeMoviesBtn.addEventListener('click', () => {
+// // '최근'에서 X 버튼 누르면 최근 본 영화 닫기
+// const closeMoviesBtn = document.getElementById('close_recent_movies_btn');
+// closeMoviesBtn.addEventListener('click', () => {
 
-  recentMovieContainer.classList.add('close');
+//   recentMovieContainer.classList.add('close');
 
-  setTimeout(() => {
-    recentMoviesBtn.style.display = 'block';
-    recentMovieContainer.classList.remove('close');
-    recentMovieContainer.style.display = 'none';
-  }, 800);
-})
+//   setTimeout(() => {
+//     recentMoviesBtn.style.display = 'block';
+//     recentMovieContainer.classList.remove('close');
+//     recentMovieContainer.style.display = 'none';
+//   }, 800);
+// })
 
 // 카드별 클릭 이벤트
 function addCardClickEvent() {
