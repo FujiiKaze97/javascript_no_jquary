@@ -3,7 +3,8 @@
 /* ==================================================================메인 페이지 스타일================================================================= */
 /* 기본 스타일 초기화 */
 
-*{
+/* 기본 스타일 초기화 */
+* {
   box-sizing: border-box;
   font-family: Arial, sans-serif;
   transition: background-color 0.3s, color 0.3s; /*테마 변경 transition*/
@@ -19,9 +20,10 @@ span {
 } */
 
 body {
-  background-color: #222;
-  color: #fff;
-  
+  background-color: #1a1a1a;
+  color: #ddd;
+  display: flex;
+  flex-direction: column;
 }
 
 /* 검색 영역 스타일 */
@@ -31,7 +33,7 @@ body {
   top: 0;
   position: fixed;
   z-index: 1; /*100은 너무 커서 1로 수정 : 해인*/
-  background-color: #222;
+  background-color: #222222;
 }
 
 .header h1 {
@@ -64,7 +66,7 @@ body {
 
 #search_button {
   padding: 11px 20px;
-  background-color: #007bff;
+  background-color: #0057ff;
   color: #fff;
   border: none;
   border-radius: 0 5px 5px 0;
@@ -75,6 +77,22 @@ body {
 
 #search_button:hover {
   background-color: #0056b3;
+}
+
+.header_border {
+  width: 100%;
+  height: 5px;
+  background-color: #afafaf;
+  position: relative;
+  top: 125px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgb(0 0 0 / 45%),
+    rgba(0, 0, 0, 0)
+  );
 }
 
 /* 영화 카드 컨테이너 스타일 */
@@ -92,7 +110,7 @@ body {
   width: 300px;
   background-color: #333;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
@@ -100,7 +118,7 @@ body {
 
 .movie_card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
 }
 
 .movie_card img {
@@ -124,14 +142,14 @@ body {
   font-family: Pretendard;
   font-size: 20px;
   margin-bottom: 10px;
-  color: #000000;
+  color: #dddddd;
   font-weight: bold;
 }
 
 .movie_card p {
   font-family: Pretendard;
   font-size: 14px;
-  color: #ccc;
+  color: #cccccc;
   margin-bottom: 10px;
   max-height: 60px;
   overflow: hidden;
@@ -151,7 +169,7 @@ body {
 .movie_card span {
   font-family: Pretendard;
   font-size: 20px;
-  color: #555;
+  color: #cccccc;
   font-weight: bold;
   display: flex;
   flex-direction: row;
@@ -212,9 +230,8 @@ h2 {
   text-align: center;
 }
 
-
 /* 최근 클릭한 영화  by 해인*/
-.recent_movies_container {
+.recent_movies_container_outer {
   display: none;
 
   z-index: 2;
@@ -231,41 +248,48 @@ h2 {
   flex-shrink: 0;
 
   background-color: rgba(255, 255, 255, 0.7);
-  padding-left: 25px;
-
+  /* padding-left: 25px; */
   /* animation: openClose 0.8s ease-in-out; */
 }
-.recent_movies_container .container {
+
+.recent_movies_container_outer .recent_movie_container {
   width: 100%;
   height: calc(100% - 25px);
   display: flex;
   flex-direction: column;
   align-items: center;
 
+  /* padding-left: 25px; */
+
   background-color: transparent;
 
   overflow-y: scroll;
 }
+
 .open {
   animation: openClose 0.8s ease-in-out;
 }
+
 .close {
   animation: openClose 0.8s ease-in-out;
   animation-direction: reverse;
 }
+
 @keyframes openClose {
   0% {
     translate: 100%;
   }
+
   100% {
     translate: 0%;
   }
 }
+
 .close_recent_movies_btn_container {
   width: 100%;
   height: 25px;
   background-color: transparent;
-  
+
   z-index: 2;
 }
 
@@ -282,6 +306,7 @@ h2 {
   border: 0;
   cursor: pointer;
 }
+
 .recent_movie_card {
   width: 250px;
   height: fit-content;
@@ -294,24 +319,28 @@ h2 {
 
   cursor: pointer;
 }
+
 .recent_movie_card:first-child {
   margin-top: 10px;
-}.recent_movie_card:first-child:hover {
+}
+
+.recent_movie_card:first-child:hover {
   margin-top: 6px;
 }
+
 .recent_movie_card:last-child {
   margin-top: 25px;
   margin-bottom: 25px;
 }
+
 .recent_movie_card img {
   width: 100%;
-  ;
-
   object-fit: cover;
 
   padding: 0;
   margin: 0;
 }
+
 .recent_movie_card:hover {
   /* img에 강조 더하면서 다른 카드 밀리지 않도록 조정 */
   margin-top: 21px;
@@ -319,7 +348,7 @@ h2 {
 
 .recent_movie_card:hover img {
   translate: -2px -5px;
-  border: 2px solid rgb(0, 123, 255);
+  border: 2px solid #0057ff;
   box-sizing: content-box;
 }
 
@@ -334,12 +363,14 @@ h2 {
   height: 50px;
 
   color: white;
-  background-color: rgb(0, 123, 255);
+  background-color: #0057ff;
   border: 0;
   border-radius: 50px;
 
   animation: upDown 1s ease-in-out infinite;
   cursor: pointer;
+
+  box-shadow: -1px -1px 8px rgba(255, 255, 255, 0.5);
 }
 
 /* 최근 버튼 상하 움직임 */
@@ -358,7 +389,35 @@ h2 {
 }
 /* 최근 클릭한 영화  by 해인*/
 
+
 /* ==================================================================상세 페이지 스타일================================================================= */
+/* 헤더 header */
+
+
+nav {
+  display: flex;
+  padding: 20px;
+  border-bottom: 2px solid #b8b8b8;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+}
+
+.page_list {
+  display: inline-block;
+}
+
+.page_list a {
+  color: #000;
+}
+
+.page_list a::after {
+  display: inline-block;
+  content: ">";
+  font-weight: bold;
+  padding: 0 15px;
+}
+
 /* 헤더 header */
 header {
   width: 100%;
@@ -398,7 +457,6 @@ main .movie_img {
   height: 480px;
   /* margin-right: 30px; */
 
-
   /* display: inline-block;
   width: 350px;
 
@@ -413,12 +471,12 @@ main .movie_img {
   margin: auto;
 }
 
-.movie_overview {
+.movie_overview_container {
   /* display: inline-block; */
-  background-color: rgb(223, 223, 223);
+  background-color: #333;
   width: 70%;
   height: 100%;
-  color:black;
+
   margin-left: 50px;
   margin-right: auto;
   padding: 40px;
@@ -429,6 +487,8 @@ main .movie_img {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+
+  /* overflow-y: scroll; */
 }
 
 .vote_box {
@@ -443,7 +503,7 @@ main .movie_img {
   gap: 10px;
 }
 
-.movie_overview .vote {
+.movie_overview_container .vote {
   color: #000;
   font-family: Pretendard;
   font-size: 36px;
@@ -501,7 +561,7 @@ main .movie_img {
 }
 
 .review_title {
-  color: #ffffff;
+  color: #ddd;
 
   font-family: Pretendard;
   font-size: 40px;
@@ -516,11 +576,12 @@ main .movie_img {
   flex-direction: row;
   flex-wrap: wrap;
   gap: 25px;
+
   width: 100%;
 }
 
 .write_review_btn {
-  color: #FFF;
+  color: #fff;
 
   font-family: Pretendard;
   font-size: 24px;
@@ -536,7 +597,7 @@ main .movie_img {
 
   border-radius: 10px;
   border: 0px;
-  background: var(--blue, #0057FF);
+  background: var(--blue, #0057ff);
 }
 
 #write_review_btn:hover {
@@ -549,13 +610,12 @@ main .movie_img {
   height: 360px; */
 
   border-radius: 26px;
-  background: var(--grey300, rgb(223, 223, 223));
+  background: var(--grey300, #333);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
   margin: 15px;
   padding: 20px 20px 20px 20px;
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  color: whie;
   cursor: pointer;
   position: relative;
 }
@@ -571,7 +631,7 @@ main .movie_img {
 }
 
 .user_id {
-  color: #000;
+  color: #ddd;
   font-family: Pretendard;
   font-size: 24px;
   font-style: normal;
@@ -586,7 +646,6 @@ main .movie_img {
   gap: 10px;
 }
 
-
 .card_divider {
   background-color: #616161;
   width: auto;
@@ -595,8 +654,7 @@ main .movie_img {
 }
 
 .user_review {
-
-  color: #000;
+  color: #ddd;
 
   font-family: Pretendard;
   font-size: 16px;
@@ -611,22 +669,28 @@ main .movie_img {
   right: 25px;
   display: flex;
   flex-direction: row;
-  gap:10px;
+  gap: 10px;
+  gap: 10px;
 }
 
 .comment_icon {
   width: 24px;
   height: 24px;
-  
 }
+
 .comment_num {
   color: #000;
 
-font-family: Pretendard;
-font-size: 20px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 /* home btn */
@@ -636,10 +700,11 @@ line-height: normal;
   display: flex;
   justify-content: center;
   align-items: center;
+  text-decoration: none;
 }
 
 .home_btn_container #home_btn {
-  color: #FFF;
+  color: #fff;
 
   font-family: Pretendard;
   font-size: 30px;
@@ -651,7 +716,27 @@ line-height: normal;
 
   border-radius: 20px;
   border: 0px;
-  background: var(--blue, #0057FF);
+  background: var(--blue, #0057ff);
+}
+
+#home_btn {
+  color: #fff;
+
+  font-family: Pretendard;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration: none;
+  display: flex;
+
+  padding: 10px 20px 10px 20px;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 20px;
+  border: 0px;
+  background: var(--blue, #0057ff);
 }
 
 /* footer */
@@ -672,7 +757,7 @@ footer {
 }
 
 .camp {
-  color: #FFF;
+  color: #fff;
 
   font-family: Pretendard;
   font-size: 32px;
@@ -680,11 +765,10 @@ footer {
   font-weight: 600;
   line-height: normal;
   margin-bottom: 5px;
-
 }
 
 .react {
-  color: #FFF;
+  color: #fff;
 
   text-align: center;
   font-family: Pretendard;
@@ -693,20 +777,19 @@ footer {
   font-weight: 400;
   line-height: normal;
 }
+
 .team {
-  color: #FFF;
+  color: #fff;
   font-family: Pretendard;
   font-size: 24px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  margin-top: 20px
+  margin-top: 20px;
 }
 
-
-
 /* 최근 클릭한 영화  by 해인*/
-.recent_movies_container {
+.recent_movies_container_outer {
   display: none;
 
   z-index: 2;
@@ -723,40 +806,48 @@ footer {
   flex-shrink: 0;
 
   background-color: rgba(255, 255, 255, 0.7);
-
+  /* padding-left: 25px; */
   /* animation: openClose 0.8s ease-in-out; */
 }
-.recent_movies_container .container {
+
+.recent_movies_container_outer .recent_movie_container {
   width: 100%;
   height: calc(100% - 25px);
   display: flex;
   flex-direction: column;
   align-items: center;
 
+  /* padding-left: 25px; */
+
   background-color: transparent;
 
   overflow-y: scroll;
 }
+
 .open {
   animation: openClose 0.8s ease-in-out;
 }
+
 .close {
   animation: openClose 0.8s ease-in-out;
   animation-direction: reverse;
 }
+
 @keyframes openClose {
   0% {
     translate: 100%;
   }
+
   100% {
     translate: 0%;
   }
 }
+
 .close_recent_movies_btn_container {
   width: 100%;
   height: 25px;
   background-color: transparent;
-  
+
   z-index: 2;
 }
 
@@ -773,6 +864,7 @@ footer {
   border: 0;
   cursor: pointer;
 }
+
 .recent_movie_card {
   width: 250px;
   height: fit-content;
@@ -785,24 +877,28 @@ footer {
 
   cursor: pointer;
 }
+
 .recent_movie_card:first-child {
   margin-top: 10px;
-}.recent_movie_card:first-child:hover {
+}
+
+.recent_movie_card:first-child:hover {
   margin-top: 6px;
 }
+
 .recent_movie_card:last-child {
   margin-top: 25px;
   margin-bottom: 25px;
 }
+
 .recent_movie_card img {
   width: 100%;
-  ;
-
   object-fit: cover;
 
   padding: 0;
   margin: 0;
 }
+
 .recent_movie_card:hover {
   /* img에 강조 더하면서 다른 카드 밀리지 않도록 조정 */
   margin-top: 21px;
@@ -810,7 +906,7 @@ footer {
 
 .recent_movie_card:hover img {
   translate: -2px -5px;
-  border: 2px solid #0057FF;
+  border: 2px solid #0057ff;
   box-sizing: content-box;
 }
 
@@ -825,12 +921,14 @@ footer {
   height: 50px;
 
   color: white;
-  background-color: #0057FF;
+  background-color: #0057ff;
   border: 0;
   border-radius: 50px;
 
   animation: upDown 1s ease-in-out infinite;
   cursor: pointer;
+
+  box-shadow: -1px -1px 8px rgba(255, 255, 255, 0.5);
 }
 
 /* 최근 버튼 상하 움직임 */
@@ -847,4 +945,271 @@ footer {
     bottom: 25px;
   }
 }
+
 /* 최근 클릭한 영화  by 해인*/
+
+/* ========= 반응형 ========= */
+/* @media screen and (max-width: 1460px) {
+} */
+@media screen and (max-width: 992px) {
+  /* 헤더 */
+  header {
+    padding: 30px 30px 0 30px;
+  }
+
+  .movie_title {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    gap: 30px;
+  }
+
+  .korean_title {
+    font-family: Pretendard;
+    font-size: 36px;
+    font-weight: 700;
+  }
+
+  .original_title {
+    font-family: Pretendard;
+    font-size: 30px;
+    font-weight: 600;
+  }
+
+  /* 메인 */
+  main {
+    width: 100%;
+    height: 400px;
+    padding: 20px 30px 30px 30px;
+    margin-bottom: 0;
+
+    display: flex;
+    justify-content: space-between;
+  }
+  main .movie_img {
+    height: 100%;
+  }
+  .movie_poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cver;
+    /* margin: auto; */
+  }
+  main img {
+    height: 100%;
+
+    object-fit: contain;
+  }
+
+  .movie_overview_container {
+    height: 100%;
+    margin-left: 30px;
+
+    /* overflow: scroll; */
+  }
+  .movie_overview_container .movie_overview {
+    height: 100%;
+  }
+  .movie_overview_container .vote,
+  .vote_average,
+  .movie_info {
+    font-size: 20px;
+  }
+  .movie_overview_container .star {
+    width: 20px;
+    height: 20px;
+  }
+  .movie_overview_container .movie_info {
+    font-size: 20px;
+    margin-top: 10px;
+  }
+  .movie_overview_container .divider {
+    margin: 10px auto 10px auto;
+  }
+  .movie_overview .overview {
+    width: 100%;
+    height: calc(100% - 71px);
+    overflow-y: scroll;
+  }
+
+  /* 리뷰 */
+  .reviews {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  .reviews .review_header {
+    margin-bottom: 0;
+  }
+
+  .review_title {
+    font-size: 24px;
+  }
+
+  .write_review_btn {
+    font-size: 16px;
+
+    display: flex;
+
+    padding: 5px 10px 5px 10px;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 10px;
+    border: 0px;
+    background: var(--blue, #0057ff);
+  }
+
+  /* footer */
+  footer {
+    height: 110px;
+    padding: 20px 0;
+    text-align: center;
+
+    color: #ffffff;
+    font-family: Pretendard;
+    font-size: 18px;
+  }
+
+  .camp {
+    font-size: 16px;
+  }
+
+  .react {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  .team {
+    font-size: 10px;
+    margin-top: 10px;
+  }
+}
+@media screen and (max-width: 630px) {
+
+  nav {
+    padding: 10px;
+    font-size: 14px;
+  }
+  
+  .page_list {
+    display: inline-block;
+  }
+  
+  .page_list a {
+    color: #000;
+  }
+  
+  .page_list a::after {
+    display: inline-block;
+    content: ">";
+    font-weight: bold;
+    padding: 0 0 0 2px;
+  }
+
+  /* 헤더 */
+  header {
+    padding: 10px;
+  }
+
+  .movie_title {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 15px;
+  }
+
+  .korean_title {
+    font-size: 22px;
+  }
+
+  .original_title {
+    font-size: 18px;
+  }
+
+  /* 메인 */
+  main {
+    width: 100%;
+    height: fit-content;
+    padding: 10px;
+
+    flex-direction: column;
+    align-items: center;
+  }
+  main .movie_img {
+    height: 100%;
+  }
+  .movie_poster {
+    /* width: 300px; */
+    height: 300px;
+    /* margin: auto; */
+  }
+  main img {
+    height: 100%;
+
+    object-fit: contain;
+  }
+
+  .movie_overview_container {
+    width: 100%;
+    height: 400px;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 15px;
+  }
+  .movie_overview_container .movie_overview {
+    height: 100%;
+  }
+  .movie_overview_container .vote,
+  .vote_average,
+  .movie_info {
+    font-size: 16px;
+  }
+  .movie_overview_container .star {
+    width: 16px;
+    height: 16px;
+  }
+  .movie_overview_container .movie_info {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  .movie_overview_container .divider {
+    margin: 10px auto 10px auto;
+  }
+  .movie_overview .overview {
+    width: 100%;
+    height: calc(100% - 89px);
+    overflow-y: scroll;
+  }
+
+  /* 리뷰 */
+  .reviews {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .reviews .review_header {
+    margin-bottom: 0;
+  }
+
+  .review_title {
+    font-size: 24px;
+  }
+
+  .write_review_btn {
+    font-size: 16px;
+
+    display: flex;
+
+    padding: 5px 10px 5px 10px;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 10px;
+    border: 0px;
+    background: var(--blue, #0057ff);
+  }
+}
+
+/* ===========================================모 . 달 . 창========================================== */
+/* .modal_window {
+  background-color: #333;
+} */
