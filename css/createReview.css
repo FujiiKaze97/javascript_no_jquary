@@ -149,7 +149,7 @@
 
 }
 
-.modal_body p #review_text {
+.modal_body p #review_text, #fix_text {
   width: 100%;
   height: 100%;
 
