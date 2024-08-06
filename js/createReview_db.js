@@ -93,8 +93,8 @@ cancelBtn.addEventListener('click', () => {
 // 'X' 버튼을 누르면 모달창이 안보이도록 함.
 const closeBtn = document.getElementById('review_close_btn');
 closeBtn.addEventListener('click', () => {
-  console.log("자꾸 이상한 창으로 넘어가요...");
-  // CancelReview();
+  const modal = document.getElementsByClassName('modal_review')[0];
+  modal.style.display = 'none';
 })
 
 const CancelReview = () => {
