@@ -6,7 +6,15 @@ import { getDocs } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-fir
 import { query, where } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js"; // 필요한 모듈 가져오기
 
 // Firebase 구성 정보 설정
-const firebaseConfig = {
+// const firebaseConfig = { // 해인
+//   apiKey: "AIzaSyAcTX_5mbzFJeUantOQ4xZXah_aJtW96EQ",
+//   authDomain: "prac-0717.firebaseapp.com",
+//   projectId: "prac-0717",
+//   storageBucket: "prac-0717.appspot.com",
+//   messagingSenderId: "299955746969",
+//   appId: "1:299955746969:web:b6cbca8f52d9469732e008"
+// };
+const firebaseConfig = { // 홍승우
   apiKey: "AIzaSyAr-pkDJkrblenxK5GSlWssdFrSEhvLdrU",
   authDomain: "sparta-90385.firebaseapp.com",
   projectId: "sparta-90385",

@@ -20,10 +20,7 @@ span {
 body {
   background-color: #222;
   color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
+  
 }
 
 /* 검색 영역 스타일 */
@@ -417,10 +414,10 @@ main .movie_img {
 
 .movie_overview {
   /* display: inline-block; */
-  background-color: white;
+  background-color: rgb(223, 223, 223);
   width: 70%;
   height: 100%;
-
+  color:black;
   margin-left: 50px;
   margin-right: auto;
   padding: 40px;
@@ -533,7 +530,7 @@ main .movie_img {
 
   display: flex;
 
-  padding: 10px 30px 10px 30px;
+  padding: 10px 20px 10px 20px;
   justify-content: center;
   align-items: center;
 
@@ -541,19 +538,21 @@ main .movie_img {
   border: 0px;
   background: var(--blue, #0057FF);
 }
+
 #write_review_btn:hover {
   background-color: #0056b3;
 }
 
 /* 카드 */
 .cards {
-  width: 340px;
-  height: 360px;
+  /* width: 340px;
+  height: 360px; */
 
   border-radius: 26px;
-  background: var(--grey300, rgb(209, 209, 209));
+  background: var(--grey300, rgb(223, 223, 223));
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
-  padding: 25px 25px 25px 25px;
+  margin: 15px;
+  padding: 20px 20px 20px 20px;
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
@@ -589,7 +588,7 @@ main .movie_img {
 
 .card_divider {
   background-color: #616161;
-  width: 285px;
+  width: auto;
   height: 1px;
   margin: 10px auto 10px auto;
 }
