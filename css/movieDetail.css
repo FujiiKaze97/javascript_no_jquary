@@ -4,7 +4,7 @@
 
 body {
   background-color: #f4f4f9;
-  transition: all 0.3s ease;
+  transition-duration: 0.5s;
 }
 
 nav {
@@ -541,7 +541,7 @@ footer {
   animation: upDown 1s ease-in-out infinite;
   cursor: pointer;
 
-  box-shadow: -1px -1px 8px rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
 }
 
 /* 최근 버튼 상하 움직임 */
