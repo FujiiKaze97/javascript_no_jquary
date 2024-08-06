@@ -7,7 +7,7 @@ const cardData = (movie) => {
   card.className = 'movie_card';
   card.innerHTML = `
     <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
-    <div class="movie-card-content">
+    <div class="movie_card_content">
       <h3>${movie.title}</h3>
       <p>${movie.overview}</p>
       <div class ="movie_card_rating">
