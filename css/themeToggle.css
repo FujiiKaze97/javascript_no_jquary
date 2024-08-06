@@ -1,5 +1,5 @@
 /*다크모드 토글*/
-.toggle-class{
+.toggle_class{
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
