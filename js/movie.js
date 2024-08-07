@@ -3,6 +3,7 @@ const PER_API = 20;
 
 // 현재 페이지 상태 관리
 let currentPage = window.localStorage.getItem('currentPage') !== null ? parseInt(window.localStorage.getItem('currentPage')) : 1;
+// let currentApiPageInfo = getApiPage(currentApiPage);
 
 
 const cardData = (movie) => {
@@ -30,7 +31,7 @@ const cardData = (movie) => {
   //   </div>
   // `;
 
-  
+
   // 화살표 함수 사용 
   card.addEventListener('click', () => {
     window.location.href = `movieDetail.html?${movie.id}`
@@ -69,7 +70,7 @@ const options = {
 };
 
 
-// // 영화 데이터를 로드하는 함수
+// 영화 데이터를 로드하는 함수
 // function loadMovies() {
 
 //   try {
@@ -144,10 +145,10 @@ function setPageNum() {
   try {
     const numberButtonWrapper = document.querySelector('.number_button_wrapper');
     numberButtonWrapper.innerHTML = ''; // 페이지 번호 wrapper 내부를 비워줌
-    window.localStorage.setItem('currentPage',currentPage);
+    window.localStorage.setItem('currentPage', currentPage);
     if (currentPage >= 6) {
       for (let i = currentPage - 5; i < currentPage + 5; i++) {
-        numberButtonWrapper.innerHTML += `<span class="number_button ${currentPage === i ? 'selected' : ''}"> ${i} </span`; 
+        numberButtonWrapper.innerHTML += `<span class="number_button ${currentPage === i ? 'selected' : ''}"> ${i} </span`;
       }
     } else {
       for (let i = 1; i <= 10; i++) {
@@ -160,7 +161,7 @@ function setPageNum() {
 
 };
 
-  // 페이지별 클릭 이벤트 
+// 페이지별 클릭 이벤트 
 function addPageClickEvent() {
 
   try {
@@ -196,28 +197,9 @@ function isPrevNext() {
   }
 }
 
-// 한 페이지에 쓰일 api Page 개수 구할 때 쓰일 함수 - 해인
-function countMultiplesInRange(a, b, c) {
-  // 배열을 저장할 변수
-  let count = 0;
 
-  // 구간 내에서 c의 첫 배수를 찾습니다.
-  let start = Math.ceil(a / c) * c;
 
-  // 첫 배수가 범위를 벗어나는 경우 처리
-  if (start < a) {
-    start += c;
-  }
-
-  // c의 배수를 찾습니다.
-  for (let i = start; i < b; i += c) {
-    count++;
-  }
-
-  return count;
-}
-
-// 영화 데이터를 로드하는 함수 - 해인
+// 영화 데이터를 로드하는 함수
 function loadMovies() {
 
   try {
@@ -233,15 +215,11 @@ function loadMovies() {
     // while (cardCount < 48) {
     console.log('cardCount :', cardCount);
 
-    const apiPageCount = countMultiplesInRange((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE, PER_API);
-    console.log('api Page Count :', apiPageCount);
-
-
 
     console.log('current api page :', currentApiPage);
-    for (let i = tmpApiPage; i < currentApiPage + apiPageCount; i++) {
+    for (let i = tmpApiPage; i < currentApiPage + 4; i++) {
 
-      if (i === currentApiPage) {
+      if (i === currentApiPage ) {
         fetch(`https://api.themoviedb.org/3/movie/popular?page=${i}&language=ko-KR&region=KR`, options)
           .then(response => response.json())
           .then(data => {
@@ -257,10 +235,9 @@ function loadMovies() {
                 movieContainer.appendChild(card);
               }
             });
-            tmpApiPage += 1;
           })
           .catch(e => console.error(e));
-      } else {
+      } else if (i !== currentApiPage && cardCount < PER_PAGE) {
         fetch(`https://api.themoviedb.org/3/movie/popular?page=${i}&language=ko-KR&region=KR`, options)
           .then(response => response.json())
           .then(data => {
@@ -276,7 +253,6 @@ function loadMovies() {
                 movieContainer.appendChild(card);
               }
             });
-            tmpApiPage += 1;
           })
           .catch(e => console.error(e));
       }
