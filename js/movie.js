@@ -8,14 +8,24 @@ const cardData = (movie) => {
   card.innerHTML = `
     <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
     <div class="movie_card_content">
-      <h3>${movie.title}</h3>
-      <p>${movie.overview}</p>
+      <p>${movie.title}</p>
       <div class ="movie_card_rating">
       <img class = "star_main" src = "source/Star_yellow.png"></img>
       <span>${movie.vote_average.toFixed(1)}</span>
       </div>
     </div>
   `;
+  // card.innerHTML = `
+  //   <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+  //   <div class="movie_card_content">
+  //     <h3>${movie.title}</h3>
+  //     <p>${movie.overview}</p>
+  //     <div class ="movie_card_rating">
+  //     <img class = "star_main" src = "source/Star_yellow.png"></img>
+  //     <span>${movie.vote_average.toFixed(1)}</span>
+  //     </div>
+  //   </div>
+  // `;
 
   
   // 화살표 함수 사용 
