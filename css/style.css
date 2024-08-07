@@ -33,7 +33,7 @@ body {
   z-index: 1; /*100은 너무 커서 1로 수정 : 해인*/
   background-color: #f4f4f9;
   color: #333;
-  transition-duration: 0.5s;
+  transition: all 0.3s;
 }
 
 .header h1 {

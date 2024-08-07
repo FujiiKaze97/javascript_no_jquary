@@ -22,13 +22,13 @@ body {
   color: #ddd;
   display: flex;
   flex-direction: column;
-  transition-duration: 0.5s; /*테마 변경 transition*/
+  transition: all 0.3s; /*테마 변경 transition*/
 }
 
 .header {
   background-color: #222;
   color: white;
-  transition-duration: 0.5s; /*테마 변경 transition*/
+  
 }
 .movie_card {
   background-color: #333;
