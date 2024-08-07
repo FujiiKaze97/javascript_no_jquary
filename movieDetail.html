@@ -12,29 +12,26 @@
   <link rel="stylesheet" href="./css/themeToggle.css">
 </head>
 
-<nav>
-
-  <ol>
-    <li class="page_list"><a href="./index.html">영화 검색 페이지</a></li>
-    <li class="page_list" style="font-weight: bold;">리뷰 페이지(영화 제목)</a></li>
-  </ol>
-
-  <label class="toggle_class"> <!--다크모드 토글-->
-    <input id="theme_toggle" type="checkbox">
-    <label for="theme_toggle" class="toggle_label">
-      <i></i>
-      <i></i>
-    </label>
-  </label>
-</nav>
 
 <body>
-  
 
-  <main class="movie_detail" id = "movie_detail_background">
-    
-    
-    
+  <nav>
+
+    <ol>
+      <li class="page_list"><a href="./index.html">영화 검색 페이지</a></li>
+      <li class="page_list" style="font-weight: bold;">리뷰 페이지(영화 제목)</a></li>
+    </ol>
+
+    <label class="toggle_class"> <!--다크모드 토글-->
+      <input id="theme_toggle" type="checkbox">
+      <label for="theme_toggle" class="toggle_label">
+        <i></i>
+        <i></i>
+      </label>
+    </label>
+  </nav>
+
+  <main class="movie_detail" id="movie_detail_background">
     <div class="movie_overview_container" id="movie_overview">
       <div class="movie_title" id="movie_title">
       </div>
@@ -87,7 +84,7 @@
         </div>
       </div>
       <div class="modal_footer">
-        
+
         <div class="name_pw">
           <div class="container">
             <div class="input_box">
@@ -134,12 +131,12 @@
       <div class="modal_header">
         댓글
       </div>
-      <div id ="comment_area" style="overflow:auto">
-      
+      <div id="comment_area" style="overflow:auto">
+
       </div>
       <div class="modal_comment">
         <input type="text" class="comment_input" id="comment" placeholder="댓글을 작성해보세요" maxlength="30">
-        <button type="button" class ="comment_button" id="comment_btn">댓글 등록</button>
+        <button type="button" class="comment_button" id="comment_btn">댓글 등록</button>
       </div>
     </form>
   </div>

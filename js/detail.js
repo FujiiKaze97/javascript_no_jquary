@@ -267,7 +267,7 @@ const getTitle = (data) => {
 }
 // 영화 배경 이미지 가져오는 함수
 const getBackground = (data) => {
-  let backgroundImg = `https://image.tmdb.org/t/p/w500/${data.poster_path}`;
+  let backgroundImg = `https://image.tmdb.org/t/p/w500/${data.backdrop_path}`;
   return backgroundImg;
 }
 
@@ -277,6 +277,8 @@ const getOverview = (data) => {
   const card = document.createElement('div');
   card.className = 'movie-overview';
   card.innerHTML = `
+  <div class = "movie_info_bar">
+  <p class = "movie_info">${data.release_date} | ${genreArr} | ${data.runtime}분</p>
   <div class = "vote_box">
   <div class = "vote">평균 별점</div>
   <div class = "star_box">
@@ -284,7 +286,8 @@ const getOverview = (data) => {
   <div class = "vote_average">${data.vote_average.toFixed(1)}</div>
   </div>
   </div>
-  <p class = "movie_info">${data.release_date} | ${genreArr} | ${data.runtime}분</p>
+  </div>
+  
   <p class = "divider"></p>
   <div>${data.overview}</div>
   `;
@@ -319,7 +322,7 @@ function getMovieData() {
         movieOverview.appendChild(overview);
 
         let background = document.getElementById('movie_detail_background');
-        background.style.backgroundImage = 'url(getBackground(data))';
+        background.style.backgroundImage = `url(${getBackground(data)})`;
         console.log(getBackground(data));
         console.log(data);
       })
