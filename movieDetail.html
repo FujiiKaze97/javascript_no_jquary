@@ -320,8 +320,9 @@
 
   <!-- 리뷰 카드 터치 / 홍승우-->
   <div class="modal_review">
-    <form class="modal_window">
+    <form class="modal_window_card">
       <!-- 리뷰 작성자 아이디, 리뷰 내용, 별점 수 , 리뷰 삭제, 리뷰 수정 -->
+       <div>
       <div class="modal_header">
         <div id="review_id">test</div>
         <div class="modal_star" id="review_star">⭐</div>
@@ -335,17 +336,20 @@
         <button class="cancel_button" id="review_delete_btn" type="button">리뷰 삭제</button>
         <button class="register_button" id="review_modify_btn" type="button">리뷰 수정</button>
       </div>
-      <br><br><br>
+    </div>
+    <div class="comment_box">
       <!-- 댓글, 댓글 사용자 , 댓글 내용-->
       <div class="modal_header">
         댓글
+        <button type="button" class="close_btn">X</button>
+
       </div>
-      <div id="comment_area" style="overflow:auto">
+      <div id ="comment_area" class="comment_area" style="overflow:auto">
 
       </div>
       <div class="modal_comment">
         <input type="text" class="comment_input" id="comment" placeholder="댓글을 작성해보세요" maxlength="30">
-        <button type="button" class="comment_button" id="comment_btn">댓글 등록</button>
+        <button type="button" class ="comment_button" id="comment_btn">댓글 등록</button>
       </div>
     </form>
   </div>

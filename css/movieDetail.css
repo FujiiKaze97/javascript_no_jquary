@@ -552,7 +552,7 @@ footer {
 }
 
 #recent_movies_btn {
-  z-index: 101;
+  z-index: 1;
   position: fixed;
   bottom: 25px;
   right: 25px;
