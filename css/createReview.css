@@ -158,7 +158,7 @@
 
 }
 
-.modal_body p #review_text {
+.modal_body p #review_text, #fix_text {
   width: 100%;
   height: 100%;
 
@@ -175,6 +175,10 @@
   border: 0; */
 }
 
+#review_content{
+  margin-bottom: 30px;
+}
+
 .modal_body .review_length {
   width: 100%;
   height: 5%;
@@ -184,6 +188,9 @@
   text-align: right;
 }
 
+#comment_area::-webkit-scrollbar{
+  display: none;
+}
 
 /**Card 방식 modal*/
 
