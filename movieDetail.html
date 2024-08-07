@@ -12,6 +12,215 @@
   <link rel="stylesheet" href="./css/themeToggle.css">
 </head>
 
+<nav>
+
+  <ol>
+    <li class="page_list"><a href="./index.html">영화 검색 페이지</a></li>
+    <li class="page_list" style="font-weight: bold;">리뷰 페이지(영화 제목)</a></li>
+  </ol>
+
+  <label class="toggle_class"> <!--다크모드 토글-->
+    <input id="theme_toggle" type="checkbox">
+    <label for="theme_toggle" class="toggle_label">
+      <i></i>
+      <i></i>
+    </label>
+  </label>
+</nav>
+
+<body>
+  <header>
+    <div class="movie_title" id="movie_title">
+    </div>
+
+
+
+  </header>
+
+  <main class="movie_detail">
+    <div class="movie_img" id="movie_poster">
+    </div>
+
+    <div class="movie_overview_container" id="movie_overview">
+
+    </div>
+  </main>
+
+  <div class="reviews">
+    <div class="review_header">
+      <h4 class="review_title">네티즌 리뷰</h4>
+      <button class="write_review_btn" id="write_review_btn">리뷰 작성</button>
+    </div>
+    <div class="slide slide_wrap">
+      <!-- 리뷰 카드 들어갈 곳 -->
+      <div class="slide_prev_button slide_button">◀</div>
+      <div class="slide_next_button slide_button">▶</div>
+      <ul class="slide_pagination"></ul>
+    </div>
+  </div>
+
+  <!-- <div class="home_btn_container">
+    <button id="home_btn" onclick="location.href='./index.html'">메인 페이지</button>
+  </div> -->
+  <!-- 상세 페이지 삭제한 버튼 -->
+
+  <footer>
+    <p class="camp">2024 내일배움캠프</p>
+    <p class="react">React_6기</p>
+    <p class="team">13조_튜탕사(튜터님 탕후루 사주세요)</p>
+  </footer>
+
+
+  <!-- 리뷰 쓰기  Form -->
+  <div class="modal_create_review">
+    <form class="modal_window">
+      <div class="modal_header">
+        <p>리뷰 작성하기</p>
+        <select class="select_star" id="select_star">
+          <option value="⭐">⭐</option>
+          <option value="⭐⭐">⭐⭐</option>
+          <option value="⭐⭐⭐">⭐⭐⭐</option>
+          <option value="⭐⭐⭐⭐">⭐⭐⭐⭐</option>
+          <option value="⭐⭐⭐⭐⭐" selected>⭐⭐⭐⭐⭐</option>
+        </select>
+      </div>
+      <div class="modal_body">
+        <p><textarea id="review_text" maxlength="500" placeholder="리뷰를 작성해주세요" style="overflow:auto"></textarea></p>
+        <div class="review_length">
+          <p>(<span id="current_length">0</span>/500)</p>
+        </div>
+      </div>
+      <div class="modal_footer">
+        
+        <div class="name_pw">
+          <div class="container">
+            <div class="input_box">
+              <label for="name">닉네임</label>
+              <input id="name" placeholder="닉네임">
+            </div>
+            <p class="input_description">4-12글자. 영문, 숫자 사용 가능</p>
+          </div>
+          <div class="container">
+            <div class="input_box">
+              <label for="pw">PW</label>
+              <input id="pw" type="password" ime-mode="disabled" placeholder="비밀번호">
+            </div>
+            <p class="input_description">영문 대소문자, 숫자, !@#$%^&_ 중 <br> 2개 이상 사용한 4-12글자</p>
+          </div>
+        </div>
+        <div class="button_area">
+          <button class="cancel_button" id="cancel_review_btn" type="button">취소</button>
+          <button class="register_button" id="create_review_btn" type="button">등록</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- 리뷰 카드 터치 / 홍승우-->
+  <div class="modal_review">
+    <form class="modal_window_card">
+      <!-- 리뷰 작성자 아이디, 리뷰 내용, 별점 수 , 리뷰 삭제, 리뷰 수정 -->
+       <div>
+      <div class="modal_header">
+        <div id="review_id">test</div>
+        <div class="modal_star" id="review_star">⭐</div>
+      </div>
+      <hr class="modal_line">
+      <div class="modal_body_card" id="review_content" style="overflow:auto">
+        test
+      </div>
+      <div class="button_area">
+        <button class="cancel_button" id="review_delete_btn" type="button">리뷰 삭제</button>
+        <button class="register_button" id="review_modify_btn" type="button">리뷰 수정</button>
+      </div>
+    </div>
+    <div class="comment_box">
+      <!-- 댓글, 댓글 사용자 , 댓글 내용-->
+      <div class="modal_header">
+        댓글
+        <button type="button" class="close_btn">X</button>
+
+      </div>
+      <div id ="comment_area" class="comment_area" style="overflow:auto">
+      
+      </div>
+      <div class="modal_comment">
+        <input type="text" class="comment_input" id="comment" placeholder="댓글을 작성해보세요" maxlength="30">
+        <button type="button" class ="comment_button" id="comment_btn">댓글 등록</button>
+      </div>
+    </div>
+    </form>
+  </div>
+
+  <!--리뷰 수정 모달창 / 이석원-->
+  <div class="modal_create_review">
+    <form class="modal_window">
+      <div class="modal_header">
+        <p>리뷰 수정하기</p>
+        <select class="select_star" id="fix_star">
+          <option value="⭐">⭐</option>
+          <option value="⭐⭐">⭐⭐</option>
+          <option value="⭐⭐⭐">⭐⭐⭐</option>
+          <option value="⭐⭐⭐⭐">⭐⭐⭐⭐</option>
+          <option value="⭐⭐⭐⭐⭐" selected>⭐⭐⭐⭐⭐</option>
+        </select>
+      </div>
+      <div class="modal_body">
+        <p><textarea id="fix_text" placeholder="리뷰를 수정하기" style="overflow:auto" maxlength="500"></textarea></p>
+        <div class="review_length">
+          <p>(<span id="fix_length">0</span>/500)</p>
+        </div>
+      </div>
+      <div class="modal_footer">
+        <div class="name_pw">
+        </div>
+        <div class="button_area">
+          <button class="cancel_button" id="cancel_fix_btn" type="button">수정취소</button>
+
+          <button class="register_button" id="fix_review_btn" type="button">수정등록</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- 최근 클릭한 영화 시작 by 해인-->
+  <div class="recent_movies_container_outer">
+    <div class="close_recent_movies_btn_container">
+      <button id="close_recent_movies_btn">&#215
+    </div>
+    <div class="recent_movie_container">
+      <!-- 포스터가 들어갈 곳 -->
+      <!-- <div class="recent_movie_card">
+          <img src="https://image.tmdb.org/t/p/w500//wIrhEUBWjRmZuL1Ix41cF2LhJrW.jpg">
+        </div> -->
+    </div>
+  </div>
+
+  <button id="recent_movies_btn">최근</button>
+  <!-- 최근 클릭한 영화 끝 -->
+
+  <script type="module" src="./js/detail.js"></script>
+  <script type="module" src="./js/createReview_db.js"></script>
+  <script type="module" src="./js/deleteReview.js" defer></script>
+  <script type="module" src="./js/darkMode.js"></script>
+  <script type="module" src="./js/recentMovie.js"></script>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Detail</title>
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/movieDetail.css">
+  <link rel="stylesheet" href="./css/createReview.css">
+  <link rel="stylesheet" href="./css/swiper.css">
+  <link rel="stylesheet" href="./css/themeToggle.css">
+</head>
+
 
 <body>
 
@@ -111,12 +320,12 @@
 
   <!-- 리뷰 카드 터치 / 홍승우-->
   <div class="modal_review">
-    <form class="modal_window_card">
+    <form class="modal_window">
       <!-- 리뷰 작성자 아이디, 리뷰 내용, 별점 수 , 리뷰 삭제, 리뷰 수정 -->
-       <div>
       <div class="modal_header">
         <div id="review_id">test</div>
         <div class="modal_star" id="review_star">⭐</div>
+        <button type="button" class="close_btn">X</button>
       </div>
       <hr class="modal_line">
       <div class="modal_body_card" id="review_content" style="overflow:auto">
@@ -126,20 +335,17 @@
         <button class="cancel_button" id="review_delete_btn" type="button">리뷰 삭제</button>
         <button class="register_button" id="review_modify_btn" type="button">리뷰 수정</button>
       </div>
-    </div>
-    <div class="comment_box">
+      <br><br><br>
       <!-- 댓글, 댓글 사용자 , 댓글 내용-->
       <div class="modal_header">
         댓글
-        <button type="button" class="close_btn">X</button>
-
       </div>
-      <div id ="comment_area" class="comment_area" style="overflow:auto">
-      
+      <div id="comment_area" style="overflow:auto">
+
       </div>
       <div class="modal_comment">
         <input type="text" class="comment_input" id="comment" placeholder="댓글을 작성해보세요" maxlength="30">
-        <button type="button" class ="comment_button" id="comment_btn">댓글 등록</button>
+        <button type="button" class="comment_button" id="comment_btn">댓글 등록</button>
       </div>
     </form>
   </div>
