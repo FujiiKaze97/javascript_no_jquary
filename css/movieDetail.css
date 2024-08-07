@@ -116,7 +116,7 @@ main .movie_img {
   /* border-radius: 25px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1); */
   font-family: Pretendard;
-  font-size: 24x;
+  font-size: 12x;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -146,20 +146,20 @@ main .movie_img {
 
 .movie_overview_container .vote {
   font-family: Pretendard;
-  font-size: 24px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
 }
 
 .star {
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
 }
 
 .vote_average {
   font-family: Pretendard;
-  font-size: 24px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -168,7 +168,7 @@ main .movie_img {
 .movie_info {
 
   font-family: Pretendard;
-  font-size: 24px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -180,6 +180,9 @@ main .movie_img {
   width: auto;
   height: 1px;
   margin: 20px auto 20px auto;
+}
+.movie_story {
+  font-size: 16px;
 }
 
 /* 리뷰 카드란 */
@@ -202,7 +205,7 @@ main .movie_img {
   color: #000;
 
   font-family: Pretendard;
-  font-size: 40px;
+  font-size: 32px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;

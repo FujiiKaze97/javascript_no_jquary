@@ -289,7 +289,7 @@ const getOverview = (data) => {
   </div>
   
   <p class = "divider"></p>
-  <div>${data.overview}</div>
+  <div class = "movie_story">${data.overview}</div>
   `;
   return card;
 }
