@@ -6,7 +6,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
-import { getDocs } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+import { getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 import { query, where } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js"; // 필요한 모듈 가져오기
 import { MOVIE_ID } from './detail.js';
 
@@ -20,6 +20,7 @@ import { MOVIE_ID } from './detail.js';
 //   messagingSenderId: "299955746969",
 //   appId: "1:299955746969:web:b6cbca8f52d9469732e008"
 // };
+
 const firebaseConfig = { // 홍승우
   apiKey: "AIzaSyAr-pkDJkrblenxK5GSlWssdFrSEhvLdrU",
   authDomain: "sparta-90385.firebaseapp.com",
@@ -34,20 +35,14 @@ const firebaseConfig = { // 홍승우
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-
-
-
 // '리뷰 작성' 버튼을 클릭하면 모달창이 뜨도록 함
 const creatReviewBtn = document.getElementById('write_review_btn');
 creatReviewBtn.addEventListener('click', () => {
   ShowModal();
 })
 const ShowModal = () => {
-  console.log('"write_review_btn" clicked');
-
   const modal = document.getElementsByClassName('modal_create_review')[0];
   modal.style.display = 'flex';
-
 }
 
 
@@ -87,8 +82,6 @@ createBtn.addEventListener('click', async function () {
         // saveReview(reviewInfo);
 
         // 저장 시각 저장
-
-        console.log("저장이되나요?");
         const reviewInfo = { name: name.value, pw: pw.value, score: score.value, review: review.value, movie: location.href.split('?')[1] };
 
         await addDoc(collection(db, "review"), reviewInfo);
@@ -110,62 +103,84 @@ createBtn.addEventListener('click', async function () {
 // 취소 버튼을 누르면 모달창이 안보이도록 함.
 const cancelBtn = document.getElementById('cancel_review_btn');
 cancelBtn.addEventListener('click', () => {
-  CancelReview();
-})
-
-
-// 'X' 버튼 Click Event
-const closeBtn = document.getElementById('review_close_btn');
-closeBtn.addEventListener('click', () => {
-  const modal = document.getElementsByClassName('modal_review')[0];
-  modal.style.display = 'none';
+  cancelReview();
 })
 
 
 // '댓글 등록' 버튼 Click Event
 const commentBtn = document.getElementById('comment_btn');
-commentBtn.addEventListener('click', () => {
-  try {
-    console.log();
-    const commentInfo = { comment: document.getElementById('comment').value, id: MOVIE_ID , date : getCurrentTime()};
-    addDoc(collection(db, "comment"), commentInfo);
-    console.log("getData");
-    console.log(getComment());
-   
-  } 
-  catch (e) {
-    console.log(e);
+commentBtn.addEventListener('click', async () => {
+
+  if (document.getElementById('comment').value.length !== 0) {
+    // async 함수로 변경
+    try {
+      const commentInfo = {
+        comment: document.getElementById('comment').value,
+        id: MOVIE_ID,
+        date: new Date().toLocaleString()
+      };
+
+      // firebase db에 데이터 넣기
+      await addDoc(collection(db, "comment"), commentInfo);  // await 추가
+
+      // firebase db에서 데이터 가져오기
+      const docsSnapshot = await getDocs(query(
+        collection(db, "comment"), // review 컬렉션 지정
+        where("id", "==", MOVIE_ID) // movie 필드와 일치하는 값으로 필터링
+      ));
+      document.getElementById('comment_area').innerHTML='';
+      document.getElementById('comment').value = '';
+      setComment(docsSnapshot);
+
+    }
+    catch (e) {
+      console.log(e);
+    }
+  } else {
+    console.log("문자열의 길이가 0이에요");
   }
-})
+});
 
 
-async function getComment() {
-  try {
-    const docsSnapshot = await getDocs(query(
-      collection(db, "comment"),
-      where("id", "==", MOVIE_ID)
-    ));
+// 댓글 가져온거 설정하는 상황
+function setComment(docsSnapshot) {
+  docsSnapshot.forEach((doc) => {
+    const data = doc.data();
 
-    docsSnapshot.forEach((doc) => {
-      console.log(doc.id, "=>", doc.data());
+    // 새로운 div 요소를 생성합니다.
+    const newDiv = document.createElement('div');
+    newDiv.id = 'review_comment';
+    newDiv.textContent = `${data.comment} ${data.date}`;
+
+    const newLine = document.createElement('hr');
+    newLine.className = 'modal_line';
+
+    // 새로운 button 요소를 생성합니다.
+    const newButton = document.createElement('button');
+    newButton.type = 'button';
+    newButton.className = 'comment_delete_btn';
+    newButton.textContent = 'X';
+
+    newButton.addEventListener('click', async () => {
+      try {
+        const reviewRef = doc.ref; // 문서 참조를 가져옵니다.
+        await deleteDoc(reviewRef); // 문서 삭제
+        newDiv.remove(); // 삭제 후 화면에서 댓글 삭제
+        newLine.remove(); // 삭제 후 줄 삭제
+      } catch (e) {
+        console.log(e);
+      }
     });
-  } catch (error) {
-    console.error("Error fetching documents: ", error);
-  }
+
+    newDiv.appendChild(newButton);
+
+    const container = document.getElementById('comment_area'); // 컨테이너의 id를 지정
+    container.appendChild(newLine);
+    container.appendChild(newDiv);
+  });
 }
 
-
-function setComment(comments) {
-
-}
-
-
-const getCurrentTime = () => {
-  const now = new Date();
-  return `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}${String(now.getHours()).padStart(2, '0')}${String(now.getMinutes()).padStart(2, '0')}${String(now.getSeconds()).padStart(2, '0')}`;
-};
-
-const CancelReview = () => {
+const cancelReview = () => {
   console.log("'cancel review button' clicked");
   const result = confirm('리뷰 작성을 취소하시겠습니까?');
   if (result) {

@@ -138,6 +138,7 @@ document.getElementById('review_delete_btn').addEventListener('click', function 
 
   let getPw = prompt('비밀번호를 입력하세요')
 
+
   if(getPw === thisData.pw){
     if(confirm('정말 삭제하시겠습니까?')){
       deleteData(thisData.id);
