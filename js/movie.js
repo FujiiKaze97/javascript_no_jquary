@@ -1,3 +1,6 @@
+const PER_PAGE = 48;
+const PER_API = 20;
+
 // 현재 페이지 상태 관리
 let currentPage = window.localStorage.getItem('currentPage') !== null ? parseInt(window.localStorage.getItem('currentPage')) : 1;
 
@@ -66,27 +69,27 @@ const options = {
 };
 
 
-// 영화 데이터를 로드하는 함수
-function loadMovies() {
+// // 영화 데이터를 로드하는 함수
+// function loadMovies() {
 
-  try {
-    fetch(`https://api.themoviedb.org/3/movie/popular?page=${currentPage}&language=ko-KR&region=KR`, options)
-      .then(response => response.json())
-      .then(data => {
-        const movies = data.results;
-        const movieContainer = document.getElementById('movie_container');
-        movieContainer.innerHTML = ''; // 이전 영화 목록 제거
+//   try {
+//     fetch(`https://api.themoviedb.org/3/movie/popular?page=${currentPage}&language=ko-KR&region=KR`, options)
+//       .then(response => response.json())
+//       .then(data => {
+//         const movies = data.results;
+//         const movieContainer = document.getElementById('movie_container');
+//         movieContainer.innerHTML = ''; // 이전 영화 목록 제거
 
-        movies.forEach(movie => {
-          const card = cardData(movie);
-          movieContainer.appendChild(card);
-        });
-      })
-      .catch(e => console.error(e));
-  } catch (e) {
-    console.log(e);
-  }
-}
+//         movies.forEach(movie => {
+//           const card = cardData(movie);
+//           movieContainer.appendChild(card);
+//         });
+//       })
+//       .catch(e => console.error(e));
+//   } catch (e) {
+//     console.log(e);
+//   }
+// }
 
 // 페이지네이션 버튼 이벤트 핸들러
 document.getElementById('prev_page').addEventListener('click', () => {
@@ -188,6 +191,98 @@ function isPrevNext() {
     // 다음 페이지 버튼 활성화/비활성화
     const nextButton = document.getElementById('next_page');
     nextButton.disabled = currentPage === 500;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+// 한 페이지에 쓰일 api Page 개수 구할 때 쓰일 함수 - 해인
+function countMultiplesInRange(a, b, c) {
+  // 배열을 저장할 변수
+  let count = 0;
+
+  // 구간 내에서 c의 첫 배수를 찾습니다.
+  let start = Math.ceil(a / c) * c;
+
+  // 첫 배수가 범위를 벗어나는 경우 처리
+  if (start < a) {
+    start += c;
+  }
+
+  // c의 배수를 찾습니다.
+  for (let i = start; i < b; i += c) {
+    count++;
+  }
+
+  return count;
+}
+
+// 영화 데이터를 로드하는 함수 - 해인
+function loadMovies() {
+
+  try {
+    const movieContainer = document.getElementById('movie_container');
+    movieContainer.innerHTML = ''; // 이전 영화 목록 제거
+
+    // let [currentApiPage, startIdxArray] = getApiPage(currentPage);
+    let currentApiPage = Math.ceil((PER_PAGE * (currentPage - 1)) / PER_API) === 0 ? 1 : Math.ceil((PER_PAGE * (currentPage - 1)) / PER_API);
+    let starIdx = (PER_PAGE * (currentPage - 1)) % PER_API;
+    let cardCount = 0;
+
+    let tmpApiPage = currentApiPage;
+    // while (cardCount < 48) {
+    console.log('cardCount :', cardCount);
+
+    const apiPageCount = countMultiplesInRange((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE, PER_API);
+    console.log('api Page Count :', apiPageCount);
+
+
+
+    console.log('current api page :', currentApiPage);
+    for (let i = tmpApiPage; i < currentApiPage + apiPageCount; i++) {
+
+      if (i === currentApiPage) {
+        fetch(`https://api.themoviedb.org/3/movie/popular?page=${i}&language=ko-KR&region=KR`, options)
+          .then(response => response.json())
+          .then(data => {
+            console.log('tmp Api Page :', tmpApiPage);
+
+            const movies = data.results;
+
+            movies.forEach((movie, idx) => {
+              if (idx >= starIdx) {
+                cardCount++;
+                console.log('cardCount :', cardCount);
+                const card = cardData(movie);
+                movieContainer.appendChild(card);
+              }
+            });
+            tmpApiPage += 1;
+          })
+          .catch(e => console.error(e));
+      } else {
+        fetch(`https://api.themoviedb.org/3/movie/popular?page=${i}&language=ko-KR&region=KR`, options)
+          .then(response => response.json())
+          .then(data => {
+            console.log('tmp Api Page :', tmpApiPage);
+
+            const movies = data.results;
+
+            movies.forEach((movie) => {
+              cardCount++;
+              console.log('cardCount :', cardCount);
+              if (cardCount <= PER_PAGE) {
+                const card = cardData(movie);
+                movieContainer.appendChild(card);
+              }
+            });
+            tmpApiPage += 1;
+          })
+          .catch(e => console.error(e));
+      }
+
+    }
+
   } catch (e) {
     console.log(e);
   }
