@@ -182,6 +182,9 @@
   text-align: right;
 }
 
+#comment_area::-webkit-scrollbar{
+  display: none;
+}
 
 /**Card 방식 modal*/
 
