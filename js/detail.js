@@ -2,7 +2,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 import { collection, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
-import { getDocs } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+import { getDocs, addDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 import { query, where } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js"; // 필요한 모듈 가져오기
 
 // Firebase 구성 정보 설정
@@ -103,17 +103,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     docsSnapshot.forEach((doc) => {
       cardCount++;
       const card = getReview(doc.data());
+      card.id = doc.id;
       cardsContainer.appendChild(card);
       if (cardCount % (gridColumn * 2) === 0) {
         reviewContainer.appendChild(cardsContainer);
         cardsContainer = document.createElement('ul');
-        // cardsContainer.id = 'cards_container';
         cardsContainer.className = 'slide_items';
       }
-      // const cardsContainer = document.getElementById('cards_container');
-      // const card = getReview(doc.data());
-      // card.setAttribute("id", doc.id);
-      // cardsContainer.appendChild(card);
     });
     reviewContainer.appendChild(cardsContainer);
     // swipe 추가 - 해인 =======================
@@ -193,6 +189,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
     // swipe 추가 - 해인 END =======================
     // 카드가 모두 추가된 후 이벤트 리스너 추가
+    
     addCardClickEvent();
   } catch (e) {
     console.error(e);
@@ -421,7 +418,8 @@ function addCardClickEvent() {
         modal.style.display = 'flex';
 
         //comment 데이터 가져오기
-        getCommentData();
+        getCommentData(card.id);
+        commentBtnListener(card.id);
       });
     });
   } catch (e) {
@@ -441,12 +439,13 @@ document.querySelector('.close_btn').addEventListener('click', () => {
 });
 
 
-async function getCommentData() {
+async function getCommentData(cardId) {
   try {
     // firebase db에서 데이터 가져오기
     const docsSnapshot = await getDocs(query(
       collection(db, "comment"), // review 컬렉션 지정
-      where("id", "==", MOVIE_ID) // movie 필드와 일치하는 값으로 필터링
+      where("id", "==", MOVIE_ID),
+      where("review_id","==",cardId) // movie 필드와 일치하는 값으로 필터링
     ));
 
     docsSnapshot.forEach((doc) => {
@@ -487,12 +486,88 @@ async function getCommentData() {
   }
 }
 
+// '댓글 등록' 버튼 Click Event
+function commentBtnListener(cardId) {
+  const commentBtn = document.getElementById('comment_btn');
+  commentBtn.addEventListener('click', async () => {
+  
+    if (document.getElementById('comment').value.length !== 0) {
+      // async 함수로 변경
+      try {
+        const commentInfo = {
+          comment: document.getElementById('comment').value,
+          id: MOVIE_ID,
+          date: new Date().toLocaleString(),
+          review_id : cardId
+        };
+  
+        // firebase db에 데이터 넣기
+        await addDoc(collection(db, "comment"), commentInfo);  // await 추가
+  
+        // firebase db에서 데이터 가져오기
+        const docsSnapshot = await getDocs(query(
+          collection(db, "comment"), // review 컬렉션 지정
+          where("id", "==", MOVIE_ID),
+          where("review_id","==",cardId) // movie 필드와 일치하는 값으로 필터링
+        ));
+        document.getElementById('comment_area').innerHTML='';
+        document.getElementById('comment').value = '';
+        setComment(docsSnapshot);
+      }
+      catch (e) {
+        console.log(e);
+      }
+    } else {
+      console.log("문자열의 길이가 0이에요");
+    }
+  });
+}
 
-// DOMContentLoaded 이후 카드에 클릭 이벤트 설정
-document.addEventListener('DOMContentLoaded', () => {
-  // 카드가 모두 추가된 후 이벤트 리스너 추가
-  addCardClickEvent();
-});
+// 댓글 가져온거 설정하는 상황
+function setComment(docsSnapshot) {
+  docsSnapshot.forEach((doc) => {
+    const data = doc.data();
+
+    // 새로운 div 요소를 생성합니다.
+    const newDiv = document.createElement('div');
+    newDiv.id = 'review_comment';
+    newDiv.textContent = `${data.comment} ${data.date}`;
+
+    const newLine = document.createElement('hr');
+    newLine.className = 'modal_line';
+
+    // 새로운 button 요소를 생성합니다.
+    const newButton = document.createElement('button');
+    newButton.type = 'button';
+    newButton.className = 'comment_delete_btn';
+    newButton.textContent = 'X';
+
+    newButton.addEventListener('click', async () => {
+      try {
+        const reviewRef = doc.ref; // 문서 참조를 가져옵니다.
+        await deleteDoc(reviewRef); // 문서 삭제
+        newDiv.remove(); // 삭제 후 화면에서 댓글 삭제
+        newLine.remove(); // 삭제 후 줄 삭제
+      } catch (e) {
+        console.log(e);
+      }
+    });
+
+    newDiv.appendChild(newButton);
+
+    const container = document.getElementById('comment_area'); // 컨테이너의 id를 지정
+    container.appendChild(newLine);
+    container.appendChild(newDiv);
+  });
+}
+
+
+
+// // DOMContentLoaded 이후 카드에 클릭 이벤트 설정
+// document.addEventListener('DOMContentLoaded', () => {
+//   // 카드가 모두 추가된 후 이벤트 리스너 추가
+//   addCardClickEvent();
+// });
 
 
 // // 리뷰 삭제 함수

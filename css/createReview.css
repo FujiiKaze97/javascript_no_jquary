@@ -101,9 +101,11 @@
 
 #comment_area {
   overflow: scroll;
+  height: 150px;
 }
 
 .modal_star {
+
   padding-bottom: 8px;
 }
 

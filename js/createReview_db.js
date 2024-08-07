@@ -106,80 +106,6 @@ cancelBtn.addEventListener('click', () => {
   cancelReview();
 })
 
-
-// '댓글 등록' 버튼 Click Event
-const commentBtn = document.getElementById('comment_btn');
-commentBtn.addEventListener('click', async () => {
-
-  if (document.getElementById('comment').value.length !== 0) {
-    // async 함수로 변경
-    try {
-      const commentInfo = {
-        comment: document.getElementById('comment').value,
-        id: MOVIE_ID,
-        date: new Date().toLocaleString()
-      };
-
-      // firebase db에 데이터 넣기
-      await addDoc(collection(db, "comment"), commentInfo);  // await 추가
-
-      // firebase db에서 데이터 가져오기
-      const docsSnapshot = await getDocs(query(
-        collection(db, "comment"), // review 컬렉션 지정
-        where("id", "==", MOVIE_ID) // movie 필드와 일치하는 값으로 필터링
-      ));
-      document.getElementById('comment_area').innerHTML='';
-      document.getElementById('comment').value = '';
-      setComment(docsSnapshot);
-
-    }
-    catch (e) {
-      console.log(e);
-    }
-  } else {
-    console.log("문자열의 길이가 0이에요");
-  }
-});
-
-
-// 댓글 가져온거 설정하는 상황
-function setComment(docsSnapshot) {
-  docsSnapshot.forEach((doc) => {
-    const data = doc.data();
-
-    // 새로운 div 요소를 생성합니다.
-    const newDiv = document.createElement('div');
-    newDiv.id = 'review_comment';
-    newDiv.textContent = `${data.comment} ${data.date}`;
-
-    const newLine = document.createElement('hr');
-    newLine.className = 'modal_line';
-
-    // 새로운 button 요소를 생성합니다.
-    const newButton = document.createElement('button');
-    newButton.type = 'button';
-    newButton.className = 'comment_delete_btn';
-    newButton.textContent = 'X';
-
-    newButton.addEventListener('click', async () => {
-      try {
-        const reviewRef = doc.ref; // 문서 참조를 가져옵니다.
-        await deleteDoc(reviewRef); // 문서 삭제
-        newDiv.remove(); // 삭제 후 화면에서 댓글 삭제
-        newLine.remove(); // 삭제 후 줄 삭제
-      } catch (e) {
-        console.log(e);
-      }
-    });
-
-    newDiv.appendChild(newButton);
-
-    const container = document.getElementById('comment_area'); // 컨테이너의 id를 지정
-    container.appendChild(newLine);
-    container.appendChild(newDiv);
-  });
-}
-
 const cancelReview = () => {
   console.log("'cancel review button' clicked");
   const result = confirm('리뷰 작성을 취소하시겠습니까?');
@@ -203,32 +129,6 @@ const cancelReview = () => {
 
 
 
-// 카드 리뷰 정보 안보이도록 
-
-// closeBtn.addEventListener('click', () => {
-//   const id = document.getElementById('review_id');
-//   const score = document.getElementById('review_star');
-//   const content = document.getElementById('review_content');
-//   const comment = document.getElementById('review_comment');
-
-//   console.log("어디까지온거임1111");
-//   ClearCardContent(id, score, content, comment);
-//   console.log("어디까지온거임12222");
-//   const modal = document.getElementsByClassName('modal_review')[0];
-//   modal.style.display = 'none';
-//   console.log("어디까지온거임3333");
-// })
-
-// const ClearCardContent = (id, score, content, comment) => {
-//   // reset : 기존 모달창에 있던 내용 초기화
-//   console.log("어디까지온거4444");
-//   id.value = '';
-//   score.value = '';
-//   content.value = '';
-//   comment.value = '';
-//   console.log("어디까지온거임5555");
-// }
-
 const ClearModal = (name, pw, review, score) => {
   // reset : 기존 모달창에 있던 내용 초기화
   name.value = '';
@@ -244,21 +144,6 @@ review.addEventListener('keyup', (e) => {
   let reviewLength = review.value.length;
   lengthPosition.innerText = reviewLength;
 })
-
-// key 생성 함수 : 현 시각 저장 + 난수 
-const makeKey = () => {
-  let time = new Date();
-  let year = time.getFullYear();
-  let month = ('0' + (time.getMonth() + 1)).slice(-2);
-  let day = ('0' + time.getDate()).slice(-2);
-  let hours = ('0' + time.getHours()).slice(-2);
-  let minutes = ('0' + time.getMinutes()).slice(-2);
-  let seconds = ('0' + time.getSeconds()).slice(-2);
-
-  let random = Math.floor(9000 * Math.random()) + 1000;
-
-  return '' + year + month + day + hours + minutes + seconds + random;
-}
 
 
 const nameInput = document.getElementById('name');
