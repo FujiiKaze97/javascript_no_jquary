@@ -127,7 +127,7 @@ document.getElementById('search_button').addEventListener('click', () => {
     const query = document.getElementById('search_input').value.toLowerCase();
     const movieCards = document.querySelectorAll('.movie_card');
     movieCards.forEach(card => {
-      const title = card.querySelector('h3').textContent.toLowerCase();
+      const title = card.querySelector('p').textContent.toLowerCase();
       if (title.includes(query)) {
         card.style.display = 'block';
       } else {

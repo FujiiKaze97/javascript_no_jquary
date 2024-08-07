@@ -3,7 +3,7 @@
 // Firebase SDK 라이브러리 가져오기
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
-import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+import { collection } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 import { getDocs } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 import { deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 
@@ -60,7 +60,7 @@ const loadReviews = async () => {
 };
 
 loadReviews();
-console.log(reviewData);
+
 
 // 2. 데이터 수정하기
 
@@ -90,18 +90,14 @@ document.getElementById('review_modify_btn').addEventListener('click', function 
     // 수정 등록 버튼 입력 시 데이터 수정저장
     document.getElementById('fix_review_btn').addEventListener('click', function () {
       let fixedReview = {
-
         review: document.getElementById('fix_text').value,
         score: document.getElementById('fix_star').value
-
       }
-
       updateReview(thisData.id, fixedReview);
     })
   } else if (getPw !== null) {
     alert('비밀번호가 다릅니다.')
   }
-
 
 })
 
