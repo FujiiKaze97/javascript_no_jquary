@@ -282,7 +282,7 @@ main .movie_img {
 }
 
 /* ===========================================모 . 달 . 창========================================== */
-.modal_window, .select_star, #review_text, #fix_text, .modal_header {
+.modal_window, .select_star, #review_text, #fix_text, .modal_header, .modal_window_card {
   background-color: #333;
   color: #ddd;
 }
