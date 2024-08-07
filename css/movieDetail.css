@@ -4,10 +4,11 @@
 
 body {
   background-color: #f4f4f9;
-  transition: all 0.3s ease;
+  transition: all 0.3s;
 }
 
 nav {
+  z-index: 100;
   display: flex;
   padding: 20px;
   border-bottom: 2px solid #b8b8b8;
@@ -39,21 +40,22 @@ header {
 
 .movie_title {
   display: flex;
-  flex-direction: row;
-  align-items: end;
-  gap: 30px;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .korean_title {
   font-family: Pretendard;
-  font-size: 64px;
+  font-size: 48px;
   font-weight: 700;
 }
 
 .original_title {
   font-family: Pretendard;
-  font-size: 40px;
-  font-weight: 600;
+  font-size: 36px;
+  font-weight: 400;
 }
 
 /* 상세 페이지 메인 */
@@ -64,9 +66,24 @@ main {
   height: 550px;
   padding: 20px 50px 50px 50px;
   margin-bottom: 50px;
+  background-image: no-repeat;
+  background-size: cover;
+}
+
+main::before {
+  position: absolute;
+  content: "";
+  background: inherit;
+  top: 64px;
+  left: 0px;
+  width: 100%;
+  height: 548px;
+  background-color: #000;
+  filter: blur(5px) brightness(30%);
 }
 
 main .movie_img {
+  z-index: 100;
   height: 480px;
   /* margin-right: 30px; */
 
@@ -85,18 +102,21 @@ main .movie_img {
 }
 
 .movie_overview_container {
+  z-index: 100;
   /* display: inline-block; */
-  background-color: white;
-  width: 70%;
+  color: white;
+  background-color: transparent;
+  width: 50%;
   height: 100%;
 
   margin-left: 50px;
   margin-right: auto;
-  padding: 40px;
-  border-radius: 25px;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+  margin-top: 70px;
+  padding: 60px;
+  /* border-radius: 25px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1); */
   font-family: Pretendard;
-  font-size: 24x;
+  font-size: 12x;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -104,46 +124,51 @@ main .movie_img {
   /* overflow-y: scroll; */
 }
 
-.vote_box {
+.movie_info_bar {
   display: flex;
   flex-direction: row;
-  gap: 30px;
+  justify-content: space-between;
+}
+
+.vote_box {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }
 
 .star_box {
+  color: white;
   display: flex;
   flex-direction: row;
   gap: 10px;
 }
 
 .movie_overview_container .vote {
-  color: #000;
   font-family: Pretendard;
-  font-size: 36px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
 }
 
 .star {
-  width: 40px;
-  height: 40px;
+  width: 20px;
+  height: 20px;
 }
 
 .vote_average {
-  color: #000;
   font-family: Pretendard;
-  font-size: 36px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
 }
 
 .movie_info {
-  color: #000;
 
   font-family: Pretendard;
-  font-size: 24px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -151,10 +176,13 @@ main .movie_img {
 }
 
 .divider {
-  background-color: #616161;
+  background-color: #ffffff;
   width: auto;
   height: 1px;
   margin: 20px auto 20px auto;
+}
+.movie_story {
+  font-size: 16px;
 }
 
 /* 리뷰 카드란 */
@@ -177,7 +205,7 @@ main .movie_img {
   color: #000;
 
   font-family: Pretendard;
-  font-size: 40px;
+  font-size: 32px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -524,7 +552,7 @@ footer {
 }
 
 #recent_movies_btn {
-  z-index: 1;
+  z-index: 101;
   position: fixed;
   bottom: 25px;
   right: 25px;
@@ -541,7 +569,7 @@ footer {
   animation: upDown 1s ease-in-out infinite;
   cursor: pointer;
 
-  box-shadow: -1px -1px 8px rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
 }
 
 /* 최근 버튼 상하 움직임 */
@@ -565,6 +593,7 @@ footer {
 /* @media screen and (max-width: 1460px) {
 } */
 @media screen and (max-width: 992px) {
+
   /* 헤더 */
   header {
     padding: 30px 30px 0 30px;
@@ -599,15 +628,18 @@ footer {
     display: flex;
     justify-content: space-between;
   }
+
   main .movie_img {
     height: 100%;
   }
+
   .movie_poster {
     width: 100%;
     height: 100%;
     object-fit: cver;
     /* margin: auto; */
   }
+
   main img {
     height: 100%;
 
@@ -620,25 +652,31 @@ footer {
 
     /* overflow: scroll; */
   }
+
   .movie_overview_container .movie_overview {
     height: 100%;
   }
+
   .movie_overview_container .vote,
   .vote_average,
   .movie_info {
     font-size: 20px;
   }
+
   .movie_overview_container .star {
     width: 20px;
     height: 20px;
   }
+
   .movie_overview_container .movie_info {
     font-size: 20px;
     margin-top: 10px;
   }
+
   .movie_overview_container .divider {
     margin: 10px auto 10px auto;
   }
+
   .movie_overview .overview {
     width: 100%;
     height: calc(100% - 71px);
@@ -650,6 +688,7 @@ footer {
     padding-left: 30px;
     padding-right: 30px;
   }
+
   .reviews .review_header {
     margin-bottom: 0;
   }
@@ -697,21 +736,22 @@ footer {
     margin-top: 10px;
   }
 }
+
 @media screen and (max-width: 630px) {
 
   nav {
     padding: 10px;
     font-size: 14px;
   }
-  
+
   .page_list {
     display: inline-block;
   }
-  
+
   .page_list a {
     color: #000;
   }
-  
+
   .page_list a::after {
     display: inline-block;
     content: ">";
@@ -748,14 +788,17 @@ footer {
     flex-direction: column;
     align-items: center;
   }
+
   main .movie_img {
     height: 100%;
   }
+
   .movie_poster {
     /* width: 300px; */
     height: 300px;
     /* margin: auto; */
   }
+
   main img {
     height: 100%;
 
@@ -769,25 +812,31 @@ footer {
     padding: 20px;
     border-radius: 15px;
   }
+
   .movie_overview_container .movie_overview {
     height: 100%;
   }
+
   .movie_overview_container .vote,
   .vote_average,
   .movie_info {
     font-size: 16px;
   }
+
   .movie_overview_container .star {
     width: 16px;
     height: 16px;
   }
+
   .movie_overview_container .movie_info {
     font-size: 16px;
     margin-top: 10px;
   }
+
   .movie_overview_container .divider {
     margin: 10px auto 10px auto;
   }
+
   .movie_overview .overview {
     width: 100%;
     height: calc(100% - 89px);
@@ -799,6 +848,7 @@ footer {
     padding-left: 10px;
     padding-right: 10px;
   }
+
   .reviews .review_header {
     margin-bottom: 0;
   }

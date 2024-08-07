@@ -12,38 +12,31 @@
   <link rel="stylesheet" href="./css/themeToggle.css">
 </head>
 
-<nav>
-
-  <ol>
-    <li class="page_list"><a href="./index.html">영화 검색 페이지</a></li>
-    <li class="page_list" style="font-weight: bold;">리뷰 페이지(영화 제목)</a></li>
-  </ol>
-
-  <label class="toggle_class"> <!--다크모드 토글-->
-    <input id="theme_toggle" type="checkbox">
-    <label for="theme_toggle" class="toggle_label">
-      <i></i>
-      <i></i>
-    </label>
-  </label>
-</nav>
 
 <body>
-  <header>
-    <div class="movie_title" id="movie_title">
-    </div>
 
+  <nav>
 
+    <ol>
+      <li class="page_list"><a href="./index.html">영화 검색 페이지</a></li>
+      <li class="page_list" style="font-weight: bold;">리뷰 페이지(영화 제목)</a></li>
+    </ol>
 
-  </header>
+    <label class="toggle_class"> <!--다크모드 토글-->
+      <input id="theme_toggle" type="checkbox">
+      <label for="theme_toggle" class="toggle_label">
+        <i></i>
+        <i></i>
+      </label>
+    </label>
+  </nav>
 
-  <main class="movie_detail">
-    <div class="movie_img" id="movie_poster">
-    </div>
-
+  <main class="movie_detail" id="movie_detail_background">
     <div class="movie_overview_container" id="movie_overview">
-
+      <div class="movie_title" id="movie_title">
+      </div>
     </div>
+    <div class="movie_img" id="movie_poster"></div>
   </main>
 
   <div class="reviews">
@@ -91,7 +84,7 @@
         </div>
       </div>
       <div class="modal_footer">
-        
+
         <div class="name_pw">
           <div class="container">
             <div class="input_box">
@@ -118,12 +111,12 @@
 
   <!-- 리뷰 카드 터치 / 홍승우-->
   <div class="modal_review">
-    <form class="modal_window_card">
+    <form class="modal_window">
       <!-- 리뷰 작성자 아이디, 리뷰 내용, 별점 수 , 리뷰 삭제, 리뷰 수정 -->
-       <div>
       <div class="modal_header">
         <div id="review_id">test</div>
         <div class="modal_star" id="review_star">⭐</div>
+        <button type="button" class="close_btn">X</button>
       </div>
       <hr class="modal_line">
       <div class="modal_body_card" id="review_content" style="overflow:auto">
@@ -133,22 +126,18 @@
         <button class="cancel_button" id="review_delete_btn" type="button">리뷰 삭제</button>
         <button class="register_button" id="review_modify_btn" type="button">리뷰 수정</button>
       </div>
-    </div>
-    <div class="comment_box">
+      <br><br><br>
       <!-- 댓글, 댓글 사용자 , 댓글 내용-->
       <div class="modal_header">
         댓글
-        <button type="button" class="close_btn">X</button>
-
       </div>
-      <div id ="comment_area" class="comment_area" style="overflow:auto">
-      
+      <div id="comment_area" style="overflow:auto">
+
       </div>
       <div class="modal_comment">
         <input type="text" class="comment_input" id="comment" placeholder="댓글을 작성해보세요" maxlength="30">
-        <button type="button" class ="comment_button" id="comment_btn">댓글 등록</button>
+        <button type="button" class="comment_button" id="comment_btn">댓글 등록</button>
       </div>
-    </div>
     </form>
   </div>
 
