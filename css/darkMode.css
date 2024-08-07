@@ -239,3 +239,11 @@ main .movie_img {
   background-color: #333;
   color: #ddd;
 }
+
+.modal_body_card{
+  border: 1px solid #666;
+}
+
+.close_btn{
+  background-color: #333;
+}
