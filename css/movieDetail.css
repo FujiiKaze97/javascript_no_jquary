@@ -8,7 +8,7 @@ body {
 }
 
 nav {
-  z-index: 100;
+  z-index: 1;
   display: flex;
   padding: 20px;
   border-bottom: 2px solid #b8b8b8;
@@ -83,7 +83,7 @@ main::before {
 }
 
 main .movie_img {
-  z-index: 100;
+  z-index: 1;
   height: 480px;
   /* margin-right: 30px; */
 
@@ -102,7 +102,7 @@ main .movie_img {
 }
 
 .movie_overview_container {
-  z-index: 100;
+  z-index: 1;
   /* display: inline-block; */
   color: white;
   background-color: transparent;
@@ -552,7 +552,7 @@ footer {
 }
 
 #recent_movies_btn {
-  z-index: 101;
+  z-index: 3;
   position: fixed;
   bottom: 25px;
   right: 25px;
