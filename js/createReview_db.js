@@ -66,8 +66,6 @@ createBtn.addEventListener('click', async function () {
 
       //등록 버튼 클릭시 컨펌 알림
       const result = confirm('등록하시겠습니까?');
-
-
       const name = document.getElementById('name');
       const pw = document.getElementById('pw');
       const review = document.getElementById('review_text');
@@ -212,4 +210,3 @@ const showDespription = (input) => {
 
   }
 }
-
