@@ -268,7 +268,11 @@ const getTitle = (data) => {
   `;
   return card;
 }
-
+// 영화 배경 이미지 가져오는 함수
+const getBackground = (data) => {
+  let backgroundImg = `https://image.tmdb.org/t/p/w500/${data.poster_path}`;
+  return backgroundImg;
+}
 
 // 영화 설명 함수
 const getOverview = (data) => {
@@ -317,6 +321,9 @@ function getMovieData() {
         const overview = getOverview(data);
         movieOverview.appendChild(overview);
 
+        // 태그요소
+      let movie_overview_container = document.getElementById('movie_overview');
+      movie_overview_container.style.backgroundImage = getBackground(data);
       })
       .catch(err => console.error(err));
   } catch (e) {
